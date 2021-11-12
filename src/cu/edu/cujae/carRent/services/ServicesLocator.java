@@ -9,6 +9,7 @@ public class ServicesLocator {
     private static CarsServices carsServices = null;
     private static BrandServices brandServices = null;
     private static ModelServices modelServices = null;
+    private static UserServices userServices = null;
 
     public static CarsServices getCarsServices(){
         if(carsServices == null){
