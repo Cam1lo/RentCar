@@ -1,9 +1,10 @@
-package cu.edu.cujae.carRent.visuals;
+package cu.edu.cujae.carRent.visuals.Login;
 
-import cu.edu.cujae.carRent.services.ServicesLocator;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -12,9 +13,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+import java.io.IOException;
 
 
-public class Controller {
+public class LoginController {
     @FXML
     Button login_button;
     @FXML
@@ -43,7 +47,7 @@ public class Controller {
         yOffset = stage.getY() - event.getScreenY();
     }
 
-    public void login(ActionEvent e) {
+    public void login(ActionEvent e) throws IOException {
         String error = "";
 
         if (this.user_name.getText().equals("")) {
@@ -57,12 +61,20 @@ public class Controller {
 
         error_label.setText(error);
         if (error.equals("")) {
-            //        ServicesLocator.AuthService.authenticate(this.user_name.getText(), this.user_password.getText());
+            this.stage = (Stage) ap.getScene().getWindow();
+            this.stage.close();
+
+            Parent mainLayout = FXMLLoader.load(getClass().getResource("../MainLayout/MainLayout.fxml"));
+
+            Stage mainStage = new Stage();
+            mainStage.setScene(new Scene(mainLayout));
+            mainStage.show();
+
+//        ServicesLocator.AuthService.authenticate(this.user_name.getText(), this.user_password.getText());
         }
     }
 
-    public void closeApplication (MouseEvent e) {
+    public void closeApplication(MouseEvent e) {
         System.exit(0);
     }
-
 }

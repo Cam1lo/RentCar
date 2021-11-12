@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="ap" onMouseDragged="#apMouseDragged" onMousePressed="#apMousePressed" prefHeight="360.0" prefWidth="350.0" styleClass="login_container" stylesheets="@stylesheets/login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cu.edu.cujae.carRent.visuals.Controller">
+<AnchorPane fx:id="ap" onMouseDragged="#apMouseDragged" onMousePressed="#apMousePressed" prefHeight="360.0" prefWidth="350.0" styleClass="login_container" stylesheets="@login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cu.edu.cujae.carRent.visuals.Login.LoginController">
    <children>
       <Button fx:id="login_button" alignment="BOTTOM_CENTER" layoutX="139.0" layoutY="312.0" mnemonicParsing="false" onAction="#login" style="-fx-background-color: #5BA6FF; -fx-border-radius: 10000;" text="LOGIN" textAlignment="CENTER">
          <opaqueInsets>
@@ -27,12 +27,12 @@
       </Label>
       <ImageView fitHeight="128.0" fitWidth="200.0" layoutX="97.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assets/logo.png" />
+            <Image url="@../../assets/logo.png" />
          </image>
       </ImageView>
       <ImageView fx:id="close_icon" fitHeight="30.0" fitWidth="31.0" layoutX="306.0" layoutY="14.0" onMouseClicked="#closeApplication" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../assets/close.png" />
+            <Image url="@../../assets/close.png" />
          </image>
       </ImageView>
    </children>

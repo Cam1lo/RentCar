@@ -12,13 +12,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("../visuals/sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("../visuals/Login/Login.fxml"));
         Scene login_scene = new Scene(root);
         login_scene.setFill(Color.TRANSPARENT);
 
         primaryStage.setScene(login_scene);
         primaryStage.setResizable(false);
-        primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.show();
     }
