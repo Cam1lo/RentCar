@@ -7,14 +7,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
-public class AuthService {
+public class UserServices {
 
-    public UserDto auhthentication(String name, String pass)throws SQLException {
+    public UserDto authentication(String name, String pass)throws SQLException {
+
         UserDto user = null;
         java.sql.Connection con = ServicesLocator.getConnection();
-        String funcion = "{?= call list_users}";
+        String function = "{?= call list_users()}";
         con.setAutoCommit(false);
-        CallableStatement call = con.prepareCall(funcion);
+        CallableStatement call = con.prepareCall(function);
         call.registerOutParameter(1, Types.OTHER);
         call.execute();
         ResultSet result = (ResultSet) call.getObject(1);

@@ -1,7 +1,5 @@
 package cu.edu.cujae.carRent.dot;
 
-import cu.edu.cujae.carRent.utils.DriversCategories;
-
 public class DriverDto {
     private String id;
     private String name;
