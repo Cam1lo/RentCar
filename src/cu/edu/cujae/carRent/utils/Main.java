@@ -1,19 +1,29 @@
 package cu.edu.cujae.carRent.utils;
 
-import cu.edu.cujae.carRent.services.ServicesLocator;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
-public class Main {
+public class Main extends Application {
 
-    public static void main(String[] args) {
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("../visuals/Login/Login.fxml"));
+        Scene login_scene = new Scene(root);
+        login_scene.setFill(Color.TRANSPARENT);
 
-        try {
-            //ServicesLocator.getCarsServices().updateCar(23,"WERDAS",3,14);
-            //ServicesLocator.getCarsServices().listCars();
-            //ServicesLocator.getCarsServices().listCars();
-            // System.out.println(ServicesLocator.getBrandServices().returnBrand(4));
-        }catch (Exception e){
-            e.printStackTrace();
-        }
+        primaryStage.setScene(login_scene);
+        primaryStage.setResizable(false);
+        primaryStage.initStyle(StageStyle.TRANSPARENT);
+        primaryStage.show();
     }
 
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 }

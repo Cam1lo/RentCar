@@ -10,8 +10,8 @@ public class CarsServices {
 
     public void insertCar(String carId, int codStatus, int codModel)throws SQLException, ClassNotFoundException{
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String funcion = "{call insert_car( ?,?,? )}";
-        CallableStatement insert = connection.prepareCall(funcion);
+        String function = "{call insert_car( ?,?,? )}";
+        CallableStatement insert = connection.prepareCall(function);
         insert.setString(1,carId);
         insert.setInt(3,codStatus);
         insert.setInt(2,codModel);
@@ -24,13 +24,14 @@ public class CarsServices {
         ArrayList<CarDto> cars = new ArrayList<CarDto>();
         java.sql.Connection connection = ServicesLocator.getConnection();
         connection.setAutoCommit(false);
-        String funcion = "{?= call list_cars()}";
-        CallableStatement insert = connection.prepareCall(funcion);
+        String function = "{?= call list_cars()}";
+        CallableStatement insert = connection.prepareCall(function);
         insert.registerOutParameter(1, Types.OTHER);
         insert.execute();
         ResultSet result = (ResultSet) insert.getObject(1);
         while(result.next()){
-            System.out.println(result.getString(2));
+            int cod_model = result.getInt(4);
+            int cod_status = result.getInt(3);
         }
         insert.close();
         connection.close();
@@ -39,8 +40,8 @@ public class CarsServices {
 
     public void deleteCar(int code)throws SQLException{
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String funcion = "{call delete_car(?)}";
-        CallableStatement call = connection.prepareCall(funcion);
+        String function = "{call delete_car(?)}";
+        CallableStatement call = connection.prepareCall(function);
         call.setInt(1,code);
         call.execute();
         call.close();
@@ -49,8 +50,8 @@ public class CarsServices {
 
     public void updateCar(int code, String carId, int codStatus, int codModel)throws SQLException{
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String funcion = "{call update_car(?,?,?,?)}";
-        CallableStatement call = connection.prepareCall(funcion);
+        String function = "{call update_car(?,?,?,?)}";
+        CallableStatement call = connection.prepareCall(function);
         call.setInt(1,code);
         call.setString(2,carId);
         call.setInt(4,codStatus);
@@ -63,9 +64,9 @@ public class CarsServices {
     public String returnCar(int code)throws SQLException{
         String car;
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String funcion = "{?= call list_cars()}";
+        String function = "{?= call list_cars()}";
         connection.setAutoCommit(false);
-        CallableStatement insert = connection.prepareCall(funcion);
+        CallableStatement insert = connection.prepareCall(function);
         insert.registerOutParameter(1, Types.OTHER);
         insert.execute();
         ResultSet result = (ResultSet) insert.getObject(1);
@@ -75,7 +76,4 @@ public class CarsServices {
         connection.close();
         return car;
     }
-
-
-
 }

@@ -11,9 +11,9 @@ public class StatusServices {
 
     public CarStatusDto returnStatus(int code) throws SQLException {
         java.sql.Connection con = ServicesLocator.getConnection();
-        String funcion = "{?= call return_status(?)}";
+        String function = "{?= call return_status(?)}";
         con.setAutoCommit(false);
-        CallableStatement call = con.prepareCall(funcion);
+        CallableStatement call = con.prepareCall(function);
         call.registerOutParameter(1, Types.OTHER);
         call.setInt(2, code);
         call.execute();
@@ -28,8 +28,8 @@ public class StatusServices {
 
     public void insertStatus(String status) throws SQLException {
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String funcion = "{call insert_status( ? )}";
-        CallableStatement insert = connection.prepareCall(funcion);
+        String function = "{call insert_status( ? )}";
+        CallableStatement insert = connection.prepareCall(function);
         insert.setString(1, status);
         insert.execute();
         insert.close();
@@ -38,8 +38,8 @@ public class StatusServices {
 
     public void deleteStatus(int code) throws SQLException {
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String funcion = "{call delete_staus( ? )}";
-        CallableStatement insert = connection.prepareCall(funcion);
+        String function = "{call delete_staus( ? )}";
+        CallableStatement insert = connection.prepareCall(function);
         insert.setInt(1, code);
         insert.execute();
         insert.close();
@@ -48,8 +48,8 @@ public class StatusServices {
 
     public void updateStatus(int code, String status) throws SQLException {
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String funcion = "{call update_status( ?,? )}";
-        CallableStatement call = connection.prepareCall(funcion);
+        String function = "{call update_status( ?,? )}";
+        CallableStatement call = connection.prepareCall(function);
         call.setInt(1, code);
         call.setString(2, status);
         call.execute();
