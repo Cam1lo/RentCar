@@ -1,11 +1,13 @@
 package cu.edu.cujae.carRent.dot;
 
 public class CarDto {
+    private int code ;
     private String carID;
     private CarStatusDto status;
     private ModelDto model;
 
-    public CarDto(int serial, String carID, CarStatusDto status, ModelDto model) {
+    public CarDto(int code, String carID, CarStatusDto status, ModelDto model) {
+        this.code = code;
         this.carID = carID;
         this.status = status;
         this.model = model;
@@ -36,5 +38,7 @@ public class CarDto {
         this.model = model;
     }
 
+    public int getCode() { return code; }
 
+    public void setCode(int code) { this.code = code; }
 }

@@ -19,7 +19,7 @@ public class BrandServices {
         call.execute();
         ResultSet result = (ResultSet) call.getObject(1);
         result.next();
-        BrandDto brand = new BrandDto(result.getString(2));
+        BrandDto brand = new BrandDto(result.getInt(1), result.getString(2));
         call.close();
         con.close();
         return brand;

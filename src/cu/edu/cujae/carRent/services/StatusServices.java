@@ -19,7 +19,7 @@ public class StatusServices {
         call.execute();
         ResultSet result = (ResultSet) call.getObject(1);
         result.next();
-        CarStatusDto status = new CarStatusDto(result.getString(2));
+        CarStatusDto status = new CarStatusDto(result.getInt(1), result.getString(2));
         call.close();
         con.close();
         return status;

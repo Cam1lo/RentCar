@@ -1,23 +1,31 @@
 package cu.edu.cujae.carRent.services;
 
+import cu.edu.cujae.carRent.dot.BrandDto;
+import cu.edu.cujae.carRent.dot.ModelDto;
+
 import java.sql.CallableStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
 public class ModelServices {
 
-    public String returnModel(int code) throws SQLException {
-        String status;
+    public ModelDto returnModel(int code) throws SQLException {
+        ModelDto model;
         java.sql.Connection con = ServicesLocator.getConnection();
         String funcion = "{?= call return_model(?)}";
+        con.setAutoCommit(false);
         CallableStatement call = con.prepareCall(funcion);
         call.registerOutParameter(1, Types.OTHER);
         call.setInt(2, code);
         call.execute();
-        status = call.getString(1);
+        ResultSet result = (ResultSet) call.getObject(1);
+        result.next();
+        BrandDto brand = ServicesLocator.getBrandServices().returnBrand(result.getInt(2));
+        model = new ModelDto(result.getInt(1),result.getString(3),brand);
         call.close();
         con.close();
-        return status;
+        return model;
     }
 
     public void insertModel(String model) throws SQLException {

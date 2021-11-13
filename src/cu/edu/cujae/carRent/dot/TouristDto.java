@@ -1,6 +1,7 @@
 package cu.edu.cujae.carRent.dot;
 
 public class TouristDto {
+    private int code;
     private String name;
     private String lastName;
     private String idPassport;
@@ -8,7 +9,8 @@ public class TouristDto {
     private char sex;
     private String telephoneNumber;
 
-    public TouristDto( String name, String lastName, String idPassport, int age, char sex, String telephoneNumber) {
+    public TouristDto( int code, String name, String lastName, String idPassport, int age, char sex, String telephoneNumber) {
+        this.code = code;
         this.name = name;
         this.lastName = lastName;
         this.idPassport = idPassport;
@@ -65,4 +67,7 @@ public class TouristDto {
         this.telephoneNumber = telephoneNumber;
     }
 
+    public int getCode() { return code; }
+
+    public void setCode(int code) { this.code = code; }
 }

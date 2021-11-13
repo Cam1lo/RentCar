@@ -10,6 +10,7 @@ public class ServicesLocator {
     private static BrandServices brandServices = null;
     private static ModelServices modelServices = null;
     private static UserServices userServices = null;
+    private static StatusServices statusServices = null;
 
     public static UserServices getUserServices(){
         if(userServices == null){
@@ -17,6 +18,15 @@ public class ServicesLocator {
         }
         return userServices;
     }
+
+
+    public static StatusServices getStatusServices(){
+        if(statusServices == null){
+            statusServices = new StatusServices();
+        }
+        return statusServices;
+    }
+
 
     public static CarsServices getCarsServices(){
         if(carsServices == null){

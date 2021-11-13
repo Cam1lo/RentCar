@@ -26,7 +26,7 @@ public class UserServices {
         while (result.next()) {
             if (result.getString(2).equals(name)) {
                 if (result.getString(3).equals(pass)) {
-                    user = new UserDto(name, pass, result.getBoolean(4));
+                    user = new UserDto(result.getInt(1), name, pass, result.getBoolean(4));
                 } else {
                     error = "pass error";
                 }
@@ -83,7 +83,11 @@ public class UserServices {
         call.execute();
         ResultSet result = (ResultSet) call.getObject(1);
         while(result.next()){
-            user.add(new UserDto(result.getString(2),result.getString(3),result.getBoolean(4)));
+            int code = result.getInt(1);
+            String name = result.getString(2);
+            String pass = result.getString(3);
+            boolean is_admin = result.getBoolean(4);
+            user.add(new UserDto(code,name,pass,is_admin));
         }
         call.close();
         connection.close();

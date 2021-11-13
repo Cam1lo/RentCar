@@ -3,6 +3,7 @@ package cu.edu.cujae.carRent.dot;
 import java.util.Date;
 
 public class ContractDto {
+    private int code;
     private TouristDto tourist;
     private CarDto car;
     private Date startingDate;
@@ -13,7 +14,8 @@ public class ContractDto {
     private DriverDto driver;
     private float totalAmount;
 
-    public ContractDto(TouristDto tourist, CarDto car, Date startingDate, Date finalDate,int extension, PaymentsDto payment, BillDto bill, DriverDto driver) {
+    public ContractDto(int code,TouristDto tourist, CarDto car, Date startingDate, Date finalDate,int extension, PaymentsDto payment, BillDto bill, DriverDto driver) {
+        this.code = code;
         this.tourist = tourist;
         this.car = car;
         this.startingDate = startingDate;
@@ -25,7 +27,8 @@ public class ContractDto {
         this.totalAmount = calculateTotalAmount();
     }
 
-    public ContractDto(TouristDto tourist, CarDto car, Date startingDate, Date finalDate,int extension, PaymentsDto payment, BillDto bill) {
+    public ContractDto(int code, TouristDto tourist, CarDto car, Date startingDate, Date finalDate, int extension, PaymentsDto payment, BillDto bill) {
+        this.code = code;
         this.tourist = tourist;
         this.car = car;
         this.startingDate = startingDate;
@@ -100,6 +103,9 @@ public class ContractDto {
     public int getExtension() { return extension; }
 
     public void setExtension(int extension) { this.extension = extension; }
+
+    public int getCode() { return code; }
+    public void setCode(int code) { this.code = code; }
 
     private float calculateTotalAmount(){ return bill.getAmount() + (bill.getSpecialAmount() * extension); }
 }

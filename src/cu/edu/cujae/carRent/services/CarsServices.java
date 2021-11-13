@@ -1,7 +1,10 @@
 package cu.edu.cujae.carRent.services;
 
 
+import cu.edu.cujae.carRent.dot.BrandDto;
 import cu.edu.cujae.carRent.dot.CarDto;
+import cu.edu.cujae.carRent.dot.CarStatusDto;
+import cu.edu.cujae.carRent.dot.ModelDto;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -30,8 +33,9 @@ public class CarsServices {
         insert.execute();
         ResultSet result = (ResultSet) insert.getObject(1);
         while(result.next()){
-            int cod_model = result.getInt(4);
-            int cod_status = result.getInt(3);
+            ModelDto model = ServicesLocator.getModelServices().returnModel(result.getInt(4));
+            CarStatusDto status = ServicesLocator.getStatusServices().returnStatus(result.getInt(3));
+            cars.add(new CarDto(result.getInt(1),result.getString(2),status,model));
         }
         insert.close();
         connection.close();

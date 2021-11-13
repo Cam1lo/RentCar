@@ -57,12 +57,12 @@ public class LoginController {
         String errors = Validations.loginValidation(username, password);
 
         if (errors.equals("")) {
-            UserDto user = ServicesLocator.getUserServices().authentication(username, password);
+            /*UserDto user = ServicesLocator.getUserServices().authentication(username, password);
 
             if(user)
 
             this.stage = (Stage) ap.getScene().getWindow();
-            this.stage.close();
+            this.stage.close();*/
 
         }
     }

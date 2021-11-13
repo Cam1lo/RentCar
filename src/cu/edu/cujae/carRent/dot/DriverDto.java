@@ -1,13 +1,15 @@
 package cu.edu.cujae.carRent.dot;
 
 public class DriverDto {
+    private int code;
     private String id;
     private String name;
     private String lastName;
     private String address;
     private DriversCategoriesDto category;
 
-    public DriverDto(String id, String name, String lastName, String address, DriversCategoriesDto category) {
+    public DriverDto(int code, String id, String name, String lastName, String address, DriversCategoriesDto category) {
+        this.code = code;
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -55,4 +57,7 @@ public class DriverDto {
         this.category = category;
     }
 
+    public int getCode() { return code; }
+
+    public void setCode(int code) { this.code = code; }
 }
