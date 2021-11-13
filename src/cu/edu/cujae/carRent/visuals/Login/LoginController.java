@@ -1,5 +1,8 @@
 package cu.edu.cujae.carRent.visuals.Login;
 
+import cu.edu.cujae.carRent.dot.UserDto;
+import cu.edu.cujae.carRent.services.ServicesLocator;
+import cu.edu.cujae.carRent.utils.Validations;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,9 +16,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 
 public class LoginController {
@@ -47,31 +50,30 @@ public class LoginController {
         yOffset = stage.getY() - event.getScreenY();
     }
 
-    public void login(ActionEvent e) throws IOException {
-        String error = "";
+    public void login(ActionEvent e) throws IOException, SQLException {
+        String username = this.user_name.getText();
+        String password = this.user_password.getText();
 
-        if (this.user_name.getText().equals("")) {
-            error = "User name field is required";
-            if (this.user_password.getText().equals("")) {
-                error = "User name and password fields are required";
-            }
-        } else if (this.user_password.getText().equals("")) {
-            error = "Password field is required";
-        }
+        String errors = Validations.loginValidation(username, password);
 
-        error_label.setText(error);
-        if (error.equals("")) {
+        if (errors.equals("")) {
+            UserDto user = ServicesLocator.getUserServices().authentication(username, password);
+
+            if(user)
+
             this.stage = (Stage) ap.getScene().getWindow();
             this.stage.close();
 
-            Parent mainLayout = FXMLLoader.load(getClass().getResource("../MainLayout/MainLayout.fxml"));
-
-            Stage mainStage = new Stage();
-            mainStage.setScene(new Scene(mainLayout));
-            mainStage.show();
-
-//        ServicesLocator.AuthService.authenticate(this.user_name.getText(), this.user_password.getText());
         }
+    }
+
+    public void initMainLayout() throws IOException {
+        Parent mainLayout = FXMLLoader.load(getClass().getResource("../MainLayout/MainLayout.fxml"));
+
+        Stage mainStage = new Stage();
+        mainStage.setScene(new Scene(mainLayout));
+        mainStage.setMaximized(true);
+        mainStage.show();
     }
 
     public void closeApplication(MouseEvent e) {
