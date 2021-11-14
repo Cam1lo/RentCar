@@ -6,10 +6,11 @@ public class TouristDto {
     private String lastName;
     private String idPassport;
     private int age;
-    private char sex;
+    private String sex;
     private String telephoneNumber;
+    private String country;
 
-    public TouristDto( int code, String name, String lastName, String idPassport, int age, char sex, String telephoneNumber) {
+    public TouristDto( int code, String name, String lastName, String idPassport, int age, String sex, String telephoneNumber, String country) {
         this.code = code;
         this.name = name;
         this.lastName = lastName;
@@ -17,6 +18,7 @@ public class TouristDto {
         this.age = age;
         this.sex = sex;
         this.telephoneNumber = telephoneNumber;
+        this.country = country;
     }
 
     public String getName() {
@@ -51,11 +53,11 @@ public class TouristDto {
         this.age = age;
     }
 
-    public char getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(char sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
@@ -70,4 +72,8 @@ public class TouristDto {
     public int getCode() { return code; }
 
     public void setCode(int code) { this.code = code; }
+
+    public String getCountry() { return country; }
+
+    public void setCountry(String country) { this.country = country; }
 }

@@ -38,7 +38,7 @@ public class ModelServices {
         connection.close();
     }
 
-    public void deleteStatus(int code) throws SQLException {
+    public void deleteModel(int code) throws SQLException {
         java.sql.Connection connection = ServicesLocator.getConnection();
         String funcion = "{call delete_model( ? )}";
         CallableStatement insert = connection.prepareCall(funcion);
@@ -48,7 +48,7 @@ public class ModelServices {
         connection.close();
     }
 
-    public void updateBrand(int code, String model) throws SQLException {
+    public void updateModel(int code, String model) throws SQLException {
         java.sql.Connection connection = ServicesLocator.getConnection();
         String funcion = "{call update_model( ?,? )}";
         CallableStatement call = connection.prepareCall(funcion);

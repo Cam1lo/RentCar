@@ -1,7 +1,5 @@
 package cu.edu.cujae.carRent.services;
 
-
-import cu.edu.cujae.carRent.dot.BrandDto;
 import cu.edu.cujae.carRent.dot.CarDto;
 import cu.edu.cujae.carRent.dot.CarStatusDto;
 import cu.edu.cujae.carRent.dot.ModelDto;
@@ -11,15 +9,17 @@ import java.util.ArrayList;
 
 public class CarsServices {
 
-    public void insertCar(String carId, int codStatus, int codModel)throws SQLException, ClassNotFoundException{
+    public void insertCar(String carId, int codStatus, int codModel, String color, double km_driver)throws SQLException, ClassNotFoundException{
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String function = "{call insert_car( ?,?,? )}";
-        CallableStatement insert = connection.prepareCall(function);
-        insert.setString(1,carId);
-        insert.setInt(3,codStatus);
-        insert.setInt(2,codModel);
-        insert.execute();
-        insert.close();
+        String function = "{call insert_car( ?,?,?,?,? )}";
+        CallableStatement call = connection.prepareCall(function);
+        call.setString(1,carId);
+        call.setInt(2,codStatus);
+        call.setInt(3,codModel);
+        call.setString(4,color);
+        call.setDouble(5,km_driver);
+        call.execute();
+        call.close();
         connection.close();
     }
 
@@ -28,16 +28,18 @@ public class CarsServices {
         java.sql.Connection connection = ServicesLocator.getConnection();
         connection.setAutoCommit(false);
         String function = "{?= call list_cars()}";
-        CallableStatement insert = connection.prepareCall(function);
-        insert.registerOutParameter(1, Types.OTHER);
-        insert.execute();
-        ResultSet result = (ResultSet) insert.getObject(1);
+        CallableStatement call = connection.prepareCall(function);
+        call.registerOutParameter(1, Types.OTHER);
+        call.execute();
+        ResultSet result = (ResultSet) call.getObject(1);
         while(result.next()){
             ModelDto model = ServicesLocator.getModelServices().returnModel(result.getInt(4));
             CarStatusDto status = ServicesLocator.getStatusServices().returnStatus(result.getInt(3));
-            cars.add(new CarDto(result.getInt(1),result.getString(2),status,model));
+            String color = result.getString(5);
+            double km_driver = result.getDouble(6);
+            cars.add(new CarDto(result.getInt(1),result.getString(2),status,model,color,km_driver));
         }
-        insert.close();
+        call.close();
         connection.close();
         return cars;
     }
@@ -65,18 +67,21 @@ public class CarsServices {
         connection.close();
     }
 
-    public String returnCar(int code)throws SQLException{
-        String car;
+    public CarDto returnCar(int code)throws SQLException{
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String function = "{?= call list_cars()}";
+        String function = "{?= call return_cars( ? )}";
         connection.setAutoCommit(false);
-        CallableStatement insert = connection.prepareCall(function);
-        insert.registerOutParameter(1, Types.OTHER);
-        insert.execute();
-        ResultSet result = (ResultSet) insert.getObject(1);
+        CallableStatement call = connection.prepareCall(function);
+        call.registerOutParameter(1, Types.OTHER);
+        call.execute();
+        ResultSet result = (ResultSet) call.getObject(1);
         result.next();
-        car = result.getString(2);
-        insert.close();
+        ModelDto model = ServicesLocator.getModelServices().returnModel(result.getInt(4));
+        CarStatusDto status = ServicesLocator.getStatusServices().returnStatus(result.getInt(3));
+        String color = result.getString(5);
+        double km_driver = result.getDouble(6);
+        CarDto car = new CarDto(result.getInt(1),result.getString(2),status,model,color,km_driver);
+        call.close();
         connection.close();
         return car;
     }
