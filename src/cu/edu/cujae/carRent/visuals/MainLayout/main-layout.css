@@ -5,3 +5,7 @@
 .container {
   -fx-background-color: #EDEDED
 }
+
+.log-out-button {
+  -fx-fill-color: #707A85;
+}

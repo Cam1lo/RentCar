@@ -12,7 +12,7 @@
 
 <AnchorPane fx:id="ap" onMouseDragged="#apMouseDragged" onMousePressed="#apMousePressed" prefHeight="360.0" prefWidth="350.0" styleClass="login_container" stylesheets="@login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cu.edu.cujae.carRent.visuals.Login.LoginController">
    <children>
-      <Button fx:id="login_button" alignment="BOTTOM_CENTER" layoutX="139.0" layoutY="312.0" mnemonicParsing="false" onAction="#login" style="-fx-background-color: #5BA6FF; -fx-border-radius: 10000;" text="LOGIN" textAlignment="CENTER">
+      <Button fx:id="login_button" alignment="BOTTOM_CENTER" layoutX="139.0" layoutY="312.0" mnemonicParsing="false" onAction="#login" styleClass="login_button" text="LOGIN" textAlignment="CENTER">
          <opaqueInsets>
             <Insets top="100.0" />
          </opaqueInsets></Button>
@@ -20,7 +20,7 @@
       <Label layoutX="77.0" layoutY="171.0" text="user:" />
       <Label layoutX="77.0" layoutY="225.0" text="pass:" />
       <PasswordField fx:id="user_password" layoutX="114.0" layoutY="220.0" />
-      <Label fx:id="error_label" alignment="CENTER" contentDisplay="CENTER" layoutX="77.0" layoutY="258.0" prefHeight="43.0" prefWidth="197.0" textAlignment="CENTER" textFill="#dc3545" wrapText="true">
+      <Label fx:id="error_label" alignment="CENTER" contentDisplay="CENTER" layoutX="77.0" layoutY="258.0" prefHeight="43.0" prefWidth="197.0" styleClass="errors" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

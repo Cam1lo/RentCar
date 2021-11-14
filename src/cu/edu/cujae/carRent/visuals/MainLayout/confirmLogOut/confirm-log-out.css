@@ -1,0 +1,13 @@
+.container {
+  -fx-background-radius: 18 18 18 18;
+  -fx-background-color: #fff;
+  -fx-border-radius: 18 18 18 18;
+}
+
+.log-out-button {
+  -fx-background-color: #dc3545;
+}
+
+.cancel-button {
+  -fx-background-color: transparent;
+}

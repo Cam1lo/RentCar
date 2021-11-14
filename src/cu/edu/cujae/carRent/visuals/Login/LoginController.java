@@ -1,8 +1,11 @@
 package cu.edu.cujae.carRent.visuals.Login;
 
+import cu.edu.cujae.carRent.Main;
 import cu.edu.cujae.carRent.dot.UserDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
 import cu.edu.cujae.carRent.utils.Validations;
+import cu.edu.cujae.carRent.utils.bdResponses.LoginResponse;
+import cu.edu.cujae.carRent.visuals.MainLayout.MainLayout;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,6 +18,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -23,21 +27,21 @@ import java.sql.SQLException;
 
 public class LoginController {
     @FXML
-    Button login_button;
+    private Button login_button;
     @FXML
-    TextField user_name;
+    private TextField user_name;
     @FXML
-    PasswordField user_password;
+    private PasswordField user_password;
     @FXML
-    Label error_label;
+    private Label error_label;
     @FXML
-    AnchorPane ap;
+    private AnchorPane ap;
     @FXML
-    ImageView close_icon;
+    private ImageView close_icon;
 
-    Stage stage;
-    Double xOffset;
-    Double yOffset;
+    private Stage stage;
+    private Double xOffset;
+    private Double yOffset;
 
     public void apMouseDragged(MouseEvent event) {
         stage.setX(event.getScreenX() + xOffset);
@@ -57,23 +61,34 @@ public class LoginController {
         String errors = Validations.loginValidation(username, password);
 
         if (errors.equals("")) {
-            /*UserDto user = ServicesLocator.getUserServices().authentication(username, password);
+            LoginResponse loginResponse = ServicesLocator.getUserServices().authentication(username, password);
 
-            if(user)
-
-            this.stage = (Stage) ap.getScene().getWindow();
-            this.stage.close();*/
-
+            if (loginResponse.getUser() != null) {
+                this.stage = (Stage) ap.getScene().getWindow();
+                this.stage.close();
+                goToMainLayout(loginResponse.getUser());
+            } else if (!loginResponse.getError().equals("")) {
+                errors = loginResponse.getError();
+                this.error_label.setText(errors);
+            }
+        } else {
+            this.error_label.setText(errors);
         }
     }
 
-    public void initMainLayout() throws IOException {
-        Parent mainLayout = FXMLLoader.load(getClass().getResource("../MainLayout/MainLayout.fxml"));
-
+    public void goToMainLayout(UserDto user) throws IOException {
         Stage mainStage = new Stage();
-        mainStage.setScene(new Scene(mainLayout));
-        mainStage.setMaximized(true);
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../MainLayout/MainLayout.fxml"));
+        Parent root = loader.load();
+        MainLayout mainLayoutController = (MainLayout) loader.getController();
+        mainLayoutController.onInit(user);
+
+        mainStage.setScene(new Scene(root));
         mainStage.show();
+        mainStage.setMaximized(true);
+        mainStage.setAlwaysOnTop(true);
+        mainStage.toFront();
     }
 
     public void closeApplication(MouseEvent e) {

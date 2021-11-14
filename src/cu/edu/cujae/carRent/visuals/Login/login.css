@@ -3,3 +3,11 @@
   -fx-background-color: #fff;
   -fx-border-radius: 18 18 18 18;
 }
+
+.login_button {
+  -fx-background-color:  #5BA6FF;
+}
+
+.errors {
+  -fx-text-fill: #dc3545;
+}

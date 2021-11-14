@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class UserServices {
 
     public LoginResponse authentication(String name, String pass) throws SQLException {
-        String error = "error";
+        String error = "Invalid user";
         UserDto user = null;
         java.sql.Connection con = ServicesLocator.getConnection();
         String function = "{?= call list_users()}";
@@ -28,7 +28,7 @@ public class UserServices {
                 if (result.getString(3).equals(pass)) {
                     user = new UserDto(result.getInt(1), name, pass, result.getBoolean(4));
                 } else {
-                    error = "pass error";
+                    error = "Wrong password";
                 }
             }
         }

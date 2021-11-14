@@ -2,11 +2,11 @@
   <library name="libs">
     <CLASSES>
       <root url="file://$PROJECT_DIR$/libs" />
-      <root url="file://$PROJECT_DIR$/libs/javafx" />
+      <root url="file://$PROJECT_DIR$/libs/javafx/linux" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
     <jarDirectory url="file://$PROJECT_DIR$/libs" recursive="false" />
-    <jarDirectory url="file://$PROJECT_DIR$/libs/javafx" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/libs/javafx/linux" recursive="false" />
   </library>
 </component>
