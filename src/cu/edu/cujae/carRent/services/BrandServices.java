@@ -29,20 +29,20 @@ public class BrandServices {
     public void insertBrand(String brand) throws SQLException {
         java.sql.Connection connection = ServicesLocator.getConnection();
         String function = "{call insert_brand( ? )}";
-        CallableStatement insert = connection.prepareCall(function);
-        insert.setString(1, brand);
-        insert.execute();
-        insert.close();
+        CallableStatement call = connection.prepareCall(function);
+        call.setString(1, brand);
+        call.execute();
+        call.close();
         connection.close();
     }
 
     public void deleteBrand(int code) throws SQLException {
         java.sql.Connection connection = ServicesLocator.getConnection();
         String function = "{call delete_brand(?)}";
-        CallableStatement insert = connection.prepareCall(function);
-        insert.setInt(1, code);
-        insert.execute();
-        insert.close();
+        CallableStatement call = connection.prepareCall(function);
+        call.setInt(1, code);
+        call.execute();
+        call.close();
         connection.close();
     }
 

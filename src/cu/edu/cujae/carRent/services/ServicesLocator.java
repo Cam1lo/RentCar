@@ -12,6 +12,11 @@ public class ServicesLocator {
     private static UserServices userServices = null;
     private static StatusServices statusServices = null;
     private static TouristServices touristServices = null;
+    private static ContractServices contractServices = null;
+    private static DriverServices driverServices = null;
+    private static BillServices billServices = null;
+    private static DriverCategoryServices driverCategoryServices = null;
+    private static PaymentsServices paymentsServices = null;
 
     public static UserServices getUserServices(){
         if(userServices == null){
@@ -48,6 +53,39 @@ public class ServicesLocator {
             brandServices = new BrandServices();
         }
         return brandServices;
+    }
+
+    public static ContractServices getContractServices(){
+        if(contractServices == null){
+            contractServices = new ContractServices();
+        }
+        return contractServices;
+    }
+    public static DriverServices getDriverServices(){
+        if(driverServices == null){
+            driverServices = new DriverServices();
+        }
+        return driverServices;
+    }
+    public static BillServices getBillServices(){
+        if(billServices == null){
+            billServices = new BillServices();
+        }
+        return billServices;
+    }
+
+    public static DriverCategoryServices getDriverCategoryServices(){
+        if(driverCategoryServices == null){
+            driverCategoryServices = new DriverCategoryServices();
+        }
+        return driverCategoryServices;
+    }
+
+    public static PaymentsServices getPaymentsServices(){
+        if(paymentsServices == null){
+            paymentsServices = new PaymentsServices();
+        }
+        return paymentsServices;
     }
 
     public static ModelServices getModelServices(){

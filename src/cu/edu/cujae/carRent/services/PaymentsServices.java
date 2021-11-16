@@ -1,8 +1,8 @@
 package cu.edu.cujae.carRent.services;
 
 import cu.edu.cujae.carRent.dot.BrandDto;
-import cu.edu.cujae.carRent.dot.CarStatusDto;
-import cu.edu.cujae.carRent.dot.ModelDto;
+import cu.edu.cujae.carRent.dot.DriversCategoriesDto;
+import cu.edu.cujae.carRent.dot.PaymentsDto;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
@@ -10,73 +10,70 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
 
-public class ModelServices {
+public class PaymentsServices {
 
-    public ModelDto returnModel(int code) throws SQLException {
-        ModelDto model;
+    public PaymentsDto returnPayment(int code) throws SQLException {
         java.sql.Connection con = ServicesLocator.getConnection();
-        String funcion = "{?= call return_model(?)}";
+        String function = "{?= call return_payment( ? )}";
         con.setAutoCommit(false);
-        CallableStatement call = con.prepareCall(funcion);
+        CallableStatement call = con.prepareCall(function);
         call.registerOutParameter(1, Types.OTHER);
         call.setInt(2, code);
         call.execute();
         ResultSet result = (ResultSet) call.getObject(1);
         result.next();
-        BrandDto brand = ServicesLocator.getBrandServices().returnBrand(result.getInt(2));
-        model = new ModelDto(result.getInt(1),result.getString(3),brand);
+        PaymentsDto payment = new PaymentsDto(result.getInt(1), result.getString(2));
         call.close();
         con.close();
-        return model;
+        return payment;
+
     }
 
-    public void insertModel(String model) throws SQLException {
+    public void insertPayment(String payment) throws SQLException {
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String funcion = "{call insert_model( ? )}";
-        CallableStatement call = connection.prepareCall(funcion);
-        call.setString(1, model);
+        String function = "{call insert_payment( ? )}";
+        CallableStatement call = connection.prepareCall(function);
+        call.setString(1, payment);
         call.execute();
         call.close();
         connection.close();
     }
 
-    public void deleteModel(int code) throws SQLException {
+    public void deletePayment(int code) throws SQLException {
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String funcion = "{call delete_model( ? )}";
-        CallableStatement call = connection.prepareCall(funcion);
+        String function = "{call delete_payment( ? )}";
+        CallableStatement call = connection.prepareCall(function);
         call.setInt(1, code);
         call.execute();
         call.close();
         connection.close();
     }
 
-    public void updateModel(int code, String model) throws SQLException {
+    public void updatePayment(int code, String payment) throws SQLException {
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String funcion = "{call update_model( ?,? )}";
-        CallableStatement call = connection.prepareCall(funcion);
+        String function = "{call update_payment( ?,? )}";
+        CallableStatement call = connection.prepareCall(function);
         call.setInt(1, code);
-        call.setString(2, model);
+        call.setString(2, payment);
         call.execute();
         call.close();
         connection.close();
     }
 
-    public ArrayList<ModelDto> listStatus() throws SQLException {
-        ArrayList<ModelDto> models = new ArrayList<>();
+    public ArrayList<PaymentsDto> listPaymaent() throws SQLException {
+        ArrayList<PaymentsDto> payments = new ArrayList<>();
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String function = "{call list_model()}";
+        String function = "{call list_payment()}";
         connection.setAutoCommit(false);
         CallableStatement call = connection.prepareCall(function);
         call.registerOutParameter(1, Types.OTHER);
         call.execute();
         ResultSet result = (ResultSet) call.getObject(1);
         while(result.next()){
-            BrandDto brand = ServicesLocator.getBrandServices().returnBrand(result.getInt(3));
-            models.add(new ModelDto(result.getInt(1),result.getString(2),brand));
+            payments.add(new PaymentsDto(result.getInt(1),result.getString(2)));
         }
         call.close();
         connection.close();
-        return models;
+        return payments;
     }
-
 }

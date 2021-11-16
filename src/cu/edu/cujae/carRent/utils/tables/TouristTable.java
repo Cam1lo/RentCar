@@ -1,5 +1,6 @@
 package cu.edu.cujae.carRent.utils.tables;
 
+import cu.edu.cujae.carRent.dot.ContractDto;
 import cu.edu.cujae.carRent.dot.TouristDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
 
@@ -52,21 +53,30 @@ public class TouristTable {
         ArrayList<TouristTable> table = new ArrayList<>();
         ArrayList<TouristDto> tourists = ServicesLocator.getTouristServices().listTourist();
         for(TouristDto e : tourists){
-            table.add(new TouristTable(e.getCountry(),e.getName(),e.getLastName(),e.getIdPassport(),0,0));
-            // falta la implementacion del countContract y del totalRentValue
+            table.add(new TouristTable(e.getCountry(),e.getName(),e.getLastName(),e.getIdPassport(),countContract(e.getCode()),totalRentValue(e.getCode())));
         }
         return table;
     }
 
-    private int countContract(int code_tourist){
+    private static int countContract(int code_tourist) throws SQLException, ClassNotFoundException {
         int count = 0;
-        //faltan la implemnetacion de listar contartos
+        ArrayList<ContractDto> contracts = ServicesLocator.getContractServices().listContract();
+        for(ContractDto con : contracts){
+            if(code_tourist == con.getTourist().getCode()){
+                count++;
+            }
+        }
         return count;
     }
 
-    private float totalRentValue(int code_tourist){
+    private static float totalRentValue(int code_tourist) throws SQLException, ClassNotFoundException {
         float amount = 0;
-        //falta la implemnetacion de listar contartos
+        ArrayList<ContractDto> contracts = ServicesLocator.getContractServices().listContract();
+        for (ContractDto con : contracts) {
+            if (code_tourist == con.getTourist().getCode()) {
+                amount += con.getTotalAmount();
+            }
+        }
         return amount;
     }
 }

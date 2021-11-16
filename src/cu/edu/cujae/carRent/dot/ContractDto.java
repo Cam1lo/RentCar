@@ -1,42 +1,52 @@
 package cu.edu.cujae.carRent.dot;
 
-import java.util.Date;
+import cu.edu.cujae.carRent.utils.DateController;
+
+import java.time.LocalDate;
 
 public class ContractDto {
     private int code;
     private TouristDto tourist;
     private CarDto car;
-    private Date startingDate;
-    private Date finalDate;
+    private LocalDate startingDate;
+    private LocalDate finalDate;
     private int extension;
     private PaymentsDto payment;
     private BillDto bill;
     private DriverDto driver;
     private float totalAmount;
 
-    public ContractDto(int code,TouristDto tourist, CarDto car, Date startingDate, Date finalDate,int extension, PaymentsDto payment, BillDto bill, DriverDto driver) {
+    public ContractDto(int code,TouristDto tourist, CarDto car, BillDto bill,PaymentsDto payment, DriverDto driver, LocalDate startingDate, LocalDate finalDate,int extension) {
         this.code = code;
         this.tourist = tourist;
         this.car = car;
         this.startingDate = startingDate;
         this.finalDate = finalDate;
-        this.extension=extension;
+        this.extension= extension;
         this.payment = payment;
         this.bill = bill;
         this.driver = driver;
         this.totalAmount = calculateTotalAmount();
     }
 
-    public ContractDto(int code, TouristDto tourist, CarDto car, Date startingDate, Date finalDate, int extension, PaymentsDto payment, BillDto bill) {
+    public ContractDto(int code, TouristDto tourist, CarDto car, BillDto bill, PaymentsDto payment, LocalDate startingDate, LocalDate finalDate,int extension) {
         this.code = code;
         this.tourist = tourist;
         this.car = car;
         this.startingDate = startingDate;
         this.finalDate = finalDate;
-        this.extension=extension;
+        this.extension= extension;
         this.payment = payment;
         this.bill = bill;
         this.driver = null;
+        this.totalAmount = calculateTotalAmount();
+    }
+
+    public ContractDto(BillDto bill, LocalDate startingDate, LocalDate finalDate, int extension) {
+        this.startingDate = startingDate;
+        this.finalDate = finalDate;
+        this.extension = extension;
+        this.bill = bill;
         this.totalAmount = calculateTotalAmount();
     }
 
@@ -56,19 +66,19 @@ public class ContractDto {
         this.car = car;
     }
 
-    public Date getStartingDate() {
+    public LocalDate getStartingDate() {
         return startingDate;
     }
 
-    public void setStartingDate(Date startingDate) {
+    public void setStartingDate(LocalDate startingDate) {
         this.startingDate = startingDate;
     }
 
-    public Date getFinalDate() {
+    public LocalDate getFinalDate() {
         return finalDate;
     }
 
-    public void setFinalDate(Date finalDate) {
+    public void setFinalDate(LocalDate finalDate) {
         this.finalDate = finalDate;
     }
 
@@ -105,7 +115,8 @@ public class ContractDto {
     public void setExtension(int extension) { this.extension = extension; }
 
     public int getCode() { return code; }
+
     public void setCode(int code) { this.code = code; }
 
-    private float calculateTotalAmount(){ return bill.getAmount() + (bill.getSpecialAmount() * extension); }
+    private float calculateTotalAmount(){ return (bill.getAmount()*DateController.extensionDate(startingDate,finalDate)) + (bill.getSpecialAmount() * extension); }
 }
