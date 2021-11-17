@@ -77,7 +77,7 @@ public class UserServices {
         ArrayList<UserDto> user = new ArrayList<UserDto>();
         java.sql.Connection connection = ServicesLocator.getConnection();
         connection.setAutoCommit(false);
-        String function = "{?= call list_user()}";
+        String function = "{?= call list_users()}";
         CallableStatement call = connection.prepareCall(function);
         call.registerOutParameter(1, Types.OTHER);
         call.execute();

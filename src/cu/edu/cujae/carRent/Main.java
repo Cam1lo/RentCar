@@ -13,7 +13,7 @@ public class Main extends Application {
     }
 
     public void start(Stage primaryStage) throws Exception {
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("./visuals/Login/Login.fxml"));
+        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("./visuals/login/Login.fxml"));
 
         Scene login_scene = new Scene(root);
         login_scene.setFill(Color.TRANSPARENT);

@@ -8,8 +8,21 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="ap_container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="750.0" stylesheets="@main-layout.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cu.edu.cujae.carRent.visuals.MainLayout.MainLayout">
+<AnchorPane fx:id="ap_container" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="750.0" stylesheets="@main-layout.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cu.edu.cujae.carRent.visuals.mainLayout.MainLayout">
    <children>
+      <AnchorPane layoutX="209.0" prefHeight="547.0" prefWidth="549.0" AnchorPane.bottomAnchor="7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane fx:id="ap_content" layoutX="211.0" prefHeight="540.0" prefWidth="539.0" AnchorPane.bottomAnchor="-7.0" AnchorPane.leftAnchor="211.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Label fx:id="log_out" alignment="CENTER" contentDisplay="CENTER" layoutX="477.0" layoutY="10.0" onMouseClicked="#confirmLogOut" styleClass="log-out-button" text="Log out" underline="true" AnchorPane.rightAnchor="18.0">
+               <font>
+                  <Font size="15.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </Label>
+         </children>
+      </AnchorPane>
       <Pane prefHeight="540.0" prefWidth="209.0" styleClass="nav-bar" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <ImageView fitHeight="97.0" fitWidth="147.0" layoutX="42.0" pickOnBounds="true" preserveRatio="true">
@@ -49,7 +62,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <Label fx:id="nav_item_users" alignment="CENTER" contentDisplay="CENTER" layoutX="80.0" layoutY="364.0" text="USERS" textAlignment="CENTER">
+            <Label fx:id="nav_item_users" alignment="CENTER" contentDisplay="CENTER" layoutX="80.0" layoutY="364.0" onMouseClicked="#loadUsers" text="USERS" textAlignment="CENTER">
                <font>
                   <Font size="15.0" />
                </font>
@@ -59,22 +72,5 @@
             </Label>
          </children>
       </Pane>
-      <AnchorPane layoutX="209.0" prefHeight="547.0" prefWidth="549.0" AnchorPane.rightAnchor="0.0">
-         <children>
-            <Label fx:id="main_header" layoutX="14.0" layoutY="10.0">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Label>
-            <Label fx:id="log_out" alignment="CENTER" contentDisplay="CENTER" layoutX="477.0" layoutY="10.0" onMouseClicked="#confirmLogOut" styleClass="log-out-button" text="Log out" underline="true" AnchorPane.rightAnchor="18.0">
-               <font>
-                  <Font size="15.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Label>
-         </children>
-      </AnchorPane>
    </children>
 </AnchorPane>

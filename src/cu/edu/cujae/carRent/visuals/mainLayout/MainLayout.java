@@ -1,8 +1,11 @@
-package cu.edu.cujae.carRent.visuals.MainLayout;
+package cu.edu.cujae.carRent.visuals.mainLayout;
 
 
 import cu.edu.cujae.carRent.dot.UserDto;
-import cu.edu.cujae.carRent.visuals.MainLayout.confirmLogOut.ConfirmLogOut;
+import cu.edu.cujae.carRent.services.ServicesLocator;
+import cu.edu.cujae.carRent.utils.visual.ScenesManager;
+import cu.edu.cujae.carRent.visuals.mainLayout.confirmLogOut.ConfirmLogOut;
+import cu.edu.cujae.carRent.visuals.pages.users.Users;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,10 +18,10 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class MainLayout {
-    @FXML
-    private Label main_header;
     @FXML
     private Label nav_item_contracts;
     @FXML
@@ -33,12 +36,16 @@ public class MainLayout {
     private Label log_out;
     @FXML
     private AnchorPane ap_container;
+    @FXML
+    private AnchorPane ap_content;
 
+    private ScenesManager sm;
     private UserDto user;
 
     public void onInit(UserDto user) {
+        this.sm = new ScenesManager();
         this.user = user;
-        if(!this.user.isAdmin()) {
+        if (!this.user.isAdmin()) {
             this.nav_item_users.setVisible(false);
         }
     }
@@ -60,5 +67,18 @@ public class MainLayout {
         confirmLogOutStage.setAlwaysOnTop(true);
         confirmLogOutStage.toFront();
         confirmLogOutStage.showAndWait();
+    }
+
+    public void loadUsers() throws SQLException,
+            ClassNotFoundException,
+            IOException,
+            NoSuchFieldException,
+            IllegalAccessException {
+
+        this.nav_item_users.getStyleClass().add("active-nav-item");
+        ArrayList<UserDto> users = ServicesLocator.getUserServices().listUsers();
+
+        Users users_controller = (Users) this.sm.changeApContentTo(this.ap_content, "users", this.sm);
+        users_controller.onInit(users);
     }
 }

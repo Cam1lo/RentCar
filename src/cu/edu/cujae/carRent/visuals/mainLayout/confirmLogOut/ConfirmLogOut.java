@@ -1,4 +1,4 @@
-package cu.edu.cujae.carRent.visuals.MainLayout.confirmLogOut;
+package cu.edu.cujae.carRent.visuals.mainLayout.confirmLogOut;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,7 +31,7 @@ public class ConfirmLogOut {
     public void confirm() throws IOException {
         this.mainStage.close();
 
-        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("../../Login/Login.fxml"));
+        Parent root = (Parent)FXMLLoader.load(this.getClass().getResource("../../login/Login.fxml"));
 
         Scene login_scene = new Scene(root);
         login_scene.setFill(Color.TRANSPARENT);

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="ap" onMouseDragged="#apMouseDragged" onMousePressed="#apMousePressed" prefHeight="360.0" prefWidth="350.0" styleClass="login_container" stylesheets="@login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cu.edu.cujae.carRent.visuals.Login.LoginController">
+<AnchorPane fx:id="ap" onMouseDragged="#apMouseDragged" onMousePressed="#apMousePressed" prefHeight="360.0" prefWidth="350.0" styleClass="login_container" stylesheets="@login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cu.edu.cujae.carRent.visuals.login.LoginController">
    <children>
       <Button fx:id="login_button" alignment="BOTTOM_CENTER" layoutX="139.0" layoutY="312.0" mnemonicParsing="false" onAction="#login" styleClass="login_button" text="LOGIN" textAlignment="CENTER">
          <opaqueInsets>
@@ -25,7 +25,7 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </Label>
-      <ImageView fitHeight="128.0" fitWidth="200.0" layoutX="97.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="128.0" fitWidth="200.0" layoutX="97.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../assets/logo.png" />
          </image>

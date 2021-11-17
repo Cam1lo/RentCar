@@ -1,11 +1,10 @@
-package cu.edu.cujae.carRent.visuals.Login;
+package cu.edu.cujae.carRent.visuals.login;
 
-import cu.edu.cujae.carRent.Main;
 import cu.edu.cujae.carRent.dot.UserDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
 import cu.edu.cujae.carRent.utils.Validations;
 import cu.edu.cujae.carRent.utils.bdResponses.LoginResponse;
-import cu.edu.cujae.carRent.visuals.MainLayout.MainLayout;
+import cu.edu.cujae.carRent.visuals.mainLayout.MainLayout;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,9 +15,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -55,6 +54,7 @@ public class LoginController {
     }
 
     public void login(ActionEvent e) throws IOException, SQLException {
+
         String username = this.user_name.getText();
         String password = this.user_password.getText();
 
@@ -70,6 +70,7 @@ public class LoginController {
             } else if (!loginResponse.getError().equals("")) {
                 errors = loginResponse.getError();
                 this.error_label.setText(errors);
+                this.user_password.clear();
             }
         } else {
             this.error_label.setText(errors);
@@ -79,7 +80,7 @@ public class LoginController {
     public void goToMainLayout(UserDto user) throws IOException {
         Stage mainStage = new Stage();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("../MainLayout/MainLayout.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("../mainLayout/MainLayout.fxml"));
         Parent root = loader.load();
         MainLayout mainLayoutController = (MainLayout) loader.getController();
         mainLayoutController.onInit(user);
@@ -87,7 +88,6 @@ public class LoginController {
         mainStage.setScene(new Scene(root));
         mainStage.show();
         mainStage.setMaximized(true);
-        mainStage.setAlwaysOnTop(true);
         mainStage.toFront();
     }
 

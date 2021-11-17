@@ -9,3 +9,7 @@
 .log-out-button {
   -fx-fill-color: #707A85;
 }
+
+.active-nav-item {
+  -fx-text-fill : #bfbfbf;
+}

@@ -2,6 +2,7 @@
   -fx-background-radius: 18 18 18 18;
   -fx-background-color: #fff;
   -fx-border-radius: 18 18 18 18;
+  -fx-border-color: #000;
 }
 
 .login_button {
