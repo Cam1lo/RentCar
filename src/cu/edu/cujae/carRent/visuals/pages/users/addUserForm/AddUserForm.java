@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.sql.SQLOutput;
 
@@ -43,7 +44,7 @@ public class AddUserForm {
         stage.close();
     }
 
-    public void addNewUser() throws IOException, SQLException, ClassNotFoundException {
+    public void addNewUser() throws IOException, SQLException, ClassNotFoundException, NoSuchAlgorithmException {
 
         String username = this.user_name.getText();
         String password = this.pass.getText();

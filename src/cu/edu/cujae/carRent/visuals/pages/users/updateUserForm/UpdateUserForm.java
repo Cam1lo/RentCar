@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 public class UpdateUserForm {
@@ -44,7 +45,7 @@ public class UpdateUserForm {
         stage.close();
     }
 
-    public void updateUser() throws SQLException, ClassNotFoundException {
+    public void updateUser() throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
 
         String username = this.user_name.getText();
         String password = this.pass.getText();
