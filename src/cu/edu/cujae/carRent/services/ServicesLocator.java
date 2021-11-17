@@ -11,12 +11,20 @@ public class ServicesLocator {
     private static ModelServices modelServices = null;
     private static UserServices userServices = null;
     private static StatusServices statusServices = null;
+    private static TouristServices touristServices = null;
 
     public static UserServices getUserServices(){
         if(userServices == null){
             userServices = new UserServices();
         }
         return userServices;
+    }
+
+    public static TouristServices getTouristServices(){
+        if(touristServices == null){
+            touristServices = new TouristServices();
+        }
+        return touristServices;
     }
 
 

@@ -1,9 +1,7 @@
 package cu.edu.cujae.carRent.services;
 
-import cu.edu.cujae.carRent.dot.CarDto;
 import cu.edu.cujae.carRent.dot.UserDto;
 import cu.edu.cujae.carRent.utils.bdResponses.LoginResponse;
-import javafx.util.Pair;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;

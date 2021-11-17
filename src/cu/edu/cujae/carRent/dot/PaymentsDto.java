@@ -8,9 +8,7 @@ public class PaymentsDto {
         this.payment = payment;
     }
 
-    public String getPayment() {
-        return payment;
-    }
+    public String getPayment() { return payment; }
 
     public void setPayment(String payment) {
         this.payment = payment;
