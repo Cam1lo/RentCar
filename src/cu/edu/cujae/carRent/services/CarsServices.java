@@ -69,10 +69,11 @@ public class CarsServices {
 
     public CarDto returnCar(int code)throws SQLException{
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String function = "{?= call return_cars( ? )}";
+        String function = "{?= call return_car( ? )}";
         connection.setAutoCommit(false);
         CallableStatement call = connection.prepareCall(function);
         call.registerOutParameter(1, Types.OTHER);
+        call.setInt(2,code);
         call.execute();
         ResultSet result = (ResultSet) call.getObject(1);
         result.next();

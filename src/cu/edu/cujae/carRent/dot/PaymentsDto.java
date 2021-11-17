@@ -4,8 +4,10 @@ public class PaymentsDto {
     private int code;
     private String payment;
 
-    public PaymentsDto(String payment) {
+    public PaymentsDto(int code, String payment) {
+
         this.payment = payment;
+        this.code=code;
     }
 
     public String getPayment() { return payment; }

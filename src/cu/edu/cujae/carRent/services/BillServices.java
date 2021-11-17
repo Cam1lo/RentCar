@@ -1,7 +1,7 @@
 package cu.edu.cujae.carRent.services;
 
 import cu.edu.cujae.carRent.dot.BillDto;
-import cu.edu.cujae.carRent.dot.CarStatusDto;
+import cu.edu.cujae.carRent.dot.PaymentsDto;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
@@ -9,11 +9,11 @@ import java.sql.SQLException;
 import java.sql.Types;
 import java.util.ArrayList;
 
-public class StatusServices {
+public class BillServices {
 
-    public CarStatusDto returnStatus(int code) throws SQLException {
+    public BillDto returnBill(int code) throws SQLException {
         java.sql.Connection con = ServicesLocator.getConnection();
-        String function = "{?= call return_status(?)}";
+        String function = "{?= call return_bill( ? )}";
         con.setAutoCommit(false);
         CallableStatement call = con.prepareCall(function);
         call.registerOutParameter(1, Types.OTHER);
@@ -21,59 +21,60 @@ public class StatusServices {
         call.execute();
         ResultSet result = (ResultSet) call.getObject(1);
         result.next();
-        CarStatusDto status = new CarStatusDto(result.getInt(1), result.getString(2));
+        BillDto bill = new BillDto(result.getInt(1), result.getFloat(2),result.getFloat(3));
         call.close();
         con.close();
-        return status;
+        return bill;
 
     }
 
-    public void insertStatus(String status) throws SQLException {
+    public void insertBill(float amount, float special_amount) throws SQLException {
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String function = "{call insert_status( ? )}";
+        String function = "{call insert_bill( ?, ? )}";
         CallableStatement call = connection.prepareCall(function);
-        call.setString(1, status);
+        call.setFloat(1, amount);
+        call.setFloat(2,special_amount);
         call.execute();
         call.close();
         connection.close();
     }
 
-    public void deleteStatus(int code) throws SQLException {
+    public void deleteBill(int code) throws SQLException {
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String function = "{call delete_staus( ? )}";
-        CallableStatement call = connection.prepareCall(function);
-        call.setInt(1, code);
-        call.execute();
-        call.close();
-        connection.close();
-    }
-
-    public void updateStatus(int code, String status) throws SQLException {
-        java.sql.Connection connection = ServicesLocator.getConnection();
-        String function = "{call update_status( ?,? )}";
+        String function = "{call delete_bill( ? )}";
         CallableStatement call = connection.prepareCall(function);
         call.setInt(1, code);
-        call.setString(2, status);
         call.execute();
         call.close();
         connection.close();
     }
 
-    public ArrayList<CarStatusDto> listStatus() throws SQLException {
-        ArrayList<CarStatusDto> statuses = new ArrayList<>();
+    public void updateBill(int code, float amount, float special_amount) throws SQLException {
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String function = "{call list_status()}";
+        String function = "{call update_bill( ?,?,? )}";
+        CallableStatement call = connection.prepareCall(function);
+        call.setInt(1, code);
+        call.setFloat(2, amount);
+        call.setFloat(3, special_amount);
+        call.execute();
+        call.close();
+        connection.close();
+    }
+
+    public ArrayList<BillDto> listBill() throws SQLException {
+        ArrayList<BillDto> bills = new ArrayList<>();
+        java.sql.Connection connection = ServicesLocator.getConnection();
+        String function = "{call list_bill()}";
         connection.setAutoCommit(false);
         CallableStatement call = connection.prepareCall(function);
         call.registerOutParameter(1, Types.OTHER);
         call.execute();
         ResultSet result = (ResultSet) call.getObject(1);
         while(result.next()){
-            statuses.add(new CarStatusDto(result.getInt(1),result.getString(2)));
+            bills.add(new BillDto(result.getInt(1),result.getFloat(2), result.getFloat(3)));
         }
         call.close();
         connection.close();
-        return statuses;
+        return bills;
     }
-
 }
