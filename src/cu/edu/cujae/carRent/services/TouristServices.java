@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class TouristServices {
 
-    public void insertTourist(String name, String last_name, String passport, String country, char sex, int age, String telephone) throws SQLException, ClassNotFoundException {
+    public void insertTourist(String name, String last_name, String passport, String country, String sex, int age, String telephone) throws SQLException, ClassNotFoundException {
         java.sql.Connection connection = ServicesLocator.getConnection();
         String function = "{call insert_tourist( ?,?,?,?,?,?,? )}";
         CallableStatement call = connection.prepareCall(function);
@@ -18,7 +18,7 @@ public class TouristServices {
         call.setString(2, last_name);
         call.setString(3, passport);
         call.setString(4, country);
-        call.setString(5, String.valueOf(sex));
+        call.setString(5, sex);
         call.setInt(6, age);
         call.setString(7, telephone);
         call.execute();
@@ -51,7 +51,7 @@ public class TouristServices {
         return tourists;
     }
 
-    public void updateTourist(int code, String name, String last_name, String passport, String country, char sex, int age, String telephone) throws SQLException, ClassNotFoundException {
+    public void updateTourist(int code, String name, String last_name, String passport, String country, String sex, int age, String telephone) throws SQLException, ClassNotFoundException {
         java.sql.Connection connection = ServicesLocator.getConnection();
         String function = "{call update_tourist( ?,?,?,?,?,?,?,? )}";
         CallableStatement call = connection.prepareCall(function);
@@ -60,7 +60,7 @@ public class TouristServices {
         call.setString(3, last_name);
         call.setString(4, passport);
         call.setString(5, country);
-        call.setString(6, String.valueOf(sex));
+        call.setString(6, sex);
         call.setInt(7, age);
         call.setString(8, telephone);
         call.execute();

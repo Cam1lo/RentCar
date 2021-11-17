@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class UserServices {
 
-    public LoginResponse authentication(String name, String pass) throws SQLException {
+    public LoginResponse authentication(String name, String pass) throws SQLException, NoSuchAlgorithmException {
         String error = "Invalid user";
         UserDto user = null;
         java.sql.Connection con = ServicesLocator.getConnection();
@@ -25,8 +25,8 @@ public class UserServices {
         ResultSet result = (ResultSet) call.getObject(1);
         while (result.next()) {
             if (result.getString(2).equals(name)) {
-                if (result.getString(3).equals(pass)) {
-                    user = new UserDto(result.getInt(1), name, pass, result.getBoolean(4));
+                if (result.getString(3).equals(Encription.encrypt(pass))) {
+                    user = new UserDto(result.getInt(1), name, Encription.encrypt(pass), result.getBoolean(4));
                 } else {
                     error = "Wrong password";
                 }

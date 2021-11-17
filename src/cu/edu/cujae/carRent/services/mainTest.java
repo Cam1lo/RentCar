@@ -1,6 +1,7 @@
 package cu.edu.cujae.carRent.services;
 
 import cu.edu.cujae.carRent.utils.Encription;
+import cu.edu.cujae.carRent.utils.rawData.Country;
 import org.postgresql.shaded.com.ongres.scram.common.bouncycastle.base64.Base64Encoder;
 
 import java.io.UnsupportedEncodingException;
@@ -8,6 +9,7 @@ import java.security.MessageDigest;
 import java.security.*;
 
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
@@ -28,7 +30,9 @@ public class mainTest {
 
         System.out.println(con.getTotalAmount());*/
 
-        ServicesLocator.getUserServices().updateUser(3,"Juan","12345",false);
+       for(String country : Country.getCountries() ){
+           System.out.println(country);
+       }
 
     }
 }

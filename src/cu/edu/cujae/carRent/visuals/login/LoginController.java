@@ -21,6 +21,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
 
@@ -53,7 +54,7 @@ public class LoginController {
         yOffset = stage.getY() - event.getScreenY();
     }
 
-    public void login(ActionEvent e) throws IOException, SQLException {
+    public void login(ActionEvent e) throws IOException, SQLException, NoSuchAlgorithmException {
 
         String username = this.user_name.getText();
         String password = this.user_password.getText();
