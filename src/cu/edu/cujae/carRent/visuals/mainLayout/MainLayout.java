@@ -42,12 +42,10 @@ public class MainLayout {
     private AnchorPane ap_content;
 
     private ScenesManager sm;
-    private UserDto user;
 
     public void onInit(UserDto user) {
         this.sm = new ScenesManager();
-        this.user = user;
-        if (!this.user.isAdmin()) {
+        if (!user.isAdmin()) {
             this.nav_item_users.setVisible(false);
         }
     }
@@ -77,9 +75,9 @@ public class MainLayout {
             NoSuchFieldException,
             IllegalAccessException {
 
-        this.nav_item_users.getStyleClass().add("active-nav-item");
         ArrayList<UserDto> users = ServicesLocator.getUserServices().listUsers();
 
+        setFocus(nav_item_users);
         Users users_controller = (Users) this.sm.changeApContentTo(this.ap_content, "users", this.sm);
         users_controller.onInit(users);
     }
@@ -90,10 +88,19 @@ public class MainLayout {
             NoSuchFieldException,
             IllegalAccessException {
 
-        this.nav_item_users.getStyleClass().add("active-nav-item");
         ArrayList<TouristDto> tourists = ServicesLocator.getTouristServices().listTourist();
 
+        setFocus(nav_item_tourist);
         Tourists tourists_controller = (Tourists) this.sm.changeApContentTo(this.ap_content, "tourists", this.sm);
         tourists_controller.onInit(tourists);
+    }
+
+    public void setFocus(Label selectedLabel) {
+        nav_item_contracts.getStyleClass().remove("active-nav-item");
+        nav_item_cars.getStyleClass().remove("active-nav-item");
+        nav_item_tourist.getStyleClass().remove("active-nav-item");
+        nav_item_drivers.getStyleClass().remove("active-nav-item");
+        nav_item_users.getStyleClass().remove("active-nav-item");
+        selectedLabel.getStyleClass().add("active-nav-item");
     }
 }
