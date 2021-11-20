@@ -116,4 +116,15 @@ public class ContractServices {
         connection.close();
     }
 
+    public ArrayList<ContractDto> getContractsByTouristId(int id) throws SQLException, ClassNotFoundException {
+        ArrayList<ContractDto> result = new ArrayList<>();
+        ArrayList<ContractDto> contracts = listContract();
+        for(ContractDto c : contracts){
+            if(c.getTourist().getCode() == id){
+                result.add(c);
+            }
+        }
+        return result;
+    }
+
 }

@@ -30,9 +30,7 @@ public class mainTest {
 
         System.out.println(con.getTotalAmount());*/
 
-       for(String country : Country.getCountries() ){
-           System.out.println(country);
-       }
+        ServicesLocator.getDriverCategoryServices().listDriverCategory();
 
     }
 }

@@ -61,7 +61,7 @@ public class StatusServices {
     public ArrayList<CarStatusDto> listStatus() throws SQLException {
         ArrayList<CarStatusDto> statuses = new ArrayList<>();
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String function = "{call list_status()}";
+        String function = "{?= call list_status()}";
         connection.setAutoCommit(false);
         CallableStatement call = connection.prepareCall(function);
         call.registerOutParameter(1, Types.OTHER);
