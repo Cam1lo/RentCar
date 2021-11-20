@@ -1,5 +1,6 @@
 package cu.edu.cujae.carRent.services;
 
+import cu.edu.cujae.carRent.dot.ContractDto;
 import cu.edu.cujae.carRent.dot.TouristDto;
 
 import java.sql.CallableStatement;
@@ -74,7 +75,7 @@ public class TouristServices {
         String function = "{?= call return_tourist( ? )}";
         CallableStatement call = connection.prepareCall(function);
         call.registerOutParameter(1, Types.OTHER);
-        call.setInt(2, cod);
+        call.setInt(2,cod);
         call.execute();
         ResultSet result = (ResultSet) call.getObject(1);
         result.next();
@@ -92,12 +93,15 @@ public class TouristServices {
         return tourists;
     }
 
-    // TODO: Method not working. SQL log problem.
-    public void deleteTourist(int code) throws SQLException {
+    public void deleteTourist(int code) throws SQLException, ClassNotFoundException {
         java.sql.Connection connection = ServicesLocator.getConnection();
         String function = "{call delete_tourist(?)}";
+        ArrayList<ContractDto> contracts = ServicesLocator.getContractServices().getContractsByTouristId(code);
+        for(ContractDto c : contracts){
+            ServicesLocator.getContractServices().deleteContract(c.getCode());
+        }
         CallableStatement call = connection.prepareCall(function);
-        call.setInt(1, code);
+        call.setInt(1,code);
         call.execute();
         call.close();
         connection.close();
