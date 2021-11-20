@@ -62,7 +62,7 @@ public class DriverCategoryServices {
     public ArrayList<DriversCategoriesDto> listDriverCategory() throws SQLException {
         ArrayList<DriversCategoriesDto> categories = new ArrayList<>();
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String function = "{call list_driver_category()}";
+        String function = "{?= call list_driver_category()}";
         connection.setAutoCommit(false);
         CallableStatement call = connection.prepareCall(function);
         call.registerOutParameter(1, Types.OTHER);

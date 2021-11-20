@@ -61,10 +61,10 @@ public class ModelServices {
         connection.close();
     }
 
-    public ArrayList<ModelDto> listStatus() throws SQLException {
+    public ArrayList<ModelDto> listModel() throws SQLException {
         ArrayList<ModelDto> models = new ArrayList<>();
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String function = "{call list_model()}";
+        String function = "{?= call list_model()}";
         connection.setAutoCommit(false);
         CallableStatement call = connection.prepareCall(function);
         call.registerOutParameter(1, Types.OTHER);

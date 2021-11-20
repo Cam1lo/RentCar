@@ -63,7 +63,7 @@ public class PaymentsServices {
     public ArrayList<PaymentsDto> listPaymaent() throws SQLException {
         ArrayList<PaymentsDto> payments = new ArrayList<>();
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String function = "{call list_payment()}";
+        String function = "{?= call list_payment()}";
         connection.setAutoCommit(false);
         CallableStatement call = connection.prepareCall(function);
         call.registerOutParameter(1, Types.OTHER);

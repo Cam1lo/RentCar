@@ -64,7 +64,7 @@ public class BillServices {
     public ArrayList<BillDto> listBill() throws SQLException {
         ArrayList<BillDto> bills = new ArrayList<>();
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String function = "{call list_bill()}";
+        String function = "{?= call list_bill()}";
         connection.setAutoCommit(false);
         CallableStatement call = connection.prepareCall(function);
         call.registerOutParameter(1, Types.OTHER);

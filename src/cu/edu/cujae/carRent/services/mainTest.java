@@ -30,7 +30,7 @@ public class mainTest {
 
         System.out.println(con.getTotalAmount());*/
 
-        ServicesLocator.getTouristServices().deleteTourist(1);
+        ServicesLocator.getDriverCategoryServices().listDriverCategory();
 
     }
 }
