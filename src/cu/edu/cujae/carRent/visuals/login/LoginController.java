@@ -2,6 +2,7 @@ package cu.edu.cujae.carRent.visuals.login;
 
 import cu.edu.cujae.carRent.dot.UserDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
+import cu.edu.cujae.carRent.utils.Error;
 import cu.edu.cujae.carRent.utils.Validations;
 import cu.edu.cujae.carRent.utils.bdResponses.LoginResponse;
 import cu.edu.cujae.carRent.visuals.mainLayout.MainLayout;
@@ -59,9 +60,9 @@ public class LoginController {
         String username = this.user_name.getText();
         String password = this.user_password.getText();
 
-        String errors = Validations.loginValidation(username, password);
+        Error error = Validations.loginValidation(username, password);
 
-        if (errors.equals("")) {
+        if (error.getErrorMsg() == null) {
             LoginResponse loginResponse = ServicesLocator.getUserServices().authentication(username, password);
 
             if (loginResponse.getUser() != null) {
@@ -69,12 +70,12 @@ public class LoginController {
                 this.stage.close();
                 goToMainLayout(loginResponse.getUser());
             } else if (!loginResponse.getError().equals("")) {
-                errors = loginResponse.getError();
-                this.error_label.setText(errors);
+                error.setErrorMsg(loginResponse.getError());
+                this.error_label.setText(error.getErrorMsg());
                 this.user_password.clear();
             }
         } else {
-            this.error_label.setText(errors);
+            this.error_label.setText(error.getErrorMsg());
         }
     }
 
@@ -83,7 +84,7 @@ public class LoginController {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../mainLayout/MainLayout.fxml"));
         Parent root = loader.load();
-        MainLayout mainLayoutController = (MainLayout) loader.getController();
+        MainLayout mainLayoutController = loader.getController();
         mainLayoutController.onInit(user);
 
         mainStage.setScene(new Scene(root));

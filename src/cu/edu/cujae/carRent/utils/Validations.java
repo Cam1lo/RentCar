@@ -1,42 +1,43 @@
 package cu.edu.cujae.carRent.utils;
 
 public class Validations {
-    public static String loginValidation(String username, String password) {
-        String error = "";
+    public static Error loginValidation(String username, String password) {
+        Error error = new Error();
 
         if (username.equals("")) {
-            error = "User field is required";
+            error.setErrorMsg("User field is required");
             if (password.equals("")) {
-                error = "User and password fields are required";
+                error.setErrorMsg("User and password field are required");
             }
         } else if (password.equals("")) {
-            error = "Password field is required";
+            error.setErrorMsg("Password field is required");
         }
 
         return error;
     }
 
-    public static String newUserValidation(String username, String password, String passConfirm) {
-        String error = "";
+    public static Error newUserValidation(String username, String password, String passConfirm) {
+        Error error = new Error();
 
         if (username.equals("")) {
-            error = "User field is required";
+            error.setErrorMsg("User field is required");
             if (password.equals("")) {
-                error = "User and password fields are required";
+                error.setErrorMsg("User and password field are required");
 
                 if (passConfirm.equals("")) {
-                    error = "User, password and repeat password fields are required";
+                    error.setErrorMsg("User, password and repeat password fields are required");
                 }
             }
         } else if (password.equals("")) {
-            error = "Password field is required";
+            error.setErrorMsg("Password field is required");
             if (passConfirm.equals("")) {
-                error = "Password and repeat password fields are required";
+                error.setErrorMsg("Password and repeat password fields are required");
             }
         } else if (passConfirm.equals("")) {
-            error = "Repeat password field is required";
+            error.setErrorMsg("Repeat password field is required");
         }
 
         return error;
     }
+
 }

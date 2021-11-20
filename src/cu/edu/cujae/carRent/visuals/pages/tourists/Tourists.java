@@ -1,11 +1,10 @@
-package cu.edu.cujae.carRent.visuals.pages.users;
+package cu.edu.cujae.carRent.visuals.pages.tourists;
 
-import cu.edu.cujae.carRent.dot.UserDto;
+import cu.edu.cujae.carRent.dot.TouristDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
-import cu.edu.cujae.carRent.visuals.pages.users.addForm.AddForm;
-import cu.edu.cujae.carRent.visuals.pages.users.updateForm.DeleteConfirm;
-import cu.edu.cujae.carRent.visuals.pages.users.updateForm.UpdateForm;
-import javafx.beans.property.SimpleBooleanProperty;
+import cu.edu.cujae.carRent.visuals.pages.tourists.addForm.AddForm;
+import cu.edu.cujae.carRent.visuals.pages.tourists.deleteConfirm.DeleteConfirm;
+import cu.edu.cujae.carRent.visuals.pages.tourists.updateForm.UpdateForm;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +24,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class Users {
+public class Tourists {
     @FXML
     private AnchorPane ap_content;
     @FXML
@@ -33,32 +32,42 @@ public class Users {
     @FXML
     private Button delete_button;
     @FXML
-    private TableView<UserDto> table;
+    private TableView<TouristDto> table;
     @FXML
-    private TableColumn<UserDto, String> nameColumn;
+    private TableColumn<TouristDto, String> nameColumn;
     @FXML
-    private TableColumn<UserDto, String> passColumn;
+    private TableColumn<TouristDto, String> lastNameColumn;
     @FXML
-    private TableColumn<UserDto, Boolean> isAdminColumn;
+    private TableColumn<TouristDto, String> passportColumn;
+    @FXML
+    private TableColumn<TouristDto, Integer> ageColumn;
+    @FXML
+    private TableColumn<TouristDto, String> sexColumn;
+    @FXML
+    private TableColumn<TouristDto, String> phoneColumn;
+    @FXML
+    private TableColumn<TouristDto, String> countryColumn;
 
-    private UserDto selected;
+    private TouristDto selected;
 
 
-    public void onInit(ArrayList<UserDto> items) {
+    public void onInit(ArrayList<TouristDto> items) {
         update_button.setDisable(true);
         delete_button.setDisable(true);
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        passColumn.setCellValueFactory(new PropertyValueFactory<>("password"));
-        isAdminColumn.setCellValueFactory(new PropertyValueFactory<>("isAdmin"));
-        isAdminColumn.setCellValueFactory(data -> new SimpleBooleanProperty(data.getValue().isAdmin()));
+        lastNameColumn.setCellValueFactory(new PropertyValueFactory<>("lastName"));
+        passportColumn.setCellValueFactory(new PropertyValueFactory<>("idPassport"));
+        ageColumn.setCellValueFactory(new PropertyValueFactory<>("age"));
+        sexColumn.setCellValueFactory(new PropertyValueFactory<>("sex"));
+        phoneColumn.setCellValueFactory(new PropertyValueFactory<>("telephoneNumber"));
+        countryColumn.setCellValueFactory(new PropertyValueFactory<>("country"));
         table.setItems(FXCollections.observableList(items));
 
         table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 update_button.setDisable(false);
-                delete_button.setDisable(newSelection.isAdmin());
-
+                delete_button.setDisable(false);
                 this.selected = newSelection;
             } else {
                 update_button.setDisable(true);
@@ -127,6 +136,6 @@ public class Users {
     }
 
     public void refreshTable() throws SQLException, ClassNotFoundException {
-        table.setItems(FXCollections.observableList(ServicesLocator.getUserServices().listUsers()));
+        table.setItems(FXCollections.observableList(ServicesLocator.getTouristServices().listTourist()));
     }
 }

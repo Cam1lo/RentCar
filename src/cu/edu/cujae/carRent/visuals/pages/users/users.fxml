@@ -14,10 +14,10 @@
          <children>
             <Label text="USERS" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
                <font>
-                  <Font name="System Bold" size="20.0" />
+                  <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Button layoutX="512.0" layoutY="358.0" mnemonicParsing="false" onAction="#openAddUserForm" prefHeight="40.0" prefWidth="95.0" styleClass="primary-button" text="Add User" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+            <Button layoutX="512.0" layoutY="358.0" mnemonicParsing="false" onAction="#openAddForm" prefHeight="40.0" prefWidth="95.0" styleClass="primary-button" text="Add User" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
                <font>
                   <Font size="15.0" />
                </font>
@@ -25,7 +25,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <TableView fx:id="table" layoutX="14.0" layoutY="60.0" prefHeight="389.0" prefWidth="722.0" styleClass="table" AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="60.0">
+            <TableView fx:id="table" layoutX="14.0" layoutY="61.0" prefHeight="388.0" prefWidth="722.0" styleClass="table" AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="61.0">
               <columns>
                 <TableColumn fx:id="nameColumn" prefWidth="217.0" text="Name" />
                 <TableColumn fx:id="passColumn" minWidth="0.0" prefWidth="322.0" text="Password" />
@@ -35,7 +35,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Button fx:id="update_user_button" layoutX="530.0" layoutY="466.0" mnemonicParsing="false" onAction="#openUpdateUserForm" prefHeight="40.0" prefWidth="95.0" styleClass="primary-button" text="Update" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="125.0">
+            <Button fx:id="update_button" layoutX="530.0" layoutY="466.0" mnemonicParsing="false" onAction="#openUpdateForm" prefHeight="40.0" prefWidth="95.0" styleClass="primary-button" text="Update" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="125.0">
                <font>
                   <Font size="15.0" />
                </font>
@@ -43,7 +43,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Button fx:id="delete_user_button" layoutX="418.0" layoutY="466.0" mnemonicParsing="false" onAction="#openDeleteUserConfirm" prefHeight="40.0" prefWidth="95.0" styleClass="delete-button" text="Delete" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="237.0">
+            <Button fx:id="delete_button" layoutX="418.0" layoutY="466.0" mnemonicParsing="false" onAction="#openDeleteConfirm" prefHeight="40.0" prefWidth="95.0" styleClass="delete-button" text="Delete" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="237.0">
                <font>
                   <Font size="15.0" />
                </font>

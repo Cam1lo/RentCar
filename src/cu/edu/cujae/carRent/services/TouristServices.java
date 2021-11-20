@@ -74,7 +74,7 @@ public class TouristServices {
         String function = "{?= call return_tourist( ? )}";
         CallableStatement call = connection.prepareCall(function);
         call.registerOutParameter(1, Types.OTHER);
-        call.setInt(2,cod);
+        call.setInt(2, cod);
         call.execute();
         ResultSet result = (ResultSet) call.getObject(1);
         result.next();
@@ -92,11 +92,12 @@ public class TouristServices {
         return tourists;
     }
 
-    public void deleteTourist(int code)throws SQLException{
+    // TODO: Method not working. SQL log problem.
+    public void deleteTourist(int code) throws SQLException {
         java.sql.Connection connection = ServicesLocator.getConnection();
         String function = "{call delete_tourist(?)}";
         CallableStatement call = connection.prepareCall(function);
-        call.setInt(1,code);
+        call.setInt(1, code);
         call.execute();
         call.close();
         connection.close();

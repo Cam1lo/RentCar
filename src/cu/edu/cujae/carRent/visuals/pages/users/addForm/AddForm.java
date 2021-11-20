@@ -1,16 +1,12 @@
-package cu.edu.cujae.carRent.visuals.pages.users.updateUserForm;
+package cu.edu.cujae.carRent.visuals.pages.users.addForm;
 
-import cu.edu.cujae.carRent.dot.UserDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
+import cu.edu.cujae.carRent.utils.Error;
 import cu.edu.cujae.carRent.utils.Validations;
-import cu.edu.cujae.carRent.utils.visual.ScenesManager;
 import cu.edu.cujae.carRent.visuals.pages.users.Users;
-import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -19,7 +15,7 @@ import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
-public class UpdateUserForm {
+public class AddForm {
     @FXML
     private AnchorPane ap;
     @FXML
@@ -31,13 +27,10 @@ public class UpdateUserForm {
     @FXML
     private Label error_label;
 
-    private UserDto user;
     private Users parent;
 
-    public void onInit(UserDto user, Users parent) {
+    public void onInit(Users parent) {
         this.parent = parent;
-        this.user = user;
-        this.user_name.setText(user.getName());
     }
 
     public void cancel() {
@@ -45,21 +38,21 @@ public class UpdateUserForm {
         stage.close();
     }
 
-    public void updateUser() throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
+    public void addNew() throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
 
         String username = this.user_name.getText();
         String password = this.pass.getText();
         String passConfirm = this.pass_confirmation.getText();
 
-        String errors = Validations.newUserValidation(username, password, passConfirm);
+        Error error = Validations.newUserValidation(username, password, passConfirm);
 
-        if (errors.equals("")) {
-            ServicesLocator.getUserServices().updateUser(this.user.getCode(), username, password, this.user.isAdmin());
+        if (error.getErrorMsg() == null) {
+            ServicesLocator.getUserServices().insertUser(username, password, false);
         } else {
-            this.error_label.setText(errors);
+            this.error_label.setText(error.getErrorMsg());
         }
 
-        parent.refreshTable();
+        this.parent.refreshTable();
         cancel();
     }
 }

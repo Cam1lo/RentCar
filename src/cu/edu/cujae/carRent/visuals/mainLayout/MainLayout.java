@@ -1,10 +1,12 @@
 package cu.edu.cujae.carRent.visuals.mainLayout;
 
 
+import cu.edu.cujae.carRent.dot.TouristDto;
 import cu.edu.cujae.carRent.dot.UserDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
 import cu.edu.cujae.carRent.utils.visual.ScenesManager;
 import cu.edu.cujae.carRent.visuals.mainLayout.confirmLogOut.ConfirmLogOut;
+import cu.edu.cujae.carRent.visuals.pages.tourists.Tourists;
 import cu.edu.cujae.carRent.visuals.pages.users.Users;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -80,5 +82,18 @@ public class MainLayout {
 
         Users users_controller = (Users) this.sm.changeApContentTo(this.ap_content, "users", this.sm);
         users_controller.onInit(users);
+    }
+
+    public void loadTourists() throws SQLException,
+            ClassNotFoundException,
+            IOException,
+            NoSuchFieldException,
+            IllegalAccessException {
+
+        this.nav_item_users.getStyleClass().add("active-nav-item");
+        ArrayList<TouristDto> tourists = ServicesLocator.getTouristServices().listTourist();
+
+        Tourists tourists_controller = (Tourists) this.sm.changeApContentTo(this.ap_content, "tourists", this.sm);
+        tourists_controller.onInit(tourists);
     }
 }

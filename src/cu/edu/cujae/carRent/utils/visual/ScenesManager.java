@@ -9,9 +9,11 @@ import java.lang.reflect.Field;
 
 public class ScenesManager {
     public String users;
+    public String tourists;
 
     public ScenesManager() {
         this.users = "../../visuals/pages/users/users.fxml";
+        this.tourists = "../../visuals/pages/tourists/tourists.fxml";
     }
 
     public Object changeApContentTo(AnchorPane ap, String pageName, ScenesManager sm) throws IOException, NoSuchFieldException, IllegalAccessException {
