@@ -8,18 +8,10 @@ import java.io.IOException;
 import java.lang.reflect.Field;
 
 public class ScenesManager {
-    public String users;
-    public String tourists;
-
-    public ScenesManager() {
-        this.users = "../../visuals/pages/users/users.fxml";
-        this.tourists = "../../visuals/pages/tourists/tourists.fxml";
-    }
-
-    public Object changeApContentTo(AnchorPane ap, String pageName, ScenesManager sm) throws IOException, NoSuchFieldException, IllegalAccessException {
-        Field field = ScenesManager.class.getField(pageName);
-        String location = (String) field.get(sm);
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(location));
+    public static Object changeApContentTo(AnchorPane ap, String pageName) throws IOException, NoSuchFieldException, IllegalAccessException {
+        Field field = Locations.class.getField(pageName);
+        String location = (String) field.get(new Locations());
+        FXMLLoader fxmlLoader = new FXMLLoader(ScenesManager.class.getResource(location));
         Node node = fxmlLoader.load();
         ap.getChildren().setAll(node);
 

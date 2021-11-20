@@ -1,6 +1,6 @@
 package cu.edu.cujae.carRent.utils.tables;
 
-import cu.edu.cujae.carRent.dot.CarDto;
+import cu.edu.cujae.carRent.dtos.CarDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
 
 import java.sql.SQLException;

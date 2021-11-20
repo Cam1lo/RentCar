@@ -1,6 +1,6 @@
 package cu.edu.cujae.carRent.visuals.pages.tourists;
 
-import cu.edu.cujae.carRent.dot.TouristDto;
+import cu.edu.cujae.carRent.dtos.TouristDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
 import cu.edu.cujae.carRent.visuals.pages.tourists.addForm.AddForm;
 import cu.edu.cujae.carRent.visuals.pages.tourists.deleteConfirm.DeleteConfirm;

@@ -1,8 +1,8 @@
 package cu.edu.cujae.carRent.services;
 
-import cu.edu.cujae.carRent.dot.CarDto;
-import cu.edu.cujae.carRent.dot.CarStatusDto;
-import cu.edu.cujae.carRent.dot.ModelDto;
+import cu.edu.cujae.carRent.dtos.CarDto;
+import cu.edu.cujae.carRent.dtos.CarStatusDto;
+import cu.edu.cujae.carRent.dtos.ModelDto;
 
 import java.sql.*;
 import java.util.ArrayList;

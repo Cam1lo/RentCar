@@ -1,8 +1,7 @@
 package cu.edu.cujae.carRent.visuals.pages.tourists.updateForm;
 
-import cu.edu.cujae.carRent.dot.TouristDto;
+import cu.edu.cujae.carRent.dtos.TouristDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
-import cu.edu.cujae.carRent.utils.Validations;
 import cu.edu.cujae.carRent.utils.rawData.Country;
 import cu.edu.cujae.carRent.visuals.pages.tourists.Tourists;
 import javafx.collections.FXCollections;

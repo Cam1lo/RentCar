@@ -1,7 +1,6 @@
 package cu.edu.cujae.carRent.services;
 
-import cu.edu.cujae.carRent.dot.BillDto;
-import cu.edu.cujae.carRent.dot.CarStatusDto;
+import cu.edu.cujae.carRent.dtos.CarStatusDto;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;

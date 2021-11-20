@@ -1,6 +1,6 @@
 package cu.edu.cujae.carRent.utils.bdResponses;
 
-import cu.edu.cujae.carRent.dot.UserDto;
+import cu.edu.cujae.carRent.dtos.UserDto;
 
 public class LoginResponse {
 

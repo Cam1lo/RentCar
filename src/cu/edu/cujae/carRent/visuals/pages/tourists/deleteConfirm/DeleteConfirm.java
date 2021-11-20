@@ -1,7 +1,6 @@
 package cu.edu.cujae.carRent.visuals.pages.tourists.deleteConfirm;
 
-import cu.edu.cujae.carRent.dot.TouristDto;
-import cu.edu.cujae.carRent.dot.UserDto;
+import cu.edu.cujae.carRent.dtos.TouristDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
 import cu.edu.cujae.carRent.visuals.pages.tourists.Tourists;
 import javafx.fxml.FXML;

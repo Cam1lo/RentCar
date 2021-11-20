@@ -1,9 +1,9 @@
 package cu.edu.cujae.carRent.visuals.pages.users;
 
-import cu.edu.cujae.carRent.dot.UserDto;
+import cu.edu.cujae.carRent.dtos.UserDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
 import cu.edu.cujae.carRent.visuals.pages.users.addForm.AddForm;
-import cu.edu.cujae.carRent.visuals.pages.users.updateForm.DeleteConfirm;
+import cu.edu.cujae.carRent.visuals.pages.users.deleteConfirm.DeleteConfirm;
 import cu.edu.cujae.carRent.visuals.pages.users.updateForm.UpdateForm;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;

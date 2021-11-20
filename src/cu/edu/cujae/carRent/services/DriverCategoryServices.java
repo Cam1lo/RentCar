@@ -1,7 +1,6 @@
 package cu.edu.cujae.carRent.services;
 
-import cu.edu.cujae.carRent.dot.CarStatusDto;
-import cu.edu.cujae.carRent.dot.DriversCategoriesDto;
+import cu.edu.cujae.carRent.dtos.DriversCategoriesDto;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
@@ -59,10 +58,10 @@ public class DriverCategoryServices {
         connection.close();
     }
 
-    public ArrayList<DriversCategoriesDto> listDriverCategory() throws SQLException {
+    public ArrayList<DriversCategoriesDto> listDriverCategories() throws SQLException {
         ArrayList<DriversCategoriesDto> categories = new ArrayList<>();
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String function = "{call list_driver_category()}";
+        String function = "{?= call list_driver_category()}";
         connection.setAutoCommit(false);
         CallableStatement call = connection.prepareCall(function);
         call.registerOutParameter(1, Types.OTHER);

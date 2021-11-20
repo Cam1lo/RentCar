@@ -54,7 +54,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <Label fx:id="nav_item_drivers" alignment="CENTER" contentDisplay="CENTER" layoutX="74.0" layoutY="313.0" text="DRIVERS" textAlignment="CENTER">
+            <Label fx:id="nav_item_drivers" alignment="CENTER" contentDisplay="CENTER" layoutX="74.0" layoutY="313.0" onMouseClicked="#loadDrivers" text="DRIVERS" textAlignment="CENTER">
                <font>
                   <Font size="15.0" />
                </font>

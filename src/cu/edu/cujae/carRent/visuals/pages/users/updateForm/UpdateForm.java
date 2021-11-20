@@ -1,6 +1,6 @@
 package cu.edu.cujae.carRent.visuals.pages.users.updateForm;
 
-import cu.edu.cujae.carRent.dot.UserDto;
+import cu.edu.cujae.carRent.dtos.UserDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
 import cu.edu.cujae.carRent.utils.Error;
 import cu.edu.cujae.carRent.utils.Validations;

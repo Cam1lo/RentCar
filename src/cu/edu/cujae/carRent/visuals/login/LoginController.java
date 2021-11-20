@@ -1,6 +1,6 @@
 package cu.edu.cujae.carRent.visuals.login;
 
-import cu.edu.cujae.carRent.dot.UserDto;
+import cu.edu.cujae.carRent.dtos.UserDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
 import cu.edu.cujae.carRent.utils.Error;
 import cu.edu.cujae.carRent.utils.Validations;
@@ -16,7 +16,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
