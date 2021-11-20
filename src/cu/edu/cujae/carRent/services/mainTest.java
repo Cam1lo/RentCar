@@ -30,7 +30,7 @@ public class mainTest {
 
         System.out.println(con.getTotalAmount());*/
 
-        ServicesLocator.getDriverCategoryServices().listDriverCategory();
+//        ServicesLocator.getDriverCategoryServices().listDriverCategories();
 
     }
 }
