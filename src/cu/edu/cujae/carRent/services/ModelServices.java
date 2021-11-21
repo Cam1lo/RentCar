@@ -70,8 +70,8 @@ public class ModelServices {
         call.execute();
         ResultSet result = (ResultSet) call.getObject(1);
         while(result.next()){
-            BrandDto brand = ServicesLocator.getBrandServices().returnBrand(result.getInt(3));
-            models.add(new ModelDto(result.getInt(1),result.getString(2),brand));
+            BrandDto brand = ServicesLocator.getBrandServices().returnBrand(result.getInt(2));
+            models.add(new ModelDto(result.getInt(1),result.getString(3),brand));
         }
         call.close();
         connection.close();

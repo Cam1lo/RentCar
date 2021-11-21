@@ -32,7 +32,7 @@ public class mainTest {
 
 //        ServicesLocator.getDriverCategoryServices().listDriverCategories();
 
-        ServicesLocator.getCarsServices().updateCar(2,"000101",1,13,"dark red",45);
+        ServicesLocator.getModelServices().listModel();
 
     }
 }
