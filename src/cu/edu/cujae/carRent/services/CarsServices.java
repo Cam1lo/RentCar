@@ -37,8 +37,8 @@ public class CarsServices {
             ModelDto model = ServicesLocator.getModelServices().returnModel(result.getInt(4));
             CarStatusDto status = ServicesLocator.getStatusServices().returnStatus(result.getInt(3));
             String color = result.getString(5);
-            double km_driver = result.getDouble(6);
-            cars.add(new CarDto(result.getInt(1),result.getString(2),status,model,color,km_driver));
+            double mileage = result.getDouble(6);
+            cars.add(new CarDto(result.getInt(1),result.getString(2),status,model,color,mileage));
         }
         call.close();
         connection.close();
