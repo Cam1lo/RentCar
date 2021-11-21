@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class DriverCategoryServices {
 
-    public DriversCategoriesDto returnDriverCategory(int code) throws SQLException {
+    public DriversCategoriesDto getDriverCategoryById(int code) throws SQLException {
         java.sql.Connection con = ServicesLocator.getConnection();
         String function = "{?= call return_driver_category( ? )}";
         con.setAutoCommit(false);

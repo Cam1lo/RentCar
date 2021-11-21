@@ -22,11 +22,11 @@ public class ContractServices {
         ResultSet result = (ResultSet) call.getObject(1);
         while (result.next()) {
             int code = result.getInt(1);
-            TouristDto tourist = ServicesLocator.getTouristServices().returnTourist(result.getInt(2));
-            CarDto car = ServicesLocator.getCarsServices().returnCar(result.getInt(3));
+            TouristDto tourist = ServicesLocator.getTouristServices().getTouristById(result.getInt(2));
+            CarDto car = ServicesLocator.getCarsServices().getCarById(result.getInt(3));
             BillDto bill = ServicesLocator.getBillServices().returnBill(result.getInt(4));
-            PaymentsDto payment = ServicesLocator.getPaymentsServices().returnPayment(result.getInt(5));
-            DriverDto driver = ServicesLocator.getDriverServices().returnDriver(result.getInt(6));
+            PaymentsDto payment = ServicesLocator.getPaymentsServices().getPaymentById(result.getInt(5));
+            DriverDto driver = ServicesLocator.getDriverServices().getDriverById(result.getInt(6));
             LocalDate starting_date = result.getDate(7).toLocalDate();
             LocalDate final_date = result.getDate(8).toLocalDate();
             int extension = result.getInt(9);
@@ -37,7 +37,7 @@ public class ContractServices {
         return contracts;
     }
 
-    public ContractDto returnContract(int code) throws SQLException, ClassNotFoundException {
+    public ContractDto getContractById(int code) throws SQLException, ClassNotFoundException {
         java.sql.Connection connection = ServicesLocator.getConnection();
         connection.setAutoCommit(false);
         String function = "{?= call return_contract( ? )}";
@@ -47,11 +47,11 @@ public class ContractServices {
         call.execute();
         ResultSet result = (ResultSet) call.getObject(1);
         result.next();
-        TouristDto tourist = ServicesLocator.getTouristServices().returnTourist(result.getInt(2));
-        CarDto car = ServicesLocator.getCarsServices().returnCar(result.getInt(3));
+        TouristDto tourist = ServicesLocator.getTouristServices().getTouristById(result.getInt(2));
+        CarDto car = ServicesLocator.getCarsServices().getCarById(result.getInt(3));
         BillDto bill = ServicesLocator.getBillServices().returnBill(result.getInt(4));
-        PaymentsDto payment = ServicesLocator.getPaymentsServices().returnPayment(result.getInt(5));
-        DriverDto driver = ServicesLocator.getDriverServices().returnDriver(result.getInt(6));
+        PaymentsDto payment = ServicesLocator.getPaymentsServices().getPaymentById(result.getInt(5));
+        DriverDto driver = ServicesLocator.getDriverServices().getDriverById(result.getInt(6));
         LocalDate starting_date = result.getDate(7).toLocalDate();
         LocalDate final_date = result.getDate(8).toLocalDate();
         int extension = result.getInt(9);

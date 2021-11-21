@@ -12,14 +12,14 @@ public class CarTable {
     private String brand;
     private String model;
     private String color;
-    private double km_driver;
+    private double mileage;
 
-    public CarTable(String car_Id, String brand, String model, String color, double km_driver) {
+    public CarTable(String car_Id, String brand, String model, String color, double mileage) {
         this.car_Id = car_Id;
         this.brand = brand;
         this.model = model;
         this.color = color;
-        this.km_driver = km_driver;
+        this.mileage = mileage;
     }
 
     public String getCar_Id() { return car_Id; }
@@ -38,15 +38,15 @@ public class CarTable {
 
     public void setColor(String color) { this.color = color; }
 
-    public double getKm_driver() { return km_driver; }
+    public double getMileage() { return mileage; }
 
-    public void setKm_driver(double km_driver) { this.km_driver = km_driver; }
+    public void setMileage(double km_driver) { this.mileage = km_driver; }
 
     public static ArrayList<CarTable> getCarTable()throws SQLException, ClassNotFoundException {
         ArrayList<CarTable> table = new ArrayList<>();
         ArrayList<CarDto> cars = ServicesLocator.getCarsServices().listCars();
         for(CarDto e : cars){
-            table.add(new CarTable(e.getCarID(),e.getModel().getBrand().getBrand(),e.getModel().getModel(),e.getColor(),e.getMilaege()));
+            table.add(new CarTable(e.getCarID(),e.getModel().getBrand().getBrandText(),e.getModel().getModelText(),e.getColor(),e.getMilaege()));
         }
         return table;
     }

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class ModelServices {
 
-    public ModelDto returnModel(int code) throws SQLException {
+    public ModelDto getModelById(int code) throws SQLException {
         ModelDto model;
         java.sql.Connection con = ServicesLocator.getConnection();
         String funcion = "{?= call return_model(?)}";
@@ -22,18 +22,19 @@ public class ModelServices {
         call.execute();
         ResultSet result = (ResultSet) call.getObject(1);
         result.next();
-        BrandDto brand = ServicesLocator.getBrandServices().returnBrand(result.getInt(2));
+        BrandDto brand = ServicesLocator.getBrandServices().getBrandById(result.getInt(2));
         model = new ModelDto(result.getInt(1),result.getString(3),brand);
         call.close();
         con.close();
         return model;
     }
 
-    public void insertModel(String model) throws SQLException {
+    public void insertModel(int brand, String model) throws SQLException {
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String funcion = "{call insert_model( ? )}";
+        String funcion = "{call insert_model( ?,? )}";
         CallableStatement call = connection.prepareCall(funcion);
-        call.setString(1, model);
+        call.setInt(1,brand);
+        call.setString(2, model);
         call.execute();
         call.close();
         connection.close();
@@ -49,12 +50,13 @@ public class ModelServices {
         connection.close();
     }
 
-    public void updateModel(int code, String model) throws SQLException {
+    public void updateModel(int code, int brand, String model) throws SQLException {
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String funcion = "{call update_model( ?,? )}";
+        String funcion = "{call update_model( ?,?,? )}";
         CallableStatement call = connection.prepareCall(funcion);
         call.setInt(1, code);
-        call.setString(2, model);
+        call.setInt(2, brand);
+        call.setString(3, model);
         call.execute();
         call.close();
         connection.close();
@@ -70,7 +72,7 @@ public class ModelServices {
         call.execute();
         ResultSet result = (ResultSet) call.getObject(1);
         while(result.next()){
-            BrandDto brand = ServicesLocator.getBrandServices().returnBrand(result.getInt(2));
+            BrandDto brand = ServicesLocator.getBrandServices().getBrandById(result.getInt(2));
             models.add(new ModelDto(result.getInt(1),result.getString(3),brand));
         }
         call.close();

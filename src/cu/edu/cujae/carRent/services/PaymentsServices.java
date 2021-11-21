@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class PaymentsServices {
 
-    public PaymentsDto returnPayment(int code) throws SQLException {
+    public PaymentsDto getPaymentById(int code) throws SQLException {
         java.sql.Connection con = ServicesLocator.getConnection();
         String function = "{?= call return_payment( ? )}";
         con.setAutoCommit(false);

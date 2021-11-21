@@ -69,7 +69,7 @@ public class TouristServices {
         connection.close();
     }
 
-    public TouristDto returnTourist(int cod) throws SQLException, ClassNotFoundException {
+    public TouristDto getTouristById(int cod) throws SQLException, ClassNotFoundException {
         java.sql.Connection connection = ServicesLocator.getConnection();
         connection.setAutoCommit(false);
         String function = "{?= call return_tourist( ? )}";
