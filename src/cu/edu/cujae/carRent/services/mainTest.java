@@ -1,5 +1,6 @@
 package cu.edu.cujae.carRent.services;
 
+import cu.edu.cujae.carRent.dtos.BillDto;
 import cu.edu.cujae.carRent.utils.Encription;
 import cu.edu.cujae.carRent.utils.rawData.Country;
 import org.postgresql.shaded.com.ongres.scram.common.bouncycastle.base64.Base64Encoder;
@@ -30,12 +31,8 @@ public class mainTest {
 
         System.out.println(con.getTotalAmount());*/
 
-//        ServicesLocator.getDriverCategoryServices().listDriverCategories();
+//      ServicesLocator.getDriverCategoryServices().listDriverCategories();
 
-
-
-
-        ServicesLocator.getCarsServices().listCars();
 
     }
 }
