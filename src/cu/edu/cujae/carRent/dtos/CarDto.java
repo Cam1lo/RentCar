@@ -6,15 +6,15 @@ public class CarDto {
     private String color;
     private CarStatusDto status;
     private ModelDto model;
-    private double km_driver;
+    private double mileage;
 
-    public CarDto(int code, String carID, CarStatusDto status, ModelDto model, String color, double km_diver) {
+    public CarDto(int code, String carID, CarStatusDto status, ModelDto model, String color, double mileage) {
         this.code = code;
         this.carID = carID;
         this.status = status;
         this.model = model;
         this.color = color;
-        this.km_driver = km_diver;
+        this.mileage = mileage;
 
     }
 
@@ -51,7 +51,7 @@ public class CarDto {
 
     public void setColor(String color) { this.color = color; }
 
-    public double getKm_driver() { return km_driver; }
+    public double getMilaege() { return mileage; }
 
-    public void setKm_driver(double km_driver) { this.km_driver = km_driver; }
+    public void setKm_driver(double mileage) { this.mileage = mileage; }
 }
