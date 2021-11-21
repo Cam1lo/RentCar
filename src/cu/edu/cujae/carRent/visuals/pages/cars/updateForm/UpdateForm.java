@@ -63,7 +63,7 @@ public class UpdateForm {
         this.id.setText(selected.getCarID());
         this.color.setText(selected.getColor());
         this.mileage.getValueFactory().setValue(selected.getMileage());
-        this.model.setValue(selected.getModel().getModelText());
+        this.model.setValue(selected.getBrand().getModel().getModelText());
         this.status.setValue(selected.getStatus().getStatusText());
     }
 

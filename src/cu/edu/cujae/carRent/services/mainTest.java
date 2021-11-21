@@ -32,9 +32,10 @@ public class mainTest {
 
 //        ServicesLocator.getDriverCategoryServices().listDriverCategories();
 
-        ServicesLocator.getModelServices().deleteModel(16);
 
-        ServicesLocator.getContractServices().listContract();
+
+
+        ServicesLocator.getCarsServices().listCars();
 
     }
 }
