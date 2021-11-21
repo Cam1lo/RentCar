@@ -14,7 +14,6 @@ public class CarStatusDto {
         return code;
     }
 
-    public String getStatus() {return status;}
     public String getStatusText() {return status;}
 
     public void setStatusText(String status) {this.status = status;}

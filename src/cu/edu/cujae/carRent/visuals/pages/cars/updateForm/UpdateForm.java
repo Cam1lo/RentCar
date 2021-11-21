@@ -9,6 +9,7 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -41,28 +42,29 @@ public class UpdateForm {
         this.selected = selected;
         this.parent = parent;
 
+        this.mileage.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 100000, 1));
         ArrayList<ModelDto> models = ServicesLocator.getModelServices().listModel();
         ArrayList<String> modelsTextList = new ArrayList<>();
         for (ModelDto model : models) {
-            modelsTextList.add(model.getModel());
-            modelsMap.put(model.getModel(), model.getCode());
+            modelsTextList.add(model.getModelText());
+            modelsMap.put(model.getModelText(), model.getCode());
         }
         this.model.setItems(FXCollections.observableList(modelsTextList));
 
         ArrayList<CarStatusDto> statuses = ServicesLocator.getStatusServices().listStatus();
         ArrayList<String> statusesTextList = new ArrayList<>();
         for (CarStatusDto status : statuses) {
-            statusesTextList.add(status.getStatus());
-            statusesMap.put(status.getStatus(), status.getCode());
+            statusesTextList.add(status.getStatusText());
+            statusesMap.put(status.getStatusText(), status.getCode());
         }
         this.status.setItems(FXCollections.observableList(statusesTextList));
 
 
         this.id.setText(selected.getCarID());
         this.color.setText(selected.getColor());
-        this.mileage.getValueFactory().setValue(selected.getKm_driver());
-        this.model.setValue(selected.getModel().getModel());
-        this.status.setValue(selected.getStatus().getStatus());
+        this.mileage.getValueFactory().setValue(selected.getMileage());
+        this.model.setValue(selected.getModel().getModelText());
+        this.status.setValue(selected.getStatus().getStatusText());
     }
 
     public void cancel() {
@@ -80,7 +82,7 @@ public class UpdateForm {
 
 //        String errors = Validations.newUserValidation(username, password, passConfirm);
 
-//        ServicesLocator.getCarsServices().updateCar(this.selected.getCode(), id, status, model, color, mileage);
+        ServicesLocator.getCarsServices().updateCar(this.selected.getCode(), id, status, model, color, mileage);
 
 
         this.parent.refreshTable();

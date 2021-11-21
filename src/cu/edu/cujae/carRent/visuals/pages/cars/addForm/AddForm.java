@@ -8,10 +8,7 @@ import cu.edu.cujae.carRent.visuals.pages.cars.Cars;
 import cu.edu.cujae.carRent.visuals.pages.drivers.Drivers;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -41,19 +38,20 @@ public class AddForm {
     public void onInit(Cars parent) throws SQLException {
         this.parent = parent;
 
+        this.mileage.setValueFactory(new SpinnerValueFactory.DoubleSpinnerValueFactory(1, 100000, 1));
         ArrayList<ModelDto> models = ServicesLocator.getModelServices().listModel();
         ArrayList<String> modelsTextList = new ArrayList<>();
         for (ModelDto model : models) {
-            modelsTextList.add(model.getModel());
-            modelsMap.put(model.getModel(), model.getCode());
+            modelsTextList.add(model.getModelText());
+            modelsMap.put(model.getModelText(), model.getCode());
         }
         this.model.setItems(FXCollections.observableList(modelsTextList));
 
         ArrayList<CarStatusDto> statuses = ServicesLocator.getStatusServices().listStatus();
         ArrayList<String> statusesTextList = new ArrayList<>();
         for (CarStatusDto status : statuses) {
-            statusesTextList.add(status.getStatus());
-            statusesMap.put(status.getStatus(), status.getCode());
+            statusesTextList.add(status.getStatusText());
+            statusesMap.put(status.getStatusText(), status.getCode());
         }
         this.status.setItems(FXCollections.observableList(statusesTextList));
 
