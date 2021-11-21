@@ -34,8 +34,8 @@ public class CarsServices {
         call.execute();
         ResultSet result = (ResultSet) call.getObject(1);
         while(result.next()){
-            ModelDto model = ServicesLocator.getModelServices().returnModel(result.getInt(4));
-            CarStatusDto status = ServicesLocator.getStatusServices().returnStatus(result.getInt(3));
+            ModelDto model = ServicesLocator.getModelServices().getModelById(result.getInt(4));
+            CarStatusDto status = ServicesLocator.getStatusServices().getStatusById(result.getInt(3));
             String color = result.getString(5);
             double mileage = result.getDouble(6);
             cars.add(new CarDto(result.getInt(1),result.getString(2),status,model,color,mileage));
@@ -71,7 +71,7 @@ public class CarsServices {
         connection.close();
     }
 
-    public CarDto returnCar(int code)throws SQLException{
+    public CarDto getCarById(int code)throws SQLException{
         java.sql.Connection connection = ServicesLocator.getConnection();
         String function = "{?= call return_car( ? )}";
         connection.setAutoCommit(false);
@@ -81,8 +81,8 @@ public class CarsServices {
         call.execute();
         ResultSet result = (ResultSet) call.getObject(1);
         result.next();
-        ModelDto model = ServicesLocator.getModelServices().returnModel(result.getInt(4));
-        CarStatusDto status = ServicesLocator.getStatusServices().returnStatus(result.getInt(3));
+        ModelDto model = ServicesLocator.getModelServices().getModelById(result.getInt(4));
+        CarStatusDto status = ServicesLocator.getStatusServices().getStatusById(result.getInt(3));
         String color = result.getString(5);
         double km_driver = result.getDouble(6);
         CarDto car = new CarDto(result.getInt(1),result.getString(2),status,model,color,km_driver);

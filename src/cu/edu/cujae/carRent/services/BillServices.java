@@ -48,7 +48,7 @@ public class BillServices {
         connection.close();
     }
 
-    public void updateBill(int code, float amount, float special_amount) throws SQLException {
+    public void getBillById(int code, float amount, float special_amount) throws SQLException {
         java.sql.Connection connection = ServicesLocator.getConnection();
         String function = "{call update_bill( ?,?,? )}";
         CallableStatement call = connection.prepareCall(function);

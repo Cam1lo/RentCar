@@ -11,11 +11,11 @@ public class ModelDto {
         this.brand = brand;
     }
 
-    public String getModel() {
+    public String getModelText() {
         return model;
     }
 
-    public void setModel(String model) {
+    public void setModelText(String model) {
         this.model = model;
     }
 

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class BrandServices {
 
-    public BrandDto returnBrand(int code) throws SQLException {
+    public BrandDto getBrandById(int code) throws SQLException {
         java.sql.Connection con = ServicesLocator.getConnection();
         String function = "{?= call return_brand(?)}";
         con.setAutoCommit(false);

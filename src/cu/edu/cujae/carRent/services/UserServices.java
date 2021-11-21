@@ -93,4 +93,20 @@ public class UserServices {
         connection.close();
         return user;
     }
+
+    public UserDto getUserById(int code) throws SQLException {
+        java.sql.Connection con = ServicesLocator.getConnection();
+        String function = "{?= call return_user(?)}";
+        con.setAutoCommit(false);
+        CallableStatement call = con.prepareCall(function);
+        call.registerOutParameter(1, Types.OTHER);
+        call.setInt(2, code);
+        call.execute();
+        ResultSet result = (ResultSet) call.getObject(1);
+        result.next();
+        UserDto user = new UserDto(result.getInt(1), result.getString(2),result.getString(3),result.getBoolean(4));
+        call.close();
+        con.close();
+        return user;
+    }
 }

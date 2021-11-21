@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class StatusServices {
 
-    public CarStatusDto returnStatus(int code) throws SQLException {
+    public CarStatusDto getStatusById(int code) throws SQLException {
         java.sql.Connection con = ServicesLocator.getConnection();
         String function = "{?= call return_status(?)}";
         con.setAutoCommit(false);

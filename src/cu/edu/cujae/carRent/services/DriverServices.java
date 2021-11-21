@@ -40,7 +40,7 @@ public class DriverServices {
             String name = result.getString(3);
             String last_name = result.getString(4);
             String address = result.getString(5);
-            DriversCategoriesDto category = ServicesLocator.getDriverCategoryServices().returnDriverCategory(result.getInt(6));
+            DriversCategoriesDto category = ServicesLocator.getDriverCategoryServices().getDriverCategoryById(result.getInt(6));
             drivers.add(new DriverDto(code,id,name,last_name,address,category));
         }
         call.close();
@@ -63,7 +63,7 @@ public class DriverServices {
         connection.close();
     }
 
-    public DriverDto returnDriver(int cod) throws SQLException, ClassNotFoundException {
+    public DriverDto getDriverById(int cod) throws SQLException, ClassNotFoundException {
         DriverDto driver = null;
         if(cod != 0) {
             java.sql.Connection connection = ServicesLocator.getConnection();
@@ -80,7 +80,7 @@ public class DriverServices {
             String name = result.getString(3);
             String last_name = result.getString(4);
             String address = result.getString(5);
-            DriversCategoriesDto category = ServicesLocator.getDriverCategoryServices().returnDriverCategory(result.getInt(6));
+            DriversCategoriesDto category = ServicesLocator.getDriverCategoryServices().getDriverCategoryById(result.getInt(6));
             driver = new DriverDto(code, id, name, last_name, address, category);
             call.close();
             connection.close();

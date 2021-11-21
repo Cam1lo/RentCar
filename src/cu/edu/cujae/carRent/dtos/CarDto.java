@@ -53,5 +53,5 @@ public class CarDto {
 
     public double getMilaege() { return mileage; }
 
-    public void setKm_driver(double mileage) { this.mileage = mileage; }
+    public void setMileage(double mileage) { this.mileage = mileage; }
 }
