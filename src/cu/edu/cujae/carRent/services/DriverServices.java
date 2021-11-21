@@ -97,4 +97,15 @@ public class DriverServices {
         call.close();
         connection.close();
     }
+
+    public ArrayList<DriverDto> getDriversByCategory(int category_id)throws ClassNotFoundException, SQLException{
+        ArrayList<DriverDto> result = new ArrayList<>();
+        ArrayList<DriverDto> drivers = listDriver();
+        for(DriverDto d : drivers){
+            if(d.getCategory().getCode() == category_id){
+                result.add(d);
+            }
+        }
+        return result;
+    }
 }
