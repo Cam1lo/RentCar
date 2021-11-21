@@ -34,5 +34,7 @@ public class mainTest {
 
         ServicesLocator.getModelServices().listModel();
 
+        ServicesLocator.getContractServices().listContract();
+
     }
 }
