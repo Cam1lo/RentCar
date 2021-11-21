@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="ap" prefHeight="323.0" prefWidth="597.0" styleClass="container" stylesheets="@../../forms.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cu.edu.cujae.carRent.visuals.pages.cars.updateForm.UpdateForm">
+   <children>
+      <Label layoutX="71.0" layoutY="116.0" text="Color:" />
+      <Label fx:id="error_label" alignment="CENTER" contentDisplay="CENTER" layoutX="209.0" layoutY="217.0" prefHeight="43.0" prefWidth="197.0" styleClass="errors" textAlignment="CENTER" wrapText="true">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="56.0" layoutY="166.0" text="Mileage:" />
+      <Label layoutX="315.0" layoutY="115.0" text="Status:" />
+      <Label layoutX="90.0" layoutY="66.0" text="Id:" />
+      <Label layoutX="259.0" layoutY="14.0" text="Update Car">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="id" layoutX="111.0" layoutY="60.0" />
+      <TextField fx:id="color" layoutX="111.0" layoutY="110.0" />
+      <ComboBox fx:id="status" layoutX="362.0" layoutY="110.0" prefHeight="28.0" prefWidth="156.0" />
+      <Button layoutX="206.0" layoutY="281.0" mnemonicParsing="false" onAction="#cancel" styleClass="cancel-button" text="Cancel" />
+      <Button layoutX="343.0" layoutY="281.0" mnemonicParsing="false" onAction="#addNew" styleClass="log-out-button" text="Update" />
+      <Spinner fx:id="mileage" layoutX="111.0" layoutY="161.0" />
+      <Label layoutX="315.0" layoutY="65.0" text="Model:" />
+      <ComboBox fx:id="model" layoutX="362.0" layoutY="61.0" prefHeight="28.0" prefWidth="156.0" />
+   </children>
+</AnchorPane>

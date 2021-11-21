@@ -1,12 +1,11 @@
 package cu.edu.cujae.carRent.visuals.mainLayout;
 
 
-import cu.edu.cujae.carRent.dtos.DriverDto;
-import cu.edu.cujae.carRent.dtos.TouristDto;
-import cu.edu.cujae.carRent.dtos.UserDto;
+import cu.edu.cujae.carRent.dtos.*;
 import cu.edu.cujae.carRent.services.ServicesLocator;
 import cu.edu.cujae.carRent.utils.visual.ScenesManager;
 import cu.edu.cujae.carRent.visuals.mainLayout.confirmLogOut.ConfirmLogOut;
+import cu.edu.cujae.carRent.visuals.pages.cars.Cars;
 import cu.edu.cujae.carRent.visuals.pages.drivers.Drivers;
 import cu.edu.cujae.carRent.visuals.pages.tourists.Tourists;
 import cu.edu.cujae.carRent.visuals.pages.users.Users;
@@ -106,6 +105,32 @@ public class MainLayout {
         Drivers drivers_controller = (Drivers) ScenesManager.changeApContentTo(this.ap_content, "drivers");
         drivers_controller.onInit(drivers, this.ap_content);
     }
+
+    public void loadCars() throws SQLException,
+            ClassNotFoundException,
+            IOException,
+            NoSuchFieldException,
+            IllegalAccessException {
+
+        ArrayList<CarDto> cars = ServicesLocator.getCarsServices().listCars();
+
+        setFocus(nav_item_cars);
+        Cars drivers_controller = (Cars) ScenesManager.changeApContentTo(this.ap_content, "cars");
+        drivers_controller.onInit(cars, this.ap_content);
+    }
+
+//    public void loadContracts() throws SQLException,
+//            ClassNotFoundException,
+//            IOException,
+//            NoSuchFieldException,
+//            IllegalAccessException {
+//
+//        ArrayList<DriverDto> drivers = ServicesLocator.getDriverServices().listDriver();
+//
+//        setFocus(nav_item_drivers);
+//        Drivers drivers_controller = (Drivers) ScenesManager.changeApContentTo(this.ap_content, "contracts");
+//        drivers_controller.onInit(drivers, this.ap_content);
+//    }
 
     public void setFocus(Label selectedLabel) {
         nav_item_contracts.getStyleClass().remove("active-nav-item");

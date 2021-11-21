@@ -38,7 +38,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Label>
-            <Label fx:id="nav_item_cars" alignment="CENTER" contentDisplay="CENTER" layoutX="84.0" layoutY="215.0" text="CARS" textAlignment="CENTER">
+            <Label fx:id="nav_item_cars" alignment="CENTER" contentDisplay="CENTER" layoutX="84.0" layoutY="215.0" onMouseClicked="#loadCars" text="CARS" textAlignment="CENTER">
                <font>
                   <Font size="15.0" />
                </font>
