@@ -1,13 +1,15 @@
-package cu.edu.cujae.carRent.visuals.pages.drivers.categories.updateForm;
+package cu.edu.cujae.carRent.visuals.pages.cars.models.updateForm;
 
 import cu.edu.cujae.carRent.dtos.DriversCategoriesDto;
+import cu.edu.cujae.carRent.dtos.ModelDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
-import cu.edu.cujae.carRent.visuals.pages.drivers.categories.Categories;
+import cu.edu.cujae.carRent.visuals.pages.cars.models.Models;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 
@@ -15,17 +17,17 @@ public class UpdateForm {
     @FXML
     private AnchorPane ap;
     @FXML
-    private TextField category;
+    private TextField model;
     @FXML
     private Label error_label;
 
-    private DriversCategoriesDto selected;
-    private Categories parent;
+    private ModelDto selected;
+    private Models parent;
 
-    public void onInit(DriversCategoriesDto selected, Categories parent) {
+    public void onInit(ModelDto selected, Models parent) {
         this.parent = parent;
         this.selected = selected;
-        this.category.setText(selected.getCategory());
+        this.model.setText(selected.getModelText());
     }
 
     public void cancel() {
@@ -35,9 +37,9 @@ public class UpdateForm {
 
     public void update() throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
 
-        String category = this.category.getText();
+        String modelText = this.model.getText();
 
-        ServicesLocator.getDriverCategoryServices().updateDriverCategory(this.selected.getCode(), category);
+//        ServicesLocator.getModelServices().updateModel(this.selected.getCode(), modelText);
 
         parent.refreshTable();
         cancel();

@@ -51,7 +51,7 @@ public class CarDto {
 
     public void setColor(String color) { this.color = color; }
 
-    public double getMilaege() { return mileage; }
+    public double getMileage() { return mileage; }
 
     public void setMileage(double mileage) { this.mileage = mileage; }
 }

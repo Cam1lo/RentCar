@@ -10,6 +10,10 @@ public class CarStatusDto {
         this.status = status;
     }
 
+    public int getCode() {
+        return code;
+    }
+
     public String getStatusText() {return status;}
 
     public void setStatusText(String status) {this.status = status;}
