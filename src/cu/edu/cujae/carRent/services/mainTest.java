@@ -32,7 +32,7 @@ public class mainTest {
 
 //        ServicesLocator.getDriverCategoryServices().listDriverCategories();
 
-        ServicesLocator.getModelServices().listModel();
+        ServicesLocator.getModelServices().deleteModel(16);
 
     }
 }

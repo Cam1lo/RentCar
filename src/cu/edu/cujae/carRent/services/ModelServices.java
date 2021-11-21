@@ -29,11 +29,12 @@ public class ModelServices {
         return model;
     }
 
-    public void insertModel(String model) throws SQLException {
+    public void insertModel(int brand, String model) throws SQLException {
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String funcion = "{call insert_model( ? )}";
+        String funcion = "{call insert_model( ?,? )}";
         CallableStatement call = connection.prepareCall(funcion);
-        call.setString(1, model);
+        call.setInt(1,brand);
+        call.setString(2, model);
         call.execute();
         call.close();
         connection.close();
@@ -49,12 +50,13 @@ public class ModelServices {
         connection.close();
     }
 
-    public void updateModel(int code, String model) throws SQLException {
+    public void updateModel(int code, int brand, String model) throws SQLException {
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String funcion = "{call update_model( ?,? )}";
+        String funcion = "{call update_model( ?,?,? )}";
         CallableStatement call = connection.prepareCall(funcion);
         call.setInt(1, code);
-        call.setString(2, model);
+        call.setInt(2, brand);
+        call.setString(3, model);
         call.execute();
         call.close();
         connection.close();
