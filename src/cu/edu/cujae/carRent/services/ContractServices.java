@@ -127,4 +127,48 @@ public class ContractServices {
         return result;
     }
 
+    public ArrayList<ContractDto> getContractsByBillId(int bill_id) throws SQLException, ClassNotFoundException {
+        ArrayList<ContractDto> result = new ArrayList<>();
+        ArrayList<ContractDto> contracts = listContract();
+        for(ContractDto c : contracts){
+            if(c.getBill().getCode() == bill_id){
+                result.add(c);
+            }
+        }
+        return result;
+    }
+
+    public ArrayList<ContractDto> getContractsByCarId(int car_id) throws SQLException, ClassNotFoundException {
+        ArrayList<ContractDto> result = new ArrayList<>();
+        ArrayList<ContractDto> contracts = listContract();
+        for(ContractDto c : contracts){
+            if(c.getCar().getCode() == car_id){
+                result.add(c);
+            }
+        }
+        return result;
+    }
+
+    public ArrayList<ContractDto> getContractsByDriverId(int driver_id) throws SQLException, ClassNotFoundException {
+        ArrayList<ContractDto> result = new ArrayList<>();
+        ArrayList<ContractDto> contracts = listContract();
+        for(ContractDto c : contracts){
+            if(c.getDriver().getCode() == driver_id){
+                result.add(c);
+            }
+        }
+        return result;
+    }
+
+    public ArrayList<ContractDto> getContractsByPaymentId(int payment_id) throws SQLException, ClassNotFoundException {
+        ArrayList<ContractDto> result = new ArrayList<>();
+        ArrayList<ContractDto> contracts = listContract();
+        for(ContractDto c : contracts){
+            if(c.getPayment().getCode() == payment_id){
+                result.add(c);
+            }
+        }
+        return result;
+    }
+
 }

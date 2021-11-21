@@ -9,15 +9,16 @@ import java.util.ArrayList;
 
 public class CarsServices {
 
-    public void insertCar(String carId, int codStatus, int codModel, String color, double km_driver)throws SQLException, ClassNotFoundException{
+    public void insertCar(String carId, int codStatus, int codModel, String color, double mileage)throws SQLException, ClassNotFoundException{
         java.sql.Connection connection = ServicesLocator.getConnection();
         String function = "{call insert_car( ?,?,?,?,? )}";
+        String id = "K " + carId;
         CallableStatement call = connection.prepareCall(function);
-        call.setString(1,carId);
+        call.setString(1,id);
         call.setInt(2,codStatus);
         call.setInt(3,codModel);
         call.setString(4,color);
-        call.setDouble(5,km_driver);
+        call.setDouble(5,mileage);
         call.execute();
         call.close();
         connection.close();
@@ -54,14 +55,17 @@ public class CarsServices {
         connection.close();
     }
 
-    public void updateCar(int code, String carId, int codStatus, int codModel)throws SQLException{
+    public void updateCar(int code, String carId, int codStatus, int codModel, String color, double mileage)throws SQLException{
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String function = "{call update_car(?,?,?,?)}";
+        String function = "{call update_car( ?,?,?,?,?,? )}";
+        String id = "K " + carId;
         CallableStatement call = connection.prepareCall(function);
         call.setInt(1,code);
-        call.setString(2,carId);
-        call.setInt(4,codStatus);
-        call.setInt(3,codModel);
+        call.setString(2,id);
+        call.setInt(3,codStatus);
+        call.setInt(4,codModel);
+        call.setString(5,color);
+        call.setDouble(6,mileage);
         call.execute();
         call.close();
         connection.close();

@@ -37,7 +37,7 @@ public class UpdateForm {
 
         String category = this.category.getText();
 
-        ServicesLocator.getDriverCategoryServices().insertDriverCategory(category);
+        ServicesLocator.getDriverCategoryServices().updateDriverCategory(this.selected.getCode(),category);
 
         parent.refreshTable();
         cancel();
