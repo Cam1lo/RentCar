@@ -1,5 +1,6 @@
 package cu.edu.cujae.carRent.services;
 
+import cu.edu.cujae.carRent.dtos.BrandDto;
 import cu.edu.cujae.carRent.dtos.CarDto;
 import cu.edu.cujae.carRent.dtos.CarStatusDto;
 import cu.edu.cujae.carRent.dtos.ModelDto;
@@ -9,14 +10,14 @@ import java.util.ArrayList;
 
 public class CarsServices {
 
-    public void insertCar(String carId, int codStatus, int codModel, String color, double mileage)throws SQLException, ClassNotFoundException{
+    public void insertCar(String carId, int codStatus, int codBrand, String color, double mileage)throws SQLException, ClassNotFoundException{
         java.sql.Connection connection = ServicesLocator.getConnection();
         String function = "{call insert_car( ?,?,?,?,? )}";
         String id = "K " + carId;
         CallableStatement call = connection.prepareCall(function);
         call.setString(1,id);
         call.setInt(2,codStatus);
-        call.setInt(3,codModel);
+        call.setInt(3,codBrand);
         call.setString(4,color);
         call.setDouble(5,mileage);
         call.execute();
@@ -34,11 +35,11 @@ public class CarsServices {
         call.execute();
         ResultSet result = (ResultSet) call.getObject(1);
         while(result.next()){
-            ModelDto model = ServicesLocator.getModelServices().getModelById(result.getInt(4));
+            BrandDto brand = ServicesLocator.getBrandServices().getBrandById(result.getInt(4));
             CarStatusDto status = ServicesLocator.getStatusServices().getStatusById(result.getInt(3));
             String color = result.getString(5);
             double mileage = result.getDouble(6);
-            cars.add(new CarDto(result.getInt(1),result.getString(2),status,model,color,mileage));
+            cars.add(new CarDto(result.getInt(1),result.getString(2),status,brand,color,mileage));
         }
         call.close();
         connection.close();
@@ -55,7 +56,7 @@ public class CarsServices {
         connection.close();
     }
 
-    public void updateCar(int code, String carId, int codStatus, int codModel, String color, double mileage)throws SQLException{
+    public void updateCar(int code, String carId, int codStatus, int codBrand, String color, double mileage)throws SQLException{
         java.sql.Connection connection = ServicesLocator.getConnection();
         String function = "{call update_car( ?,?,?,?,?,? )}";
         String id = "K " + carId;
@@ -63,7 +64,7 @@ public class CarsServices {
         call.setInt(1,code);
         call.setString(2,id);
         call.setInt(3,codStatus);
-        call.setInt(4,codModel);
+        call.setInt(4,codBrand);
         call.setString(5,color);
         call.setDouble(6,mileage);
         call.execute();
@@ -81,11 +82,11 @@ public class CarsServices {
         call.execute();
         ResultSet result = (ResultSet) call.getObject(1);
         result.next();
-        ModelDto model = ServicesLocator.getModelServices().getModelById(result.getInt(4));
+        BrandDto brand = ServicesLocator.getBrandServices().getBrandById(result.getInt(4));
         CarStatusDto status = ServicesLocator.getStatusServices().getStatusById(result.getInt(3));
         String color = result.getString(5);
         double km_driver = result.getDouble(6);
-        CarDto car = new CarDto(result.getInt(1),result.getString(2),status,model,color,km_driver);
+        CarDto car = new CarDto(result.getInt(1),result.getString(2),status,brand,color,km_driver);
         call.close();
         connection.close();
         return car;

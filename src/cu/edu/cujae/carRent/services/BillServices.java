@@ -27,7 +27,7 @@ public class BillServices {
 
     }
 
-    public void insertBill(float amount, float special_amount) throws SQLException {
+    public BillDto insertBill(float amount, float special_amount) throws SQLException {
         java.sql.Connection connection = ServicesLocator.getConnection();
         String function = "{call insert_bill( ?, ? )}";
         CallableStatement call = connection.prepareCall(function);
@@ -35,7 +35,17 @@ public class BillServices {
         call.setFloat(2,special_amount);
         call.execute();
         call.close();
+        function = "{?= call get_last_bill()}";
+        CallableStatement call2 = connection.prepareCall(function);
+        connection.setAutoCommit(false);
+        call2.registerOutParameter(1, Types.OTHER);
+        call2.execute();
+        ResultSet result = (ResultSet) call2.getObject(1);
+        result.next();
+        BillDto bill = new BillDto(result.getInt(1), result.getFloat(2),result.getFloat(3));
+        call2.close();
         connection.close();
+        return bill;
     }
 
     public void deleteBill(int code) throws SQLException {

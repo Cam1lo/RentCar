@@ -14,27 +14,25 @@ public class ModelServices {
     public ModelDto getModelById(int code) throws SQLException {
         ModelDto model;
         java.sql.Connection con = ServicesLocator.getConnection();
-        String funcion = "{?= call return_model(?)}";
+        String function = "{?= call return_model(?)}";
         con.setAutoCommit(false);
-        CallableStatement call = con.prepareCall(funcion);
+        CallableStatement call = con.prepareCall(function);
         call.registerOutParameter(1, Types.OTHER);
         call.setInt(2, code);
         call.execute();
         ResultSet result = (ResultSet) call.getObject(1);
         result.next();
-        BrandDto brand = ServicesLocator.getBrandServices().getBrandById(result.getInt(2));
-        model = new ModelDto(result.getInt(1),result.getString(3),brand);
+        model = new ModelDto(result.getInt(1),result.getString(2));
         call.close();
         con.close();
         return model;
     }
 
-    public void insertModel(int brand, String model) throws SQLException {
+    public void insertModel(String model) throws SQLException {
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String funcion = "{call insert_model( ?,? )}";
-        CallableStatement call = connection.prepareCall(funcion);
-        call.setInt(1,brand);
-        call.setString(2, model);
+        String function = "{call insert_model( ? )}";
+        CallableStatement call = connection.prepareCall(function);
+        call.setString(1, model);
         call.execute();
         call.close();
         connection.close();
@@ -50,13 +48,12 @@ public class ModelServices {
         connection.close();
     }
 
-    public void updateModel(int code, int brand, String model) throws SQLException {
+    public void updateModel(int code, String model) throws SQLException {
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String funcion = "{call update_model( ?,?,? )}";
+        String funcion = "{call update_model( ?,? )}";
         CallableStatement call = connection.prepareCall(funcion);
         call.setInt(1, code);
-        call.setInt(2, brand);
-        call.setString(3, model);
+        call.setString(2, model);
         call.execute();
         call.close();
         connection.close();
@@ -72,12 +69,22 @@ public class ModelServices {
         call.execute();
         ResultSet result = (ResultSet) call.getObject(1);
         while(result.next()){
-            BrandDto brand = ServicesLocator.getBrandServices().getBrandById(result.getInt(2));
-            models.add(new ModelDto(result.getInt(1),result.getString(3),brand));
+            models.add(new ModelDto(result.getInt(1),result.getString(2)));
         }
         call.close();
         connection.close();
         return models;
+    }
+
+    public ArrayList<ModelDto> getModelByBrand(String brand) throws SQLException {
+        ArrayList<ModelDto> result = new ArrayList<>();
+        ArrayList<BrandDto> brands = ServicesLocator.getBrandServices().listBrand();
+        for(BrandDto b : brands){
+            if(b.getBrandText().equals(brand)){
+                result.add(b.getModel());
+            }
+        }
+        return result;
     }
 
 }

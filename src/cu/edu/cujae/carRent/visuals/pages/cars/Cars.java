@@ -63,7 +63,7 @@ public class Cars {
 
         idColumn.setCellValueFactory(new PropertyValueFactory<>("CarID"));
         colorColumn.setCellValueFactory(new PropertyValueFactory<>("color"));
-        modelColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getModel().getModelText()));
+        modelColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getBrand().getModel().getModelText()));
         statusColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getStatus().getStatusText()));
         mileageColumn.setCellValueFactory(new PropertyValueFactory<>("mileage"));
 

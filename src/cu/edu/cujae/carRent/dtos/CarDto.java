@@ -5,14 +5,14 @@ public class CarDto {
     private String carID;
     private String color;
     private CarStatusDto status;
-    private ModelDto model;
+    private BrandDto brand;
     private double mileage;
 
-    public CarDto(int code, String carID, CarStatusDto status, ModelDto model, String color, double mileage) {
+    public CarDto(int code, String carID, CarStatusDto status, BrandDto brand, String color, double mileage) {
         this.code = code;
         this.carID = carID;
         this.status = status;
-        this.model = model;
+        this.brand = brand;
         this.color = color;
         this.mileage = mileage;
 
@@ -35,12 +35,12 @@ public class CarDto {
         this.status = status;
     }
 
-    public ModelDto getModel() {
-        return model;
+    public BrandDto getBrand() {
+        return brand;
     }
 
-    public void setModel(ModelDto model) {
-        this.model = model;
+    public void setBrand(BrandDto brand) {
+        this.brand = brand;
     }
 
     public int getCode() { return code; }

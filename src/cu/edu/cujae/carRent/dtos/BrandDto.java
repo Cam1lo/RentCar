@@ -3,10 +3,20 @@ package cu.edu.cujae.carRent.dtos;
 public class BrandDto {
     private String brand;
     private int code;
+    private ModelDto model;
 
-    public BrandDto(int code, String brand) {
+    public BrandDto(int code, String brand,ModelDto model) {
         this.code = code;
         this.brand = brand;
+        this.model = model;
+    }
+
+    public ModelDto getModel() {
+        return model;
+    }
+
+    public void setModel(ModelDto model) {
+        this.model = model;
     }
 
     public String getBrandText() {

@@ -46,7 +46,7 @@ public class CarTable {
         ArrayList<CarTable> table = new ArrayList<>();
         ArrayList<CarDto> cars = ServicesLocator.getCarsServices().listCars();
         for(CarDto e : cars){
-            table.add(new CarTable(e.getCarID(),e.getModel().getBrand().getBrandText(),e.getModel().getModelText(),e.getColor(),e.getMileage()));
+            table.add(new CarTable(e.getCarID(),e.getBrand().getBrandText(),e.getBrand().getModel().getModelText(),e.getColor(),e.getMileage()));
         }
         return table;
     }
