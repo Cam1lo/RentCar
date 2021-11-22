@@ -3,6 +3,7 @@ package cu.edu.cujae.carRent.services;
 import cu.edu.cujae.carRent.dtos.BillDto;
 import cu.edu.cujae.carRent.utils.Encription;
 import cu.edu.cujae.carRent.utils.rawData.Country;
+import javafx.util.converter.LocalDateStringConverter;
 import org.postgresql.shaded.com.ongres.scram.common.bouncycastle.base64.Base64Encoder;
 
 import java.io.UnsupportedEncodingException;
@@ -32,6 +33,15 @@ public class mainTest {
         System.out.println(con.getTotalAmount());*/
 
 //      ServicesLocator.getDriverCategoryServices().listDriverCategories();
+
+       /*LocalDate datei = LocalDate.parse("2021-04-23");
+        LocalDate datef = LocalDate.parse("2021-04-30");
+
+        ServicesLocator.getContractServices().updateContract(4,2,3,3,2,0,datei,datef,4);*/
+
+        ServicesLocator.getDriverServices().deleteDriver(2);
+
+
 
 
     }
