@@ -112,7 +112,8 @@ public class ContractServices {
         connection.close();
     }
 
-    public void deleteContract(int code)throws SQLException{
+    public void deleteContract(int code) throws SQLException, ClassNotFoundException {
+        BillDto bill = getContractById(code).getBill();
         java.sql.Connection connection = ServicesLocator.getConnection();
         String function = "{call delete_contract(?)}";
         CallableStatement call = connection.prepareCall(function);
@@ -120,6 +121,7 @@ public class ContractServices {
         call.execute();
         call.close();
         connection.close();
+        ServicesLocator.getBillServices().deleteBill(bill.getCode());
     }
 
     public ArrayList<ContractDto> getContractsByTouristId(int id) throws SQLException, ClassNotFoundException {

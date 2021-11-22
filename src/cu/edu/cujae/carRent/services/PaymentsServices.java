@@ -1,5 +1,8 @@
 package cu.edu.cujae.carRent.services;
 
+import cu.edu.cujae.carRent.dtos.BrandDto;
+import cu.edu.cujae.carRent.dtos.ContractDto;
+import cu.edu.cujae.carRent.dtos.ModelDto;
 import cu.edu.cujae.carRent.dtos.PaymentsDto;
 
 import java.sql.CallableStatement;
@@ -73,5 +76,15 @@ public class PaymentsServices {
         call.close();
         connection.close();
         return payments;
+    }
+    public boolean canDelete(PaymentsDto payment) throws SQLException, ClassNotFoundException {
+        ArrayList<ContractDto> contacts = ServicesLocator.getContractServices().listContract();
+        boolean found = true;
+        for(int i = 0; i<contacts.size() && found;i++){
+            if(contacts.get(i).getPayment().getCode()==payment.getCode()){
+                found = false;
+            }
+        }
+        return found;
     }
 }
