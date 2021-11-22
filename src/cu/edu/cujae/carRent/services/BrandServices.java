@@ -95,5 +95,28 @@ public class BrandServices {
         return brands;
     }
 
+     public BrandDto getBrandByText(String brand, String model) throws SQLException {
+        ArrayList<BrandDto> brands = listBrand();
+        BrandDto result = null;
+        boolean found = false;
+        for(int i = 0; i<brands.size() && !found;i++){
+            if(brands.get(i).getBrandText().equals(brand) && brands.get(i).getModel().getModelText().equals(model)){
+                found = true;
+                result = brands.get(i);
+            }
+        }
+        return result;
+     }
+
+     public void insertBrandWithModel(String brand, String model) throws SQLException {
+        ModelDto model_insert= ServicesLocator.getModelServices().getModelByText(model);
+        if(model_insert!=null){
+            insertBrand(brand,model_insert.getCode());
+        }else{
+            model_insert = ServicesLocator.getModelServices().insertModel(model);
+            insertBrand(brand,model_insert.getCode());
+        }
+     }
+
 
 }
