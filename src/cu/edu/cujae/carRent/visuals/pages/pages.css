@@ -28,6 +28,10 @@
   -fx-font-size: 25
 }
 
+.large-table .column-header .label {
+  -fx-font-size: 16 !important;
+}
+
 .table-view .corner {
     -fx-background-color: transparent;
 }

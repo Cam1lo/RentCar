@@ -9,4 +9,5 @@ public class Locations {
     public String models = "../../visuals/pages/cars/models/models.fxml";
     public String statuses = "../../visuals/pages/cars/statuses/statuses.fxml";
     public String contracts = "../../visuals/pages/contracts/contracts.fxml";
+    public String payments = "../../visuals/pages/contracts/payments/payments.fxml";
 }
