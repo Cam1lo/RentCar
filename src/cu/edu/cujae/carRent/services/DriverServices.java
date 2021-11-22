@@ -1,5 +1,6 @@
 package cu.edu.cujae.carRent.services;
 
+import cu.edu.cujae.carRent.dtos.ContractDto;
 import cu.edu.cujae.carRent.dtos.DriverDto;
 import cu.edu.cujae.carRent.dtos.DriversCategoriesDto;
 
@@ -88,7 +89,11 @@ public class DriverServices {
         return driver;
     }
 
-    public void deleteDriver(int code)throws SQLException{
+    public void deleteDriver(int code) throws SQLException, ClassNotFoundException {
+        ArrayList<ContractDto> contracts = ServicesLocator.getContractServices().getContractsByDriverId(code);
+        for(ContractDto c : contracts){
+            ServicesLocator.getContractServices().updateContract(c.getCode(),c.getTourist().getCode(),c.getCar().getCode(),c.getBill().getCode(),c.getPayment().getCode(),0,c.getStartingDate(),c.getFinalDate(),c.getExtension());
+        }
         java.sql.Connection connection = ServicesLocator.getConnection();
         String function = "{call delete_driver(?)}";
         CallableStatement call = connection.prepareCall(function);

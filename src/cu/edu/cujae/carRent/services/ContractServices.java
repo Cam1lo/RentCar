@@ -26,7 +26,10 @@ public class ContractServices {
             CarDto car = ServicesLocator.getCarsServices().getCarById(result.getInt(3));
             BillDto bill = ServicesLocator.getBillServices().returnBill(result.getInt(4));
             PaymentsDto payment = ServicesLocator.getPaymentsServices().getPaymentById(result.getInt(5));
-            DriverDto driver = ServicesLocator.getDriverServices().getDriverById(result.getInt(6));
+            DriverDto driver = null;
+            if(result.getInt(6)!=0) {
+                driver = ServicesLocator.getDriverServices().getDriverById(result.getInt(6));
+            }
             LocalDate starting_date = result.getDate(7).toLocalDate();
             LocalDate final_date = result.getDate(8).toLocalDate();
             int extension = result.getInt(9);
@@ -51,7 +54,10 @@ public class ContractServices {
         CarDto car = ServicesLocator.getCarsServices().getCarById(result.getInt(3));
         BillDto bill = ServicesLocator.getBillServices().returnBill(result.getInt(4));
         PaymentsDto payment = ServicesLocator.getPaymentsServices().getPaymentById(result.getInt(5));
-        DriverDto driver = ServicesLocator.getDriverServices().getDriverById(result.getInt(6));
+        DriverDto driver = null;
+        if(result.getInt(6)!=0) {
+            driver = ServicesLocator.getDriverServices().getDriverById(result.getInt(6));
+        }
         LocalDate starting_date = result.getDate(7).toLocalDate();
         LocalDate final_date = result.getDate(8).toLocalDate();
         int extension = result.getInt(9);
@@ -153,8 +159,10 @@ public class ContractServices {
         ArrayList<ContractDto> result = new ArrayList<>();
         ArrayList<ContractDto> contracts = listContract();
         for(ContractDto c : contracts){
-            if(c.getDriver().getCode() == driver_id){
-                result.add(c);
+            if(c.getDriver()!=null){
+                if(c.getDriver().getCode() == driver_id){
+                    result.add(c);
+                }
             }
         }
         return result;
