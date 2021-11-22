@@ -105,7 +105,7 @@ public class Statuses {
         stage.showAndWait();
     }
 
-    public void openDeleteConfirm() throws IOException {
+    public void openDeleteConfirm() throws IOException, SQLException, ClassNotFoundException {
         Stage stage = new Stage();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("deleteConfirm/DeleteConfirm.fxml"));

@@ -44,6 +44,7 @@ public class UpdateForm {
         String brandText = this.model.getText();
         String modelText = this.model.getText();
 
+        ServicesLocator.getBrandServices().updateBrandWithModel(this.selected.getCode(), brandText, modelText);
 
         this.parent.refreshTable();
         cancel();

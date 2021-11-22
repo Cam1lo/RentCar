@@ -8,6 +8,7 @@ import cu.edu.cujae.carRent.visuals.pages.cars.Cars;
 import cu.edu.cujae.carRent.visuals.pages.cars.brands.addForm.AddForm;
 import cu.edu.cujae.carRent.visuals.pages.cars.brands.deleteConfirm.DeleteConfirm;
 import cu.edu.cujae.carRent.visuals.pages.cars.brands.updateForm.UpdateForm;
+import cu.edu.cujae.carRent.visuals.pages.cars.statuses.Statuses;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -108,7 +109,7 @@ public class Brands {
         stage.showAndWait();
     }
 
-    public void openDeleteConfirm() throws IOException {
+    public void openDeleteConfirm() throws IOException, SQLException, ClassNotFoundException {
         Stage stage = new Stage();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("deleteConfirm/DeleteConfirm.fxml"));
@@ -132,8 +133,8 @@ public class Brands {
     }
 
     public void loadStatuses() throws IOException, NoSuchFieldException, IllegalAccessException, SQLException {
-//        Statuses statuses = (Statuses) ScenesManager.changeApContentTo(this.parentApContent, "statuses");
-//        statuses.onInit(ServicesLocator.getStatusServices().listStatus(), this.parentApContent);
+        Statuses statuses = (Statuses) ScenesManager.changeApContentTo(this.parentApContent, "statuses");
+        statuses.onInit(ServicesLocator.getStatusServices().listStatus(), this.parentApContent);
     }
 
     public void refreshTable() throws SQLException, ClassNotFoundException {

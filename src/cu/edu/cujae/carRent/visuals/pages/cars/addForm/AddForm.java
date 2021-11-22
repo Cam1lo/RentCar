@@ -80,10 +80,10 @@ public class AddForm {
         int modelVal = this.modelsMap.get(this.model.getValue());
         int status = this.statusesMap.get(this.status.getValue());
 
-//        BrandDto brand = ServicesLocator.getBrandServices()
+        BrandDto brand = ServicesLocator.getBrandServices().getBrandByText(this.brand.getValue(), this.model.getValue());
 //        String errors = Validations.newUserValidation(username, password, passConfirm);
 
-//        ServicesLocator.getCarsServices().insertCar(id, status, brand, color, mileage);
+        ServicesLocator.getCarsServices().insertCar(id, status, brand.getCode(), color, mileage);
 
 
         this.parent.refreshTable();

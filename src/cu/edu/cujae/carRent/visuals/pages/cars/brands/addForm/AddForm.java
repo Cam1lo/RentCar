@@ -1,5 +1,6 @@
 package cu.edu.cujae.carRent.visuals.pages.cars.brands.addForm;
 
+import cu.edu.cujae.carRent.services.ServicesLocator;
 import cu.edu.cujae.carRent.visuals.pages.cars.brands.Brands;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -37,6 +38,7 @@ public class AddForm {
         String brandText = this.model.getText();
         String modelText = this.model.getText();
 
+        ServicesLocator.getBrandServices().insertBrandWithModel(brandText, modelText);
 
         this.parent.refreshTable();
         cancel();

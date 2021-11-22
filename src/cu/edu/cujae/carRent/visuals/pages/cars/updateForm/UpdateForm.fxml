@@ -17,20 +17,22 @@
          </font>
       </Label>
       <Label layoutX="56.0" layoutY="166.0" text="Mileage:" />
-      <Label layoutX="315.0" layoutY="115.0" text="Status:" />
+      <Label layoutX="315.0" layoutY="165.0" text="Status:" />
       <Label layoutX="90.0" layoutY="66.0" text="Id:" />
-      <Label layoutX="259.0" layoutY="14.0" text="Update Car">
+      <Label layoutX="256.0" layoutY="14.0" text="Update Car">
          <font>
             <Font name="System Bold" size="15.0" />
          </font>
       </Label>
       <TextField fx:id="id" layoutX="111.0" layoutY="60.0" />
       <TextField fx:id="color" layoutX="111.0" layoutY="110.0" />
-      <ComboBox fx:id="status" layoutX="362.0" layoutY="110.0" prefHeight="28.0" prefWidth="156.0" />
+      <ComboBox fx:id="status" layoutX="362.0" layoutY="160.0" prefHeight="28.0" prefWidth="156.0" />
       <Button layoutX="206.0" layoutY="281.0" mnemonicParsing="false" onAction="#cancel" styleClass="cancel-button" text="Cancel" />
-      <Button layoutX="343.0" layoutY="281.0" mnemonicParsing="false" onAction="#addNew" styleClass="log-out-button" text="Update" />
+      <Button layoutX="341.0" layoutY="281.0" mnemonicParsing="false" onAction="#update" styleClass="log-out-button" text="Update" />
       <Spinner fx:id="mileage" layoutX="111.0" layoutY="161.0" />
-      <Label layoutX="315.0" layoutY="65.0" text="Model:" />
-      <ComboBox fx:id="model" layoutX="362.0" layoutY="61.0" prefHeight="28.0" prefWidth="156.0" />
+      <Label layoutX="315.0" layoutY="115.0" text="Model:" />
+      <ComboBox fx:id="model" layoutX="362.0" layoutY="111.0" prefHeight="28.0" prefWidth="156.0" />
+      <Label layoutX="317.0" layoutY="65.0" text="Brand:" />
+      <ComboBox fx:id="brand" layoutX="362.0" layoutY="61.0" onAction="#updateModels" prefHeight="28.0" prefWidth="156.0" />
    </children>
 </AnchorPane>
