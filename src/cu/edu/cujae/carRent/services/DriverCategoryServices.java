@@ -1,6 +1,9 @@
 package cu.edu.cujae.carRent.services;
 
+import cu.edu.cujae.carRent.dtos.BrandDto;
+import cu.edu.cujae.carRent.dtos.DriverDto;
 import cu.edu.cujae.carRent.dtos.DriversCategoriesDto;
+import cu.edu.cujae.carRent.dtos.ModelDto;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
@@ -73,5 +76,16 @@ public class DriverCategoryServices {
         call.close();
         connection.close();
         return categories;
+    }
+
+    public boolean canDelete(DriversCategoriesDto category) throws SQLException, ClassNotFoundException {
+        ArrayList<DriverDto> drivers = ServicesLocator.getDriverServices().listDriver();
+        boolean found = true;
+        for(int i = 0; i<drivers.size() && found;i++){
+            if(drivers.get(i).getCategory().getCode()==category.getCode()){
+                found = false;
+            }
+        }
+        return found;
     }
 }

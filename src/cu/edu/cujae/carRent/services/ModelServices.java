@@ -110,4 +110,15 @@ public class ModelServices {
         return result;
     }
 
+    public boolean canDelete(ModelDto model) throws SQLException {
+        ArrayList<BrandDto> brands = ServicesLocator.getBrandServices().listBrand();
+        boolean found = true;
+        for(int i = 0; i<brands.size() && found;i++){
+            if(brands.get(i).getModel().getCode()==model.getCode()){
+                found = false;
+            }
+        }
+        return found;
+    }
+
 }

@@ -1,6 +1,7 @@
 package cu.edu.cujae.carRent.services;
 
 import cu.edu.cujae.carRent.dtos.BrandDto;
+import cu.edu.cujae.carRent.dtos.CarDto;
 import cu.edu.cujae.carRent.dtos.ModelDto;
 import cu.edu.cujae.carRent.utils.Error;
 
@@ -126,6 +127,17 @@ public class BrandServices {
             model_insert = ServicesLocator.getModelServices().insertModel(model);
             updateBrand(code, brand,model_insert.getCode());
         }
+    }
+
+    public boolean canDelete(BrandDto brand) throws SQLException, ClassNotFoundException {
+        ArrayList<CarDto> cars = ServicesLocator.getCarsServices().listCars();
+        boolean found = true;
+        for(int i = 0; i<cars.size() && found;i++){
+            if(cars.get(i).getBrand().getCode()==brand.getCode()){
+                found = false;
+            }
+        }
+        return found;
     }
 
 
