@@ -118,5 +118,15 @@ public class BrandServices {
         }
      }
 
+    public void updateBrandWithModel(int code, String brand, String model) throws SQLException {
+        ModelDto model_insert= ServicesLocator.getModelServices().getModelByText(model);
+        if(model_insert!=null){
+            updateBrand(code, brand,model_insert.getCode());
+        }else{
+            model_insert = ServicesLocator.getModelServices().insertModel(model);
+            updateBrand(code, brand,model_insert.getCode());
+        }
+    }
+
 
 }
