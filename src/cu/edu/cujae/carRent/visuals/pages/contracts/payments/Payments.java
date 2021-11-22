@@ -1,13 +1,14 @@
-package cu.edu.cujae.carRent.visuals.pages.contracts.models;
+package cu.edu.cujae.carRent.visuals.pages.contracts.payments;
 
 import cu.edu.cujae.carRent.dtos.ModelDto;
+import cu.edu.cujae.carRent.dtos.PaymentsDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
 import cu.edu.cujae.carRent.utils.visual.ScenesManager;
-import cu.edu.cujae.carRent.visuals.pages.cars.Cars;
 import cu.edu.cujae.carRent.visuals.pages.contracts.Contracts;
-import cu.edu.cujae.carRent.visuals.pages.contracts.models.addForm.AddForm;
-import cu.edu.cujae.carRent.visuals.pages.contracts.models.deleteConfirm.DeleteConfirm;
-import cu.edu.cujae.carRent.visuals.pages.contracts.models.updateForm.UpdateForm;
+import cu.edu.cujae.carRent.visuals.pages.contracts.payments.addForm.AddForm;
+import cu.edu.cujae.carRent.visuals.pages.contracts.payments.deleteConfirm.DeleteConfirm;
+import cu.edu.cujae.carRent.visuals.pages.contracts.payments.updateForm.UpdateForm;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,7 +28,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class Models {
+public class Payments {
     @FXML
     private AnchorPane ap_content;
     @FXML
@@ -35,19 +36,19 @@ public class Models {
     @FXML
     private Button delete_button;
     @FXML
-    private TableView<ModelDto> table;
+    private TableView<PaymentsDto> table;
     @FXML
-    private TableColumn<ModelDto, String> modelColumn;
+    private TableColumn<PaymentsDto, String> paymentColumn;
 
-    private ModelDto selected;
+    private PaymentsDto selected;
     private AnchorPane parentApContent;
 
-    public void onInit(ArrayList<ModelDto> items, AnchorPane ap) {
+    public void onInit(ArrayList<PaymentsDto> items, AnchorPane ap) {
         this.parentApContent = ap;
         update_button.setDisable(true);
         delete_button.setDisable(true);
 
-        modelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
+        paymentColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPayment()));
 
         table.setItems(FXCollections.observableList(items));
 
@@ -122,17 +123,12 @@ public class Models {
         stage.showAndWait();
     }
 
-    public void loadCars() throws IOException, NoSuchFieldException, IllegalAccessException, SQLException, ClassNotFoundException {
-//        Cars carsPage = (Cars) ScenesManager.changeApContentTo(this.parentApContent, "cars");
-//        carsPage.onInit(ServicesLocator.getCarsServices().listCars(), this.parentApContent);
-    }
-
-    public void loadStatuses() throws IOException, NoSuchFieldException, IllegalAccessException, SQLException {
-//        Statuses statuses = (Statuses) ScenesManager.changeApContentTo(this.parentApContent, "statuses");
-//        statuses.onInit(ServicesLocator.getStatusServices().listStatus(), this.parentApContent);
+    public void loadContracts() throws IOException, NoSuchFieldException, IllegalAccessException, SQLException, ClassNotFoundException {
+        Contracts contractsPage = (Contracts) ScenesManager.changeApContentTo(this.parentApContent, "contracts");
+        contractsPage.onInit(ServicesLocator.getContractServices().listContract(), this.parentApContent);
     }
 
     public void refreshTable() throws SQLException, ClassNotFoundException {
-        table.setItems(FXCollections.observableList(ServicesLocator.getModelServices().listModel()));
+        table.setItems(FXCollections.observableList(ServicesLocator.getPaymentsServices().listPaymaent()));
     }
 }

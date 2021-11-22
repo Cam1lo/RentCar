@@ -50,7 +50,7 @@ public class UpdateForm {
         this.parent = parent;
         this.selected = selected;
 
-        this.extension.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1));
+        this.extension.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1000, 0));
 
         ArrayList<TouristDto> tourists = ServicesLocator.getTouristServices().listTourist();
         ArrayList<String> touristsTextList = new ArrayList<>();
@@ -120,7 +120,8 @@ public class UpdateForm {
 
         ServicesLocator.
                 getContractServices().
-                insertContract(
+                updateContract(
+                        this.selected.getCode(),
                         cod_tourist,
                         cod_car,
                         cod_bill,

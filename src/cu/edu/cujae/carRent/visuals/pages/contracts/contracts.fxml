@@ -67,11 +67,6 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="statuses" layoutX="249.0" layoutY="21.0" onMouseClicked="#loadBills" text="Bill" textFill="#797979">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
          </children>
       </AnchorPane>
    </children>

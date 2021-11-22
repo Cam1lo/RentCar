@@ -17,15 +17,6 @@ public class StringFormatters {
         return date1String + " -> " + date2String;
     }
 
-    public static String billsToString(BillDto bill) {
-        String regular = String.valueOf(bill.getAmount());
-        String special = "";
-        if (bill.getSpecialAmount() > 0) {
-            special = "special: " + String.valueOf(bill.getSpecialAmount());
-        }
-        return regular + special;
-    }
-
     public static String touristToString(TouristDto t) {
         return t.getIdPassport() + " " + t.getName() + " " + t.getLastName();
     }

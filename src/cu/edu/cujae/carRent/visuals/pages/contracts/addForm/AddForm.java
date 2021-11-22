@@ -48,7 +48,7 @@ public class AddForm {
     public void onInit(Contracts parent) throws SQLException, ClassNotFoundException {
         this.parent = parent;
 
-        this.extension.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1));
+        this.extension.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 0));
 
         ArrayList<TouristDto> tourists = ServicesLocator.getTouristServices().listTourist();
         ArrayList<String> touristsTextList = new ArrayList<>();
@@ -90,11 +90,10 @@ public class AddForm {
     }
 
     public void addNew() throws SQLException, ClassNotFoundException {
-//        BillDto bill = ServicesLocator.
-//                getBillServices().
-//                insertBill(Float.valueOf(this.regularBill.getText()), Float.valueOf(this.specialBill.getText()));
+        BillDto bill = ServicesLocator.
+                getBillServices().
+                insertBill(Float.parseFloat(this.regularBill.getText()), Float.parseFloat(this.specialBill.getText()));
 
-        BillDto bill = new BillDto(1, 1, 1);
 
         Integer cod_tourist = this.touristsMap.get(this.tourist.getValue());
         Integer cod_car = this.carsMap.get(this.car.getValue());

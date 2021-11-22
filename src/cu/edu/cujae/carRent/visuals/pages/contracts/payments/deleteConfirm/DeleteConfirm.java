@@ -1,8 +1,9 @@
-package cu.edu.cujae.carRent.visuals.pages.contracts.models.deleteConfirm;
+package cu.edu.cujae.carRent.visuals.pages.contracts.payments.deleteConfirm;
 
 import cu.edu.cujae.carRent.dtos.ModelDto;
+import cu.edu.cujae.carRent.dtos.PaymentsDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
-import cu.edu.cujae.carRent.visuals.pages.contracts.models.Models;
+import cu.edu.cujae.carRent.visuals.pages.contracts.payments.Payments;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -13,10 +14,10 @@ public class DeleteConfirm {
     @FXML
     private AnchorPane ap;
 
-    private ModelDto selected;
-    private Models parent;
+    private PaymentsDto selected;
+    private Payments parent;
 
-    public void onInit(ModelDto selected, Models parent) {
+    public void onInit(PaymentsDto selected, Payments parent) {
         this.parent = parent;
         this.selected = selected;
     }

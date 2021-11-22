@@ -113,8 +113,8 @@ public class MainLayout {
             NoSuchFieldException,
             IllegalAccessException {
 
-        ArrayList<CarDto> cars = ServicesLocator.getCarsServices().listCars();
 
+        ArrayList<CarDto> cars = ServicesLocator.getCarsServices().listCars();
         setFocus(nav_item_cars);
         Cars drivers_controller = (Cars) ScenesManager.changeApContentTo(this.ap_content, "cars");
         drivers_controller.onInit(cars, this.ap_content);

@@ -1,6 +1,8 @@
 package cu.edu.cujae.carRent.visuals.pages.contracts;
 
 import cu.edu.cujae.carRent.dtos.ContractDto;
+import cu.edu.cujae.carRent.utils.visual.ScenesManager;
+import cu.edu.cujae.carRent.visuals.pages.contracts.payments.Payments;
 import cu.edu.cujae.carRent.visuals.pages.contracts.updateForm.UpdateForm;
 import cu.edu.cujae.carRent.services.ServicesLocator;
 import cu.edu.cujae.carRent.utils.StringFormatters;
@@ -156,13 +158,8 @@ public class Contracts {
     }
 
     public void loadPayments() throws IOException, NoSuchFieldException, IllegalAccessException, SQLException {
-//        Models models = (Models) ScenesManager.changeApContentTo(this.parentApContent, "models");
-//        models.onInit(ServicesLocator.getModelServices().listModel(), this.parentApContent);
-    }
-
-    public void loadBills() throws IOException, NoSuchFieldException, IllegalAccessException, SQLException {
-//        Statuses statuses = (Statuses) ScenesManager.changeApContentTo(this.parentApContent, "statuses");
-//        statuses.onInit(ServicesLocator.getStatusServices().listStatus(), this.parentApContent);
+        Payments payments = (Payments) ScenesManager.changeApContentTo(this.parentApContent, "payments");
+        payments.onInit(ServicesLocator.getPaymentsServices().listPaymaent(), this.parentApContent);
     }
 
     public void refreshTable() throws SQLException, ClassNotFoundException {
