@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="ap_users" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="520.0" prefWidth="750.0" stylesheets="@../../pages.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cu.edu.cujae.carRent.visuals.pages.cars.models.Models">
+<AnchorPane fx:id="ap_users" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="520.0" prefWidth="750.0" stylesheets="@../../pages.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cu.edu.cujae.carRent.visuals.pages.cars.statuses.Statuses">
    <children>
       <AnchorPane fx:id="ap_content" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onMouseClicked="#resetFocus" prefHeight="530.0" prefWidth="750.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -17,7 +17,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button layoutX="512.0" layoutY="358.0" mnemonicParsing="false" onAction="#openAddForm" prefHeight="40.0" prefWidth="122.0" styleClass="primary-button" text="Add Model" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
+            <Button layoutX="512.0" layoutY="358.0" mnemonicParsing="false" onAction="#openAddForm" prefHeight="40.0" prefWidth="122.0" styleClass="primary-button" text="Add Status" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="14.0">
                <font>
                   <Font size="15.0" />
                </font>
@@ -27,7 +27,7 @@
             </Button>
             <TableView fx:id="table" layoutX="14.0" layoutY="61.0" prefHeight="388.0" prefWidth="722.0" styleClass="table" AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="61.0">
               <columns>
-                  <TableColumn fx:id="modelColumn" prefWidth="174.0" text="Model" />
+                  <TableColumn fx:id="statusColumn" prefWidth="174.0" text="Status" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -49,12 +49,12 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Label layoutX="89.0" layoutY="15.0" text="Models">
+            <Label layoutX="167.0" layoutY="15.0" text="Statuses">
                <font>
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Label fx:id="statuses" layoutX="193.0" layoutY="22.0" onMouseClicked="#loadStatuses" text="Statuses" textFill="#797979">
+            <Label layoutX="89.0" layoutY="22.0" onMouseClicked="#loadBrands" text="Brands" textFill="#797979">
                <font>
                   <Font size="18.0" />
                </font>

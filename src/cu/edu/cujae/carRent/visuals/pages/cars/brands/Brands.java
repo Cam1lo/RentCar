@@ -1,12 +1,14 @@
-package cu.edu.cujae.carRent.visuals.pages.cars.models;
+package cu.edu.cujae.carRent.visuals.pages.cars.brands;
 
+import cu.edu.cujae.carRent.dtos.BrandDto;
 import cu.edu.cujae.carRent.dtos.ModelDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
 import cu.edu.cujae.carRent.utils.visual.ScenesManager;
 import cu.edu.cujae.carRent.visuals.pages.cars.Cars;
-import cu.edu.cujae.carRent.visuals.pages.cars.models.addForm.AddForm;
-import cu.edu.cujae.carRent.visuals.pages.cars.models.deleteConfirm.DeleteConfirm;
-import cu.edu.cujae.carRent.visuals.pages.cars.models.updateForm.UpdateForm;
+import cu.edu.cujae.carRent.visuals.pages.cars.brands.addForm.AddForm;
+import cu.edu.cujae.carRent.visuals.pages.cars.brands.deleteConfirm.DeleteConfirm;
+import cu.edu.cujae.carRent.visuals.pages.cars.brands.updateForm.UpdateForm;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,7 +28,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class Models {
+public class Brands {
     @FXML
     private AnchorPane ap_content;
     @FXML
@@ -34,19 +36,22 @@ public class Models {
     @FXML
     private Button delete_button;
     @FXML
-    private TableView<ModelDto> table;
+    private TableView<BrandDto> table;
     @FXML
-    private TableColumn<ModelDto, String> modelColumn;
+    private TableColumn<BrandDto, String> brandColumn;
+    @FXML
+    private TableColumn<BrandDto, String> modelColumn;
 
-    private ModelDto selected;
+    private BrandDto selected;
     private AnchorPane parentApContent;
 
-    public void onInit(ArrayList<ModelDto> items, AnchorPane ap) {
+    public void onInit(ArrayList<BrandDto> items, AnchorPane ap) {
         this.parentApContent = ap;
         update_button.setDisable(true);
         delete_button.setDisable(true);
 
-        modelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
+        brandColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getBrandText()));
+        modelColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getModel().getModelText()));
 
         table.setItems(FXCollections.observableList(items));
 
@@ -132,6 +137,6 @@ public class Models {
     }
 
     public void refreshTable() throws SQLException, ClassNotFoundException {
-        table.setItems(FXCollections.observableList(ServicesLocator.getModelServices().listModel()));
+        table.setItems(FXCollections.observableList(ServicesLocator.getBrandServices().listBrand()));
     }
 }

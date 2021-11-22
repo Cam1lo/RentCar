@@ -1,13 +1,14 @@
-package cu.edu.cujae.carRent.visuals.pages.cars;
+package cu.edu.cujae.carRent.visuals.pages.cars.statuses;
 
-import cu.edu.cujae.carRent.dtos.CarDto;
+import cu.edu.cujae.carRent.dtos.BrandDto;
+import cu.edu.cujae.carRent.dtos.CarStatusDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
 import cu.edu.cujae.carRent.utils.visual.ScenesManager;
-import cu.edu.cujae.carRent.visuals.pages.cars.addForm.AddForm;
+import cu.edu.cujae.carRent.visuals.pages.cars.Cars;
 import cu.edu.cujae.carRent.visuals.pages.cars.brands.Brands;
-import cu.edu.cujae.carRent.visuals.pages.cars.deleteConfirm.DeleteConfirm;
-import cu.edu.cujae.carRent.visuals.pages.cars.statuses.Statuses;
-import cu.edu.cujae.carRent.visuals.pages.cars.updateForm.UpdateForm;
+import cu.edu.cujae.carRent.visuals.pages.cars.statuses.addForm.AddForm;
+import cu.edu.cujae.carRent.visuals.pages.cars.statuses.deleteConfirm.DeleteConfirm;
+import cu.edu.cujae.carRent.visuals.pages.cars.statuses.updateForm.UpdateForm;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -15,10 +16,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -29,47 +28,27 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class Cars {
+public class Statuses {
     @FXML
     private AnchorPane ap_content;
-    @FXML
-    private Label models;
-    @FXML
-    private Label statuses;
     @FXML
     private Button update_button;
     @FXML
     private Button delete_button;
     @FXML
-    private TableView<CarDto> table;
+    private TableView<CarStatusDto> table;
     @FXML
-    private TableColumn<CarDto, String> idColumn;
-    @FXML
-    private TableColumn<CarDto, String> colorColumn;
-    @FXML
-    private TableColumn<CarDto, String> brandColumn;
-    @FXML
-    private TableColumn<CarDto, String> modelColumn;
-    @FXML
-    private TableColumn<CarDto, String> statusColumn;
-    @FXML
-    private TableColumn<CarDto, Double> mileageColumn;
+    private TableColumn<CarStatusDto, String> statusColumn;
 
-
-    private CarDto selected;
+    private CarStatusDto selected;
     private AnchorPane parentApContent;
 
-    public void onInit(ArrayList<CarDto> items, AnchorPane parentApContent) {
-        this.parentApContent = parentApContent;
+    public void onInit(ArrayList<CarStatusDto> items, AnchorPane ap) {
+        this.parentApContent = ap;
         update_button.setDisable(true);
         delete_button.setDisable(true);
 
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("CarID"));
-        colorColumn.setCellValueFactory(new PropertyValueFactory<>("color"));
-        brandColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getBrand().getBrandText()));
-        modelColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getBrand().getModel().getModelText()));
-        statusColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getStatus().getStatusText()));
-        mileageColumn.setCellValueFactory(new PropertyValueFactory<>("mileage"));
+        statusColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getStatusText()));
 
         table.setItems(FXCollections.observableList(items));
 
@@ -144,9 +123,9 @@ public class Cars {
         stage.showAndWait();
     }
 
-    public void loadStatuses() throws IOException, NoSuchFieldException, IllegalAccessException, SQLException {
-        Statuses statuses = (Statuses) ScenesManager.changeApContentTo(this.parentApContent, "statuses");
-        statuses.onInit(ServicesLocator.getStatusServices().listStatus(), this.parentApContent);
+    public void loadCars() throws IOException, NoSuchFieldException, IllegalAccessException, SQLException, ClassNotFoundException {
+        Cars carsPage = (Cars) ScenesManager.changeApContentTo(this.parentApContent, "cars");
+        carsPage.onInit(ServicesLocator.getCarsServices().listCars(), this.parentApContent);
     }
 
     public void loadBrands() throws IOException, NoSuchFieldException, IllegalAccessException, SQLException {
@@ -155,6 +134,6 @@ public class Cars {
     }
 
     public void refreshTable() throws SQLException, ClassNotFoundException {
-        table.setItems(FXCollections.observableList(ServicesLocator.getCarsServices().listCars()));
+        table.setItems(FXCollections.observableList(ServicesLocator.getStatusServices().listStatus()));
     }
 }

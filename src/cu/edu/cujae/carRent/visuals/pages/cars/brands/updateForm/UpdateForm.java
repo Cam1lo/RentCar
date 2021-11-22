@@ -1,9 +1,8 @@
-package cu.edu.cujae.carRent.visuals.pages.cars.models.updateForm;
+package cu.edu.cujae.carRent.visuals.pages.cars.brands.updateForm;
 
-import cu.edu.cujae.carRent.dtos.DriversCategoriesDto;
-import cu.edu.cujae.carRent.dtos.ModelDto;
+import cu.edu.cujae.carRent.dtos.BrandDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
-import cu.edu.cujae.carRent.visuals.pages.cars.models.Models;
+import cu.edu.cujae.carRent.visuals.pages.cars.brands.Brands;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -17,17 +16,22 @@ public class UpdateForm {
     @FXML
     private AnchorPane ap;
     @FXML
+    private TextField brand;
+    @FXML
     private TextField model;
     @FXML
     private Label error_label;
 
-    private ModelDto selected;
-    private Models parent;
+    private BrandDto selected;
+    private Brands parent;
 
-    public void onInit(ModelDto selected, Models parent) {
-        this.parent = parent;
+
+    public void onInit(BrandDto selected, Brands parent) throws SQLException {
         this.selected = selected;
-        this.model.setText(selected.getModelText());
+        this.parent = parent;
+
+        this.brand.setText(selected.getBrandText());
+        this.model.setText(selected.getModel().getModelText());
     }
 
     public void cancel() {
@@ -37,11 +41,11 @@ public class UpdateForm {
 
     public void update() throws SQLException, ClassNotFoundException, NoSuchAlgorithmException {
 
+        String brandText = this.model.getText();
         String modelText = this.model.getText();
 
-//        ServicesLocator.getModelServices().updateModel(this.selected.getCode(), modelText);
 
-        parent.refreshTable();
+        this.parent.refreshTable();
         cancel();
     }
 }

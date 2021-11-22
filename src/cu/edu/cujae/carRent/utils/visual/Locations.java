@@ -6,7 +6,7 @@ public class Locations {
     public String drivers = "../../visuals/pages/drivers/drivers.fxml";
     public String categories = "../../visuals/pages/drivers/categories/categories.fxml";
     public String cars = "../../visuals/pages/cars/cars.fxml";
-    public String models = "../../visuals/pages/cars/models/models.fxml";
+    public String brands = "../../visuals/pages/cars/brands/brands.fxml";
     public String statuses = "../../visuals/pages/cars/statuses/statuses.fxml";
     public String contracts = "../../visuals/pages/contracts/contracts.fxml";
     public String payments = "../../visuals/pages/contracts/payments/payments.fxml";

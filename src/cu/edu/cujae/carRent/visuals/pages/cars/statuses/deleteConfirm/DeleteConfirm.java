@@ -1,9 +1,9 @@
-package cu.edu.cujae.carRent.visuals.pages.cars.models.deleteConfirm;
+package cu.edu.cujae.carRent.visuals.pages.cars.statuses.deleteConfirm;
 
-import cu.edu.cujae.carRent.dtos.DriversCategoriesDto;
-import cu.edu.cujae.carRent.dtos.ModelDto;
+import cu.edu.cujae.carRent.dtos.BrandDto;
+import cu.edu.cujae.carRent.dtos.CarStatusDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
-import cu.edu.cujae.carRent.visuals.pages.cars.models.Models;
+import cu.edu.cujae.carRent.visuals.pages.cars.statuses.Statuses;
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -14,10 +14,10 @@ public class DeleteConfirm {
     @FXML
     private AnchorPane ap;
 
-    private ModelDto selected;
-    private Models parent;
+    private CarStatusDto selected;
+    private Statuses parent;
 
-    public void onInit(ModelDto selected, Models parent) {
+    public void onInit(CarStatusDto selected, Statuses parent) {
         this.parent = parent;
         this.selected = selected;
     }
@@ -28,7 +28,7 @@ public class DeleteConfirm {
     }
 
     public void delete() throws SQLException, ClassNotFoundException {
-        ServicesLocator.getModelServices().deleteModel(this.selected.getCode());
+        ServicesLocator.getStatusServices().deleteStatus(this.selected.getCode());
 
         parent.refreshTable();
         cancel();

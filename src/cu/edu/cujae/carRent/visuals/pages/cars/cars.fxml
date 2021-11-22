@@ -29,6 +29,7 @@
               <columns>
                 <TableColumn fx:id="idColumn" maxWidth="3000.0" prefWidth="50.0" text="Id" />
                 <TableColumn fx:id="colorColumn" maxWidth="4000.0" minWidth="0.0" prefWidth="176.0" text="Color" />
+                  <TableColumn fx:id="brandColumn" maxWidth="4000.0" minWidth="0.0" prefWidth="176.0" text="Brand" />
                   <TableColumn fx:id="modelColumn" prefWidth="174.0" text="Model" />
                   <TableColumn fx:id="statusColumn" prefWidth="90.0" text="Status" />
                   <TableColumn fx:id="mileageColumn" minWidth="0.0" prefWidth="201.0" text="Mileage" />
@@ -53,12 +54,12 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-            <Label fx:id="models" layoutX="85.0" layoutY="21.0" onMouseClicked="#loadModels" text="Models" textFill="#797979">
+            <Label fx:id="brands" layoutX="85.0" layoutY="21.0" onMouseClicked="#loadBrands" text="Brands" textFill="#797979">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="statuses" layoutX="164.0" layoutY="21.0" onMouseClicked="#loadStatuses" text="Statuses" textFill="#797979">
+            <Label fx:id="statuses" layoutX="163.0" layoutY="21.0" onMouseClicked="#loadStatuses" text="Statuses" textFill="#797979">
                <font>
                   <Font size="18.0" />
                </font>
