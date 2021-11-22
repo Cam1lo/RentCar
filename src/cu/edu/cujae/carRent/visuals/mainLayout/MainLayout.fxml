@@ -30,7 +30,7 @@
                   <Image url="@../../assets/logo.png" />
                </image>
             </ImageView>
-            <Label fx:id="nav_item_contracts" alignment="CENTER" contentDisplay="CENTER" layoutX="63.0" layoutY="166.0" text="CONTRACTS">
+            <Label fx:id="nav_item_contracts" alignment="CENTER" contentDisplay="CENTER" layoutX="63.0" layoutY="166.0" onMouseClicked="#loadContracts" text="CONTRACTS">
                <font>
                   <Font size="15.0" />
                </font>
