@@ -11,9 +11,8 @@ public class CarsServices {
     public void insertCar(String carId, int codStatus, int codBrand, String color, double mileage) throws SQLException, ClassNotFoundException {
         java.sql.Connection connection = ServicesLocator.getConnection();
         String function = "{call insert_car( ?,?,?,?,? )}";
-        String id = "K " + carId;
         CallableStatement call = connection.prepareCall(function);
-        call.setString(1, id);
+        call.setString(1, carId);
         call.setInt(2, codStatus);
         call.setInt(3, codBrand);
         call.setString(4, color);
@@ -57,10 +56,9 @@ public class CarsServices {
     public void updateCar(int code, String carId, int codStatus, int codBrand, String color, double mileage) throws SQLException {
         java.sql.Connection connection = ServicesLocator.getConnection();
         String function = "{call update_car( ?,?,?,?,?,? )}";
-        String id = "K " + carId;
         CallableStatement call = connection.prepareCall(function);
         call.setInt(1, code);
-        call.setString(2, id);
+        call.setString(2, carId);
         call.setInt(3, codStatus);
         call.setInt(4, codBrand);
         call.setString(5, color);
