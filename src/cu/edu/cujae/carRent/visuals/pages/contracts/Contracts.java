@@ -81,7 +81,12 @@ public class Contracts {
         paymentColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPayment().getPayment()));
         billColumn.setCellValueFactory(data -> new SimpleStringProperty(String.valueOf(data.getValue().getBill().getAmount())));
         specialBill.setCellValueFactory(data -> new SimpleStringProperty(String.valueOf(data.getValue().getBill().getSpecialAmount())));
-        driverColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getDriver().getId()));
+        driverColumn.setCellValueFactory(data -> {
+            if (data.getValue().getDriver() == null) {
+                return new SimpleStringProperty("-");
+            } else
+                return new SimpleStringProperty(data.getValue().getDriver().getId());
+        });
         totalAmountColumn.setCellValueFactory(new PropertyValueFactory<>("totalAmount"));
 
         table.setItems(FXCollections.observableList(items));

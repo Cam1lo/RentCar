@@ -48,7 +48,7 @@ public class AddForm {
     public void onInit(Contracts parent) throws SQLException, ClassNotFoundException {
         this.parent = parent;
 
-        this.extension.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 0));
+        this.extension.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 0));
 
         ArrayList<TouristDto> tourists = ServicesLocator.getTouristServices().listTourist();
         ArrayList<String> touristsTextList = new ArrayList<>();
