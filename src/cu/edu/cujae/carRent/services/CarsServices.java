@@ -120,4 +120,10 @@ public class CarsServices {
         CarStatusDto rentStatus = ServicesLocator.getStatusServices().getStatusByText("Rentado");
         updateCar(car.getCode(),car.getCarID(),rentStatus.getCode(),car.getBrand().getCode(),car.getColor(),car.getMileage());
     }
+
+    public void setCarStatusToAvailable(int code) throws SQLException {
+        CarDto car = getCarById(code);
+        CarStatusDto rentStatus = ServicesLocator.getStatusServices().getStatusByText("Disponible");
+        updateCar(car.getCode(),car.getCarID(),rentStatus.getCode(),car.getBrand().getCode(),car.getColor(),car.getMileage());
+    }
 }

@@ -2,6 +2,7 @@ package cu.edu.cujae.carRent.services;
 
 import cu.edu.cujae.carRent.dtos.BillDto;
 import cu.edu.cujae.carRent.utils.Encription;
+import cu.edu.cujae.carRent.utils.StringFormatters;
 import cu.edu.cujae.carRent.utils.rawData.Country;
 import javafx.util.converter.LocalDateStringConverter;
 import org.postgresql.shaded.com.ongres.scram.common.bouncycastle.base64.Base64Encoder;
@@ -39,7 +40,6 @@ public class mainTest {
 
         ServicesLocator.getContractServices().updateContract(4,2,3,3,2,0,datei,datef,4);*/
 
-        ServicesLocator.getBrandServices().insertBrandWithModel("toyota","lujoso");
 
 
 
