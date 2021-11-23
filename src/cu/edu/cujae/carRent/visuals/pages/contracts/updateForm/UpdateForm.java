@@ -66,6 +66,8 @@ public class UpdateForm {
             carsTextList.add(StringFormatters.carToString(c));
             carsMap.put(StringFormatters.carToString(c), c.getCode());
         }
+        carsTextList.add(StringFormatters.carToString(this.selected.getCar()));
+        carsMap.put(StringFormatters.carToString(this.selected.getCar()), this.selected.getCar().getCode());
         this.car.setItems(FXCollections.observableList(carsTextList));
 
         ArrayList<DriverDto> drivers = ServicesLocator.getDriverServices().listDriver();
