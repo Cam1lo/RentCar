@@ -72,6 +72,7 @@ public class AddForm {
             driversTextList.add(StringFormatters.driverToString(d));
             driversMap.put(StringFormatters.driverToString(d), d.getCode());
         }
+        driversTextList.add("-");
         this.driver.setItems(FXCollections.observableList(driversTextList));
 
         ArrayList<PaymentsDto> payments = ServicesLocator.getPaymentsServices().listPaymaent();
@@ -99,7 +100,14 @@ public class AddForm {
         Integer cod_car = this.carsMap.get(this.car.getValue());
         Integer cod_bill = bill.getCode();
         Integer cod_payment = this.paymentMap.get(this.payment.getValue());
-        Integer cod_driver = this.driversMap.get(this.driver.getValue());
+
+        Integer cod_driver = 0;
+
+        if (!driver.getValue().equals("-")) {
+            cod_driver = this.driversMap.get(this.driver.getValue());
+        }
+
+
         LocalDate fromDate = this.fromDate.getValue();
         LocalDate toDate = this.toDate.getValue();
         Integer extension = this.extension.getValue();

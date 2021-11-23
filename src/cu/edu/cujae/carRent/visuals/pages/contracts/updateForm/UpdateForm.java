@@ -50,7 +50,7 @@ public class UpdateForm {
         this.parent = parent;
         this.selected = selected;
 
-        this.extension.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 1000, 0));
+        this.extension.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 0));
 
         ArrayList<TouristDto> tourists = ServicesLocator.getTouristServices().listTourist();
         ArrayList<String> touristsTextList = new ArrayList<>();
@@ -74,6 +74,7 @@ public class UpdateForm {
             driversTextList.add(StringFormatters.driverToString(d));
             driversMap.put(StringFormatters.driverToString(d), d.getCode());
         }
+        driversTextList.add("-");
         this.driver.setItems(FXCollections.observableList(driversTextList));
 
         ArrayList<PaymentsDto> payments = ServicesLocator.getPaymentsServices().listPaymaent();
@@ -108,17 +109,20 @@ public class UpdateForm {
     }
 
     public void update() throws SQLException, ClassNotFoundException {
-//        BillDto bill = ServicesLocator.
-//                getBillServices().
-//                insertBill(Float.valueOf(this.regularBill.getText()), Float.valueOf(this.specialBill.getText()));
-
-        BillDto bill = new BillDto(1, 1, 1);
+        BillDto bill = ServicesLocator.
+                getBillServices().
+                insertBill(Float.parseFloat(this.regularBill.getText()), Float.parseFloat(this.specialBill.getText()));
 
         Integer cod_tourist = this.touristsMap.get(this.tourist.getValue());
         Integer cod_car = this.carsMap.get(this.car.getValue());
         Integer cod_bill = bill.getCode();
         Integer cod_payment = this.paymentMap.get(this.payment.getValue());
-        Integer cod_driver = this.driversMap.get(this.driver.getValue());
+        Integer cod_driver = 0;
+
+        if (!driver.getValue().equals("-")) {
+            cod_driver = this.driversMap.get(this.driver.getValue());
+        }
+
         LocalDate fromDate = this.fromDate.getValue();
         LocalDate toDate = this.toDate.getValue();
         Integer extension = this.extension.getValue();
