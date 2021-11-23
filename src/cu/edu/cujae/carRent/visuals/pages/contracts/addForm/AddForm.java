@@ -58,7 +58,7 @@ public class AddForm {
         }
         this.tourist.setItems(FXCollections.observableList(touristsTextList));
 
-        ArrayList<CarDto> cars = ServicesLocator.getCarsServices().listCars();
+        ArrayList<CarDto> cars = ServicesLocator.getCarsServices().getAvailableCars();
         ArrayList<String> carsTextList = new ArrayList<>();
         for (CarDto c : cars) {
             carsTextList.add(StringFormatters.carToString(c));
@@ -103,6 +103,7 @@ public class AddForm {
         LocalDate fromDate = this.fromDate.getValue();
         LocalDate toDate = this.toDate.getValue();
         Integer extension = this.extension.getValue();
+
 //        String errors = Validations.newUserValidation(username, password, passConfirm);
 
         ServicesLocator.

@@ -60,7 +60,7 @@ public class UpdateForm {
         }
         this.tourist.setItems(FXCollections.observableList(touristsTextList));
 
-        ArrayList<CarDto> cars = ServicesLocator.getCarsServices().listCars();
+        ArrayList<CarDto> cars = ServicesLocator.getCarsServices().getAvailableCars();
         ArrayList<String> carsTextList = new ArrayList<>();
         for (CarDto c : cars) {
             carsTextList.add(StringFormatters.carToString(c));
@@ -88,7 +88,13 @@ public class UpdateForm {
         this.tourist.setValue(StringFormatters.touristToString(this.selected.getTourist()));
         this.car.setValue(StringFormatters.carToString(this.selected.getCar()));
         this.payment.setValue(this.selected.getPayment().getPayment());
-        this.driver.setValue(StringFormatters.driverToString(this.selected.getDriver()));
+
+        if (this.selected.getDriver() == null) {
+            this.driver.setValue("-");
+        } else {
+            this.driver.setValue(StringFormatters.driverToString(this.selected.getDriver()));
+        }
+
         this.fromDate.setValue(this.selected.getStartingDate());
         this.toDate.setValue(this.selected.getFinalDate());
         this.regularBill.setText(String.valueOf(this.selected.getBill().getAmount()));
@@ -101,7 +107,7 @@ public class UpdateForm {
         stage.close();
     }
 
-    public void addNew() throws SQLException, ClassNotFoundException {
+    public void update() throws SQLException, ClassNotFoundException {
 //        BillDto bill = ServicesLocator.
 //                getBillServices().
 //                insertBill(Float.valueOf(this.regularBill.getText()), Float.valueOf(this.specialBill.getText()));
