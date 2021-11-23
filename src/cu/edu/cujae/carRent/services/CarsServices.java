@@ -3,6 +3,7 @@ package cu.edu.cujae.carRent.services;
 import cu.edu.cujae.carRent.dtos.*;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class CarsServices {
@@ -89,6 +90,22 @@ public class CarsServices {
         return car;
     }
 
+    public ArrayList<CarDto> getAvailableCars() throws SQLException, ClassNotFoundException {
+        ArrayList<CarDto> cars = listCars();
+        ArrayList<CarDto> result = new ArrayList<>();
+        for(CarDto c : cars){
+            if(c.getStatus().getStatusText().equals("Disponible")){
+                result.add(c);
+            }else{
+                if(c.getStatus().getStatusText().equals("Rentado")){
+                    //implementar para el otro corte
+                    //pasar por parametro un LocalDate
+                }
+            }
+        }
+        return result;
+    }
+
     public boolean canDelete(CarDto car) throws SQLException, ClassNotFoundException {
         ArrayList<ContractDto> contacts = ServicesLocator.getContractServices().listContract();
         boolean found = true;
@@ -98,5 +115,11 @@ public class CarsServices {
             }
         }
         return found;
+    }
+
+    public void setCarStatusToRented(int code) throws SQLException {
+        CarDto car = getCarById(code);
+        CarStatusDto rentStatus = ServicesLocator.getStatusServices().getStatusByText("Rentado");
+        updateCar(car.getCode(),car.getCarID(),rentStatus.getCode(),car.getBrand().getCode(),car.getColor(),car.getMileage());
     }
 }

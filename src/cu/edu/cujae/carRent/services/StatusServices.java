@@ -5,6 +5,7 @@ import cu.edu.cujae.carRent.dtos.CarDto;
 import cu.edu.cujae.carRent.dtos.CarStatusDto;
 import cu.edu.cujae.carRent.dtos.ModelDto;
 
+import java.nio.charset.StandardCharsets;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,6 +29,19 @@ public class StatusServices {
         con.close();
         return status;
 
+    }
+
+    public CarStatusDto getStatusByText(String status) throws SQLException {
+        CarStatusDto result = null;
+        ArrayList<CarStatusDto> statuses = listStatus();
+        boolean found = false;
+        for(int i = 0;i<statuses.size() && !found; i++){
+            if(statuses.get(i).getStatusText().equalsIgnoreCase(status)){
+                result = statuses.get(i);
+                found = true;
+            }
+        }
+        return result;
     }
 
     public void insertStatus(String status) throws SQLException {
