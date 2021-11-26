@@ -17,12 +17,20 @@ public class ServicesLocator {
     private static BillServices billServices = null;
     private static DriverCategoryServices driverCategoryServices = null;
     private static PaymentsServices paymentsServices = null;
+    private static RoleServices roleServices = null;
 
     public static UserServices getUserServices(){
         if(userServices == null){
             userServices = new UserServices();
         }
         return userServices;
+    }
+
+    public static RoleServices getRoleServices(){
+        if(roleServices == null){
+            roleServices = new RoleServices();
+        }
+        return roleServices;
     }
 
     public static TouristServices getTouristServices(){

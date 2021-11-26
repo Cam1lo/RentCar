@@ -44,7 +44,7 @@ public class MainLayout {
     private AnchorPane ap_content;
 
     public void onInit(UserDto user) {
-        if (!user.isAdmin()) {
+        if (user.getRole().getRoleText().equals("User")) {
             this.nav_item_users.setVisible(false);
         }
     }
