@@ -29,7 +29,7 @@
               <columns>
                 <TableColumn fx:id="nameColumn" prefWidth="217.0" text="Name" />
                 <TableColumn fx:id="passColumn" minWidth="0.0" prefWidth="322.0" text="Password" />
-                  <TableColumn fx:id="isAdminColumn" prefWidth="182.0" text="Admin?" />
+                  <TableColumn fx:id="roleColumn" prefWidth="182.0" text="Role" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

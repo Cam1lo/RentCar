@@ -5,7 +5,7 @@ import cu.edu.cujae.carRent.services.ServicesLocator;
 import cu.edu.cujae.carRent.visuals.pages.users.addForm.AddForm;
 import cu.edu.cujae.carRent.visuals.pages.users.deleteConfirm.DeleteConfirm;
 import cu.edu.cujae.carRent.visuals.pages.users.updateForm.UpdateForm;
-import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,7 +39,7 @@ public class Users {
     @FXML
     private TableColumn<UserDto, String> passColumn;
     @FXML
-    private TableColumn<UserDto, Boolean> isAdminColumn;
+    private TableColumn<UserDto, String> roleColumn;
 
     private UserDto selected;
 
@@ -50,14 +50,13 @@ public class Users {
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         passColumn.setCellValueFactory(new PropertyValueFactory<>("password"));
-        isAdminColumn.setCellValueFactory(new PropertyValueFactory<>("isAdmin"));
-        isAdminColumn.setCellValueFactory(data -> new SimpleBooleanProperty(data.getValue().isAdmin()));
+        roleColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getRole().getRoleText()));
         table.setItems(FXCollections.observableList(items));
 
         table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             if (newSelection != null) {
                 update_button.setDisable(false);
-                delete_button.setDisable(newSelection.isAdmin());
+                delete_button.setDisable(newSelection.getRole().getRoleText().equals("Administrator"));
 
                 this.selected = newSelection;
             } else {
@@ -72,7 +71,7 @@ public class Users {
         table.getSelectionModel().clearSelection();
     }
 
-    public void openUpdateForm() throws IOException {
+    public void openUpdateForm() throws IOException, SQLException {
         Stage stage = new Stage();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("./updateForm/UpdateForm.fxml"));
@@ -90,7 +89,7 @@ public class Users {
         stage.showAndWait();
     }
 
-    public void openAddForm() throws IOException {
+    public void openAddForm() throws IOException, SQLException {
         Stage stage = new Stage();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("./addForm/AddForm.fxml"));

@@ -1,19 +1,24 @@
 package cu.edu.cujae.carRent.visuals.pages.users.addForm;
 
+import cu.edu.cujae.carRent.dtos.RoleDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
 import cu.edu.cujae.carRent.utils.Error;
 import cu.edu.cujae.carRent.utils.Validations;
 import cu.edu.cujae.carRent.visuals.pages.users.Users;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AddForm {
     @FXML
@@ -26,11 +31,22 @@ public class AddForm {
     private PasswordField pass_confirmation;
     @FXML
     private Label error_label;
+    @FXML
+    private ComboBox<String> role;
 
+    private Map<String, Integer> rolesMap = new HashMap<>();
     private Users parent;
 
-    public void onInit(Users parent) {
+    public void onInit(Users parent) throws SQLException {
         this.parent = parent;
+
+        ArrayList<RoleDto> roles = ServicesLocator.getRoleServices().listRoles();
+        ArrayList<String> rolesTextList = new ArrayList<>();
+        for (RoleDto role : roles) {
+            rolesTextList.add(role.getRoleText());
+            rolesMap.put(role.getRoleText(), role.getCode());
+        }
+        this.role.setItems(FXCollections.observableList(rolesTextList));
     }
 
     public void cancel() {
@@ -47,7 +63,7 @@ public class AddForm {
         Error error = Validations.newUserValidation(username, password, passConfirm);
 
         if (error.getErrorMsg() == null) {
-            ServicesLocator.getUserServices().insertUser(username, password, false);
+            ServicesLocator.getUserServices().insertUser(username, password, ServicesLocator.getRoleServices().getRoleByText(this.role.getValue()));
         } else {
             this.error_label.setText(error.getErrorMsg());
         }

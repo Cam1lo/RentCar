@@ -34,7 +34,7 @@ public class UserServices {
                 }
             }
         }
-        LoginResponse response = new LoginResponse(user,error);
+        LoginResponse response = new LoginResponse(user, error);
         call.close();
         con.close();
         return response;
@@ -57,8 +57,8 @@ public class UserServices {
         result.next();
         String function2 = "{call insert_role_user(?,?)}";
         CallableStatement call1 = connection.prepareCall(function2);
-        call1.setInt(1,result.getInt(1));
-        call1.setInt(2,role.getCode());
+        call1.setInt(1, result.getInt(1));
+        call1.setInt(2, role.getCode());
         call1.execute();
         call.close();
         call1.close();
@@ -80,7 +80,7 @@ public class UserServices {
         connection.close();
     }
 
-    public void updateUser(int code, String name,String pass, RoleDto role) throws SQLException, NoSuchAlgorithmException {
+    public void updateUser(int code, String name, String pass, RoleDto role) throws SQLException, NoSuchAlgorithmException {
         java.sql.Connection connection = ServicesLocator.getConnection();
         String function = "{call update_user( ?,?,? )}";
         CallableStatement call = connection.prepareCall(function);
@@ -91,14 +91,14 @@ public class UserServices {
         call.close();
         String function1 = "{call update_role_user( ?,? )}";
         CallableStatement call1 = connection.prepareCall(function1);
-        call1.setInt(1,code);
-        call1.setInt(2,role.getCode());
+        call1.setInt(1, code);
+        call1.setInt(2, role.getCode());
         call1.execute();
         call1.close();
         connection.close();
     }
 
-    public ArrayList<UserDto> listUsers()throws SQLException, ClassNotFoundException{
+    public ArrayList<UserDto> listUsers() throws SQLException, ClassNotFoundException {
         ArrayList<UserDto> user = new ArrayList<UserDto>();
         java.sql.Connection connection = ServicesLocator.getConnection();
         connection.setAutoCommit(false);
@@ -107,12 +107,12 @@ public class UserServices {
         call.registerOutParameter(1, Types.OTHER);
         call.execute();
         ResultSet result = (ResultSet) call.getObject(1);
-        while(result.next()){
+        while (result.next()) {
             int code = result.getInt(1);
             String name = result.getString(2);
             String pass = result.getString(3);
             RoleDto role = ServicesLocator.getRoleServices().getRoleByText(result.getString(4));
-            user.add(new UserDto(code,name,pass,role));
+            user.add(new UserDto(code, name, pass, role));
         }
         call.close();
         connection.close();
@@ -130,7 +130,7 @@ public class UserServices {
         ResultSet result = (ResultSet) call.getObject(1);
         result.next();
         RoleDto role = ServicesLocator.getRoleServices().getRoleByText(result.getString(4));
-        UserDto user = new UserDto(result.getInt(1), result.getString(2),result.getString(3),role);
+        UserDto user = new UserDto(result.getInt(1), result.getString(2), result.getString(3), role);
         call.close();
         con.close();
         return user;
