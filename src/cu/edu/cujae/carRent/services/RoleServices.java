@@ -22,6 +22,7 @@ public class RoleServices {
         while(result.next()){
             int code = result.getInt(1);
             String role = result.getString(2);
+            roles.add(new RoleDto(code,role));
         }
         call.close();
         connection.close();
