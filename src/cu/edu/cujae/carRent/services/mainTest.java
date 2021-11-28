@@ -40,6 +40,8 @@ public class mainTest {
 
         ServicesLocator.getContractServices().updateContract(4,2,3,3,2,0,datei,datef,4);*/
 
+        ServicesLocator.getRoleServices().listRoles();
+
 
 
 

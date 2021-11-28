@@ -53,6 +53,7 @@ public class UserServices {
         CallableStatement call = connection.prepareCall(function1);
         call.registerOutParameter(1, Types.OTHER);
         call.execute();
+        connection.setAutoCommit(true);
         ResultSet result = (ResultSet) call.getObject(1);
         result.next();
         String function2 = "{call insert_role_user(?,?)}";
@@ -67,16 +68,16 @@ public class UserServices {
 
     public void deleteUser(int code) throws SQLException {
         java.sql.Connection connection = ServicesLocator.getConnection();
-        String function = "{call delete_user( ? )}";
-        CallableStatement insert = connection.prepareCall(function);
-        insert.setInt(1, code);
-        insert.execute();
-        insert.close();
         String function1 = "{call delete_role_user( ? )}";
         CallableStatement call = connection.prepareCall(function1);
         call.setInt(1, code);
         call.execute();
         call.close();
+        String function = "{call delete_user( ? )}";
+        CallableStatement insert = connection.prepareCall(function);
+        insert.setInt(1, code);
+        insert.execute();
+        insert.close();
         connection.close();
     }
 
