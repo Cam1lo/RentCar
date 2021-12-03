@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class ContractForCountryReport {
 
     private String country;
-    private String carBran;
+    private String carBrand;
     private String carModel;
     private int totalExtensionDays;
     private float incomeForCash;
@@ -16,7 +16,7 @@ public class ContractForCountryReport {
 
     public ContractForCountryReport(String country, String carBran, String carModel, int totalExtensionDays, float incomeForCash, float totalIncome) {
         this.country = country;
-        this.carBran = carBran;
+        this.carBrand = carBran;
         this.carModel = carModel;
         this.totalExtensionDays = totalExtensionDays;
         this.incomeForCash = incomeForCash;
@@ -31,12 +31,12 @@ public class ContractForCountryReport {
         this.country = country;
     }
 
-    public String getCarBran() {
-        return carBran;
+    public String getCarBrand() {
+        return carBrand;
     }
 
-    public void setCarBran(String carBran) {
-        this.carBran = carBran;
+    public void setCarBrand(String carBrand) {
+        this.carBrand = carBrand;
     }
 
     public String getCarModel() {

@@ -322,13 +322,16 @@ public class ContractServices {
     public ArrayList<IncomeAnnualReport> incomeAnnualReport() throws SQLException, ClassNotFoundException {
         ArrayList<IncomeAnnualReport> report = IncomeAnnualReport.generatedIncomeAnnualReport();
         ArrayList<ContractDto> contracts = listContract();
+        float totalAmount = 0;
         for (ContractDto c : contracts) {
             if (c.getStartingDate().getYear() == LocalDate.now().getYear()) {
                 int month = c.getStartingDate().getMonthValue();
+                totalAmount += c.getTotalAmount();
                 float amount = c.getTotalAmount() + report.get(month-1).getIncomeMonthly();
                 report.get(month-1).setIncomeMonthly(amount);
             }
         }
+        report.get(12).setIncomeMonthly(totalAmount);
         return report;
     }
 

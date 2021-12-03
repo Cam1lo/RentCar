@@ -29,12 +29,12 @@ public class mainTest {
         LocalDate datef = LocalDate.parse("2021-04-30");*/
 
 
-       /* ArrayList<IncomeAnnualReport> report = IncomeAnnualReport.getIncomeAnnualReport();
+       ArrayList<IncomeAnnualReport> report = IncomeAnnualReport.getIncomeAnnualReport();
 
         for(IncomeAnnualReport t : report){
             System.out.println( t.getMoth()+" | "+t.getIncomeMonthly()+" | ");
         }
-*/
+
 
 
 

@@ -33,7 +33,7 @@ public class IncomeAnnualReport {
 
     public static ArrayList<IncomeAnnualReport> generatedIncomeAnnualReport(){
         ArrayList<IncomeAnnualReport> report = new ArrayList<>();
-        String[] moths = {"JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"};
+        String[] moths = {"JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER","TOTAL"};
         float amount = 0;
         for(String m : moths){
             report.add(new IncomeAnnualReport(m,amount));
