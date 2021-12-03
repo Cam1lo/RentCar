@@ -2,6 +2,8 @@ package cu.edu.cujae.carRent.visuals.pages.tourists.updateForm;
 
 import cu.edu.cujae.carRent.dtos.TouristDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
+import cu.edu.cujae.carRent.utils.Error;
+import cu.edu.cujae.carRent.utils.Validations;
 import cu.edu.cujae.carRent.utils.rawData.Country;
 import cu.edu.cujae.carRent.visuals.pages.tourists.Tourists;
 import javafx.collections.FXCollections;
@@ -9,14 +11,18 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class UpdateForm {
     @FXML
     private AnchorPane ap;
+    @FXML
+    private Label error_label;
     @FXML
     private TextField name;
     @FXML
@@ -69,12 +75,16 @@ public class UpdateForm {
         int age = this.age.getValue();
         String country = this.country.getValue();
 
-//        String errors = Validations.newUserValidation(username, password, passConfirm);
+        Error error = Validations.noEmptyStringValidation(
+                new ArrayList<>(Arrays.asList(name, lastName, passport, phone, sex, country)
+                ));
 
-        ServicesLocator.getTouristServices().updateTourist(selected.getCode(), name, lastName, passport, country, sex, age, phone);
-
-
-        this.parent.refreshTable();
-        cancel();
+        if (error.getErrorMsg() == null) {
+            ServicesLocator.getTouristServices().updateTourist(selected.getCode(), name, lastName, passport, country, sex, age, phone);
+            this.parent.refreshTable();
+            cancel();
+        } else {
+            this.error_label.setText(error.getErrorMsg());
+        }
     }
 }

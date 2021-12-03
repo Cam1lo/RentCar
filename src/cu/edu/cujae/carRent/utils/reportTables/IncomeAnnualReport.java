@@ -7,20 +7,20 @@ import java.util.ArrayList;
 
 public class IncomeAnnualReport {
 
-    private String moth;
+    private String month;
     private float incomeMonthly;
 
     public IncomeAnnualReport(String moth, float incomeMonthly) {
-        this.moth = moth;
+        this.month = moth;
         this.incomeMonthly = incomeMonthly;
     }
 
-    public String getMoth() {
-        return moth;
+    public String getMonth() {
+        return month;
     }
 
-    public void setMoth(String moth) {
-        this.moth = moth;
+    public void setMonth(String month) {
+        this.month = month;
     }
 
     public float getIncomeMonthly() {

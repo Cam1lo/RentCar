@@ -3,6 +3,8 @@ package cu.edu.cujae.carRent.visuals.pages.contracts.payments.addForm;
 import cu.edu.cujae.carRent.dtos.BrandDto;
 import cu.edu.cujae.carRent.dtos.PaymentsDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
+import cu.edu.cujae.carRent.utils.Error;
+import cu.edu.cujae.carRent.utils.Validations;
 import cu.edu.cujae.carRent.visuals.pages.contracts.payments.Payments;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
@@ -15,6 +17,7 @@ import javafx.stage.Stage;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,9 +44,17 @@ public class AddForm {
 
         String paymentText = this.payment.getText();
 
-        ServicesLocator.getPaymentsServices().insertPayment(paymentText);
 
-        this.parent.refreshTable();
-        cancel();
+        Error error = Validations.noEmptyStringValidation(
+                new ArrayList<>(Arrays.asList(paymentText)
+                ));
+
+        if (error.getErrorMsg() == null) {
+            ServicesLocator.getPaymentsServices().insertPayment(paymentText);
+            this.parent.refreshTable();
+            cancel();
+        } else {
+            this.error_label.setText(error.getErrorMsg());
+        }
     }
 }

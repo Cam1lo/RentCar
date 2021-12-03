@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class AddForm {
     @FXML
@@ -40,7 +42,16 @@ public class AddForm {
 
         ServicesLocator.getDriverCategoryServices().insertDriverCategory(categoryText);
 
-        this.parent.refreshTable();
-        cancel();
+        Error error = Validations.noEmptyStringValidation(
+                new ArrayList<>(Arrays.asList(categoryText)
+                ));
+
+        if (error.getErrorMsg() == null) {
+            ServicesLocator.getDriverCategoryServices().insertDriverCategory(categoryText);
+            this.parent.refreshTable();
+            cancel();
+        } else {
+            this.error_label.setText(error.getErrorMsg());
+        }
     }
 }

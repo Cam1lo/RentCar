@@ -3,6 +3,8 @@ package cu.edu.cujae.carRent.visuals.pages.cars.statuses.updateForm;
 import cu.edu.cujae.carRent.dtos.BrandDto;
 import cu.edu.cujae.carRent.dtos.CarStatusDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
+import cu.edu.cujae.carRent.utils.Error;
+import cu.edu.cujae.carRent.utils.Validations;
 import cu.edu.cujae.carRent.visuals.pages.cars.statuses.Statuses;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -12,6 +14,8 @@ import javafx.stage.Stage;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class UpdateForm {
     @FXML
@@ -41,9 +45,16 @@ public class UpdateForm {
 
         String statusText = this.status.getText();
 
-        ServicesLocator.getStatusServices().updateStatus(this.selected.getCode(), statusText);
+        Error error = Validations.noEmptyStringValidation(
+                new ArrayList<>(Arrays.asList(statusText)
+                ));
 
-        this.parent.refreshTable();
-        cancel();
+        if (error.getErrorMsg() == null) {
+            ServicesLocator.getStatusServices().updateStatus(this.selected.getCode(), statusText);
+            this.parent.refreshTable();
+            cancel();
+        } else {
+            this.error_label.setText(error.getErrorMsg());
+        }
     }
 }

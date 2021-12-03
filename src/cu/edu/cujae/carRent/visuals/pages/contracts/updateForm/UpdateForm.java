@@ -2,6 +2,7 @@ package cu.edu.cujae.carRent.visuals.pages.contracts.updateForm;
 
 import cu.edu.cujae.carRent.dtos.*;
 import cu.edu.cujae.carRent.services.ServicesLocator;
+import cu.edu.cujae.carRent.utils.Error;
 import cu.edu.cujae.carRent.utils.StringFormatters;
 import cu.edu.cujae.carRent.visuals.pages.contracts.Contracts;
 import javafx.collections.FXCollections;
@@ -17,6 +18,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UpdateForm {
+    @FXML
+    private Label error_label;
     @FXML
     private AnchorPane ap;
     @FXML
@@ -128,24 +131,31 @@ public class UpdateForm {
         LocalDate fromDate = this.fromDate.getValue();
         LocalDate toDate = this.toDate.getValue();
         Integer extension = this.extension.getValue();
-//        String errors = Validations.newUserValidation(username, password, passConfirm);
 
-        ServicesLocator.
-                getContractServices().
-                updateContract(
-                        this.selected.getCode(),
-                        cod_tourist,
-                        cod_car,
-                        cod_bill,
-                        cod_payment,
-                        cod_driver,
-                        fromDate,
-                        toDate,
-                        extension
-                );
+        Error error = new Error();
+//        = Validations.noEmptyStringValidation(
+//                new ArrayList<>(Arrays.asList(name, lastName, id, address)
+//                ));
 
+        if (error.getErrorMsg() == null) {
+            ServicesLocator.
+                    getContractServices().
+                    updateContract(
+                            this.selected.getCode(),
+                            cod_tourist,
+                            cod_car,
+                            cod_bill,
+                            cod_payment,
+                            cod_driver,
+                            fromDate,
+                            toDate,
+                            extension
+                    );
 
-        this.parent.refreshTable();
-        cancel();
+            this.parent.refreshTable();
+            cancel();
+        } else {
+            this.error_label.setText(error.getErrorMsg());
+        }
     }
 }

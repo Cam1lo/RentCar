@@ -19,7 +19,7 @@
       <Button layoutX="337.0" layoutY="281.0" mnemonicParsing="false" onAction="#addNew" styleClass="log-out-button" text="Add Tourist" />
       <TextField fx:id="name" layoutX="111.0" layoutY="60.0" />
       <Label layoutX="66.0" layoutY="66.0" text="Name:" />
-      <Label fx:id="error_label" alignment="CENTER" contentDisplay="CENTER" layoutX="209.0" layoutY="217.0" prefHeight="43.0" prefWidth="197.0" styleClass="errors" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="error_label" alignment="CENTER" contentDisplay="CENTER" layoutX="333.0" layoutY="217.0" prefHeight="43.0" prefWidth="197.0" styleClass="errors" textAlignment="CENTER" textFill="#e0301e" wrapText="true">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

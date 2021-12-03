@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -68,15 +69,19 @@ public class UpdateForm {
         String password = this.pass.getText();
         String passConfirm = this.pass_confirmation.getText();
 
-        Error error = Validations.newUserValidation(username, password, passConfirm);
+        Error error = Validations.noEmptyStringValidation(new ArrayList<>(Arrays.asList(username, passConfirm, password)));
+
+        if (!password.equals(passConfirm) && error.getErrorMsg() == null) {
+            error.setErrorMsg("Password and password confirm fields must be equals.");
+        }
 
         if (error.getErrorMsg() == null) {
             ServicesLocator.getUserServices().updateUser(this.user.getCode(), username, password, ServicesLocator.getRoleServices().getRoleByText(this.role.getValue()));
+            this.parent.refreshTable();
+            cancel();
         } else {
             this.error_label.setText(error.getErrorMsg());
         }
 
-        parent.refreshTable();
-        cancel();
     }
 }

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="ap_users" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="520.0" prefWidth="750.0" stylesheets="@../../pages/pages.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cu.edu.cujae.carRent.visuals.reports.car.CarReportVisual">
+   <children>
+      <AnchorPane fx:id="ap_content" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="530.0" prefWidth="750.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="Car Report" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <TableView fx:id="table" layoutX="14.0" layoutY="61.0" prefHeight="438.0" prefWidth="722.0" styleClass="table" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="61.0">
+              <columns>
+                <TableColumn fx:id="idColumn" prefWidth="217.0" text="Id" />
+                <TableColumn fx:id="brandColumn" minWidth="0.0" prefWidth="322.0" text="Brand" />
+                  <TableColumn fx:id="modelColumn" prefWidth="182.0" text="Model" />
+                  <TableColumn fx:id="colorColumn" prefWidth="182.0" text="Color" />
+                  <TableColumn fx:id="mileageColumn" prefWidth="182.0" text="Mileage" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+            <Label fx:id="current_date" layoutX="661.0" layoutY="23.0" AnchorPane.rightAnchor="89.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
