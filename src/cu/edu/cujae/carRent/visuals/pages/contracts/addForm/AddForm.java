@@ -88,6 +88,11 @@ public class AddForm {
         }
         this.payment.setItems(FXCollections.observableList(paymentsTextList));
 
+        this.tourist.getSelectionModel().selectFirst();
+        this.car.getSelectionModel().selectFirst();
+        this.driver.getSelectionModel().selectFirst();
+        this.payment.getSelectionModel().selectFirst();
+
     }
 
     public void cancel() {
@@ -96,14 +101,8 @@ public class AddForm {
     }
 
     public void addNew() throws SQLException, ClassNotFoundException {
-        BillDto bill = ServicesLocator.
-                getBillServices().
-                insertBill(Float.parseFloat(this.regularBill.getText()), Float.parseFloat(this.specialBill.getText()));
-
-
         Integer cod_tourist = this.touristsMap.get(this.tourist.getValue());
         Integer cod_car = this.carsMap.get(this.car.getValue());
-        Integer cod_bill = bill.getCode();
         Integer cod_payment = this.paymentMap.get(this.payment.getValue());
 
         Integer cod_driver = 0;
@@ -117,13 +116,21 @@ public class AddForm {
         LocalDate toDate = this.toDate.getValue();
         Integer extension = this.extension.getValue();
 
+        Error error = Validations.noEmptyStringValidation(
+                new ArrayList<>(Arrays.asList(this.specialBill.getText(), this.regularBill.getText())
+                ));
 
-        Error error = new Error();
-//        = Validations.noEmptyStringValidation(
-//                new ArrayList<>(Arrays.asList(name, lastName, id, address)
-//                ));
+        if (this.toDate == null || this.fromDate == null) {
+            error.setErrorMsg("All fields must be filled.");
+        }
 
         if (error.getErrorMsg() == null) {
+            BillDto bill = ServicesLocator.
+                    getBillServices().
+                    insertBill(Float.parseFloat(this.regularBill.getText()), Float.parseFloat(this.specialBill.getText()));
+
+            Integer cod_bill = bill.getCode();
+
             ServicesLocator.
                     getContractServices().
                     insertContract(

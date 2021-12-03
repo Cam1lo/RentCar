@@ -17,7 +17,7 @@
                   <Font name="System Bold" size="24.0" />
                </font>
             </Label>
-            <Pane layoutX="61.0" layoutY="68.0" prefHeight="427.0" prefWidth="629.0">
+            <Pane layoutX="61.0" layoutY="68.0" prefHeight="427.0" prefWidth="629.0" AnchorPane.leftAnchor="220.0" AnchorPane.rightAnchor="60.0">
                <children>
                   <AnchorPane id="car" prefHeight="203.0" prefWidth="176.0" styleClass="card">
                      <children>
