@@ -80,4 +80,20 @@ public class Validations {
         }
         return true;
     }
+
+    public static boolean validatePassportId(String text){
+        if(!Character.isUpperCase(text.charAt(0))){
+            return false;
+        }else{
+            if(text.length()!=7){
+                return false;
+            }
+            for(int i = 1; i<text.length(); i++){
+                if(!Character.isDigit(text.charAt(i))){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
