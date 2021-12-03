@@ -4,9 +4,13 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+
+import javax.swing.text.IconView;
+
 
 public class Main extends Application {
     public Main() {
@@ -17,10 +21,11 @@ public class Main extends Application {
 
         Scene login_scene = new Scene(root);
         login_scene.setFill(Color.TRANSPARENT);
-
         primaryStage.setScene(login_scene);
         primaryStage.setResizable(false);
         primaryStage.initStyle(StageStyle.TRANSPARENT);
+        primaryStage.setTitle("CarRent");
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("assets/icon.jpg")));
         primaryStage.show();
     }
 
