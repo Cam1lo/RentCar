@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -85,9 +86,10 @@ public class LoginController {
         Parent root = loader.load();
         MainLayout mainLayoutController = loader.getController();
         mainLayoutController.onInit(user);
-
         mainStage.setScene(new Scene(root));
         mainStage.show();
+        mainStage.setTitle("CarRent");
+        mainStage.getIcons().add(new Image(getClass().getResourceAsStream("../../assets/icon.jpg")));
         mainStage.setMaximized(true);
         mainStage.toFront();
     }

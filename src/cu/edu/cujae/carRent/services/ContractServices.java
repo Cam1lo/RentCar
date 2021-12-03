@@ -97,7 +97,9 @@ public class ContractServices {
         call.execute();
         call.close();
         connection.close();
-        ServicesLocator.getCarsServices().setCarStatusToRented(cod_car);
+        if(final_date.isAfter(LocalDate.now())) {
+            ServicesLocator.getCarsServices().setCarStatusToRented(cod_car);
+        }
     }
 
     public void updateContract(int code, int cod_tourist, int cod_car, int cod_bill, int cod_payment, int cod_driver, LocalDate starting_date, LocalDate final_date, int extension) throws SQLException, ClassNotFoundException {
