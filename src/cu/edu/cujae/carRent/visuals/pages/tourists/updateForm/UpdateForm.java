@@ -79,6 +79,13 @@ public class UpdateForm {
                 new ArrayList<>(Arrays.asList(name, lastName, passport, phone, sex, country)
                 ));
 
+        if (!Validations.validateLetters(name) || !Validations.validateLetters(lastName)) {
+            error.setErrorMsg("Name can only contain letters.");
+        }
+        if (!Validations.validatePassportId(passport)) {
+            error.setErrorMsg("Passport must be in this format 'X123456'.");
+        }
+
         if (error.getErrorMsg() == null) {
             ServicesLocator.getTouristServices().updateTourist(selected.getCode(), name, lastName, passport, country, sex, age, phone);
             this.parent.refreshTable();

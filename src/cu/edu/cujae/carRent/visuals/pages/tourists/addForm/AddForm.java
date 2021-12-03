@@ -49,6 +49,8 @@ public class AddForm {
             add("F");
         }}));
 
+        this.country.getSelectionModel().selectFirst();
+        this.sex.getSelectionModel().selectFirst();
     }
 
     public void cancel() {
@@ -67,11 +69,12 @@ public class AddForm {
         String country = this.country.getValue();
 
         Error error = Validations.noEmptyStringValidation(
-                new ArrayList<>(Arrays.asList(name, lastName, passport, phone, sex, country)
+                new ArrayList<>(Arrays.asList(name, lastName, passport, phone)
                 ));
 
         if (error.getErrorMsg() == null) {
             ServicesLocator.getTouristServices().insertTourist(name, lastName, passport, country, sex, age, phone);
+            error_label.setText(error.getErrorMsg());
             this.parent.refreshTable();
             cancel();
         } else {

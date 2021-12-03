@@ -67,9 +67,18 @@ public class AddForm {
         String address = this.address.getText();
         int category = this.categoriesMap.get(this.category.getValue());
 
+
         Error error = Validations.noEmptyStringValidation(
                 new ArrayList<>(Arrays.asList(name, lastName, id, address)
                 ));
+
+        if (!Validations.validateLetters(name) || !Validations.validateLetters(lastName)) {
+            error.setErrorMsg("Name can only contain letters.");
+        }
+
+        if (!Validations.IdCorrect(id)) {
+            error.setErrorMsg("Id can only contain eleven digits.");
+        }
 
         if (error.getErrorMsg() == null) {
             ServicesLocator.getDriverServices().insertDriver(id, name, lastName, address, category);
