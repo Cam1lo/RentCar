@@ -4,6 +4,8 @@ import org.w3c.dom.Text;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Validations {
     public static Error loginValidation(String username, String password) {
@@ -55,5 +57,27 @@ public class Validations {
         }
 
         return error;
+    }
+
+    public static boolean validateLetters(String txt) {
+
+        String regx = "^[a-zA-Z\\s]+$";
+        Pattern pattern = Pattern.compile(regx,Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(txt);
+        return matcher.find();
+
+    }
+
+    public static boolean IdCorrect(String  text){
+        if(text.length()==11){
+            for(int i = 0; i< text.length(); i++){
+                if(!Character.isDigit(text.charAt(i))){
+                    return false;
+                }
+            }
+        }else{
+            return false;
+        }
+        return true;
     }
 }
