@@ -5,6 +5,8 @@ import cu.edu.cujae.carRent.dtos.CarStatusDto;
 import cu.edu.cujae.carRent.dtos.DriversCategoriesDto;
 import cu.edu.cujae.carRent.dtos.ModelDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
+import cu.edu.cujae.carRent.utils.Error;
+import cu.edu.cujae.carRent.utils.Validations;
 import cu.edu.cujae.carRent.visuals.pages.cars.Cars;
 import cu.edu.cujae.carRent.visuals.pages.drivers.Drivers;
 import javafx.collections.FXCollections;
@@ -15,10 +17,13 @@ import javafx.stage.Stage;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class AddForm {
+    @FXML
+    private Label error_label;
     @FXML
     private AnchorPane ap;
     @FXML
@@ -64,6 +69,11 @@ public class AddForm {
         }
         this.brand.setItems(FXCollections.observableList(brandsTextList));
 
+
+        this.brand.getSelectionModel().selectFirst();
+        this.updateModels();
+        this.model.getSelectionModel().selectFirst();
+        this.status.getSelectionModel().selectFirst();
     }
 
     public void cancel() {
@@ -81,13 +91,18 @@ public class AddForm {
         int status = this.statusesMap.get(this.status.getValue());
 
         BrandDto brand = ServicesLocator.getBrandServices().getBrandByText(this.brand.getValue(), this.model.getValue());
-//        String errors = Validations.newUserValidation(username, password, passConfirm);
 
-        ServicesLocator.getCarsServices().insertCar(id, status, brand.getCode(), color, mileage);
+        Error error = Validations.noEmptyStringValidation(
+                new ArrayList<>(Arrays.asList(id, color)
+                ));
 
-
-        this.parent.refreshTable();
-        cancel();
+        if (error.getErrorMsg() == null) {
+            ServicesLocator.getCarsServices().insertCar(id, status, brand.getCode(), color, mileage);
+            this.parent.refreshTable();
+            cancel();
+        } else {
+            this.error_label.setText(error.getErrorMsg());
+        }
     }
 
     public void updateModels() throws SQLException {

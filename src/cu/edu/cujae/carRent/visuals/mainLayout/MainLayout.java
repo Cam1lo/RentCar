@@ -43,10 +43,18 @@ public class MainLayout {
     @FXML
     private AnchorPane ap_content;
 
-    public void onInit(UserDto user) {
-        if (user.getRole().getRoleText().equals("User")) {
+    public void onInit(UserDto user) throws IOException, NoSuchFieldException, IllegalAccessException {
+        if (user == null) {
+            this.nav_item_contracts.setVisible(false);
+            this.nav_item_cars.setVisible(false);
+            this.nav_item_tourist.setVisible(false);
+            this.nav_item_drivers.setVisible(false);
+            this.nav_item_users.setVisible(false);
+        } else if (user.getRole().getRoleText().equals("User")) {
             this.nav_item_users.setVisible(false);
         }
+
+        this.load_home();
     }
 
     public void confirmLogOut() throws IOException {
@@ -133,12 +141,19 @@ public class MainLayout {
         contracts_controller.onInit(contracts, this.ap_content);
     }
 
+    public void load_home() throws IOException, NoSuchFieldException, IllegalAccessException {
+        setFocus(null);
+        ScenesManager.changeApContentTo(this.ap_content, "home");
+    }
+
     public void setFocus(Label selectedLabel) {
         nav_item_contracts.getStyleClass().remove("active-nav-item");
         nav_item_cars.getStyleClass().remove("active-nav-item");
         nav_item_tourist.getStyleClass().remove("active-nav-item");
         nav_item_drivers.getStyleClass().remove("active-nav-item");
         nav_item_users.getStyleClass().remove("active-nav-item");
-        selectedLabel.getStyleClass().add("active-nav-item");
+        if (selectedLabel != null) {
+            selectedLabel.getStyleClass().add("active-nav-item");
+        }
     }
 }

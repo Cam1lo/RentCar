@@ -3,10 +3,13 @@ package cu.edu.cujae.carRent.visuals.pages.drivers.updateForm;
 import cu.edu.cujae.carRent.dtos.DriverDto;
 import cu.edu.cujae.carRent.dtos.DriversCategoriesDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
+import cu.edu.cujae.carRent.utils.Error;
+import cu.edu.cujae.carRent.utils.Validations;
 import cu.edu.cujae.carRent.visuals.pages.drivers.Drivers;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
@@ -14,12 +17,15 @@ import javafx.stage.Stage;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class UpdateForm {
     @FXML
     private AnchorPane ap;
+    @FXML
+    private Label error_label;
     @FXML
     private TextField id;
     @FXML
@@ -69,12 +75,16 @@ public class UpdateForm {
         String address = this.address.getText();
         int category = this.categoriesMap.get(this.category.getValue());
 
-//        String errors = Validations.newUserValidation(username, password, passConfirm);
+        Error error = Validations.noEmptyStringValidation(
+                new ArrayList<>(Arrays.asList(name, lastName, id, address)
+                ));
 
-        ServicesLocator.getDriverServices().updateDriver(this.selected.getCode(), id, name, lastName, address, category);
-
-
-        this.parent.refreshTable();
-        cancel();
+        if (error.getErrorMsg() == null) {
+            ServicesLocator.getDriverServices().updateDriver(this.selected.getCode(), id, name, lastName, address, category);
+            this.parent.refreshTable();
+            cancel();
+        } else {
+            this.error_label.setText(error.getErrorMsg());
+        }
     }
 }

@@ -2,6 +2,8 @@ package cu.edu.cujae.carRent.visuals.pages.contracts.payments.updateForm;
 
 import cu.edu.cujae.carRent.dtos.PaymentsDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
+import cu.edu.cujae.carRent.utils.Error;
+import cu.edu.cujae.carRent.utils.Validations;
 import cu.edu.cujae.carRent.visuals.pages.contracts.payments.Payments;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -11,6 +13,8 @@ import javafx.stage.Stage;
 
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class UpdateForm {
     @FXML
@@ -39,9 +43,16 @@ public class UpdateForm {
 
         String paymentText = this.payment.getText();
 
-        ServicesLocator.getPaymentsServices().updatePayment(this.selected.getCode(), paymentText);
+        Error error = Validations.noEmptyStringValidation(
+                new ArrayList<>(Arrays.asList(paymentText)
+                ));
 
-        this.parent.refreshTable();
-        cancel();
+        if (error.getErrorMsg() == null) {
+            ServicesLocator.getPaymentsServices().updatePayment(this.selected.getCode(), paymentText);
+            this.parent.refreshTable();
+            cancel();
+        } else {
+            this.error_label.setText(error.getErrorMsg());
+        }
     }
 }

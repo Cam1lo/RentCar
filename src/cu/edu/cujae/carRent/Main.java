@@ -17,7 +17,7 @@ public class Main extends Application {
 
         Scene login_scene = new Scene(root);
         login_scene.setFill(Color.TRANSPARENT);
-
+        primaryStage.setTitle("RentCar");
         primaryStage.setScene(login_scene);
         primaryStage.setResizable(false);
         primaryStage.initStyle(StageStyle.TRANSPARENT);

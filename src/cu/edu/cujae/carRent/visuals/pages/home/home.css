@@ -1,0 +1,35 @@
+.card {
+  -fx-background-radius: 18 18 18 18;
+  -fx-background-color: #fff;
+  -fx-border-radius: 18 18 18 18;
+}
+
+.scalable_label {
+  -fx-cursor: hand;
+}
+
+.scalable_label:hover {
+-fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+    -fx-scale-z: 1.1;
+}
+
+#tourist {
+   -fx-effect: dropshadow(three-pass-box, #663aa9, 10, 0, 0, 0);
+}
+
+#car {
+   -fx-effect: dropshadow(three-pass-box, #f8a03a, 10, 0, 0, 0);
+}
+
+#contract {
+   -fx-effect: dropshadow(three-pass-box, #1b84fc, 10, 0, 0, 0);
+}
+
+#driver {
+   -fx-effect: dropshadow(three-pass-box, #d2135a, 10, 0, 0, 0);
+}
+
+#income {
+   -fx-effect: dropshadow(three-pass-box, #159b82, 10, 0, 0, 0);
+}

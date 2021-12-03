@@ -1,5 +1,10 @@
 package cu.edu.cujae.carRent.utils;
 
+import org.w3c.dom.Text;
+
+import java.awt.*;
+import java.util.ArrayList;
+
 public class Validations {
     public static Error loginValidation(String username, String password) {
         Error error = new Error();
@@ -40,5 +45,15 @@ public class Validations {
         return error;
     }
 
+    public static Error noEmptyStringValidation(ArrayList<String> stringsVals) {
+        Error error = new Error();
 
+        for (String string : stringsVals) {
+            if (string == null || string.equals("")) {
+                error.setErrorMsg("All fields must be filled.");
+            }
+        }
+
+        return error;
+    }
 }

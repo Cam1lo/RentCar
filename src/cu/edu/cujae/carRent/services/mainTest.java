@@ -32,7 +32,7 @@ public class mainTest {
        ArrayList<IncomeAnnualReport> report = IncomeAnnualReport.getIncomeAnnualReport();
 
         for(IncomeAnnualReport t : report){
-            System.out.println( t.getMoth()+" | "+t.getIncomeMonthly()+" | ");
+            System.out.println( t.getMonth()+" | "+t.getIncomeMonthly()+" | ");
         }
 
 

@@ -5,22 +5,24 @@ import cu.edu.cujae.carRent.dtos.CarDto;
 import cu.edu.cujae.carRent.dtos.CarStatusDto;
 import cu.edu.cujae.carRent.dtos.ModelDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
+import cu.edu.cujae.carRent.utils.Error;
+import cu.edu.cujae.carRent.utils.Validations;
 import cu.edu.cujae.carRent.visuals.pages.cars.Cars;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class UpdateForm {
+    @FXML
+    private Label error_label;
     @FXML
     private AnchorPane ap;
     @FXML
@@ -73,6 +75,7 @@ public class UpdateForm {
         this.updateModels();
         this.model.setValue(selected.getBrand().getModel().getModelText());
         this.status.setValue(selected.getStatus().getStatusText());
+
     }
 
     public void cancel() {
@@ -90,13 +93,18 @@ public class UpdateForm {
         int status = this.statusesMap.get(this.status.getValue());
 
         BrandDto brand = ServicesLocator.getBrandServices().getBrandByText(this.brand.getValue(), this.model.getValue());
-//        String errors = Validations.newUserValidation(username, password, passConfirm);
 
-        ServicesLocator.getCarsServices().updateCar(this.selected.getCode(), id, status, brand.getCode(), color, mileage);
+        Error error = Validations.noEmptyStringValidation(
+                new ArrayList<>(Arrays.asList(id, color)
+                ));
 
-
-        this.parent.refreshTable();
-        cancel();
+        if (error.getErrorMsg() == null) {
+            ServicesLocator.getCarsServices().updateCar(this.selected.getCode(), id, status, brand.getCode(), color, mileage);
+            this.parent.refreshTable();
+            cancel();
+        } else {
+            this.error_label.setText(error.getErrorMsg());
+        }
     }
 
     public void updateModels() throws SQLException {

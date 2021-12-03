@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="ap_users" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="520.0" prefWidth="750.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cu.edu.cujae.carRent.visuals.pages.home.Home">
+   <children>
+      <AnchorPane fx:id="ap_content" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="520.0" prefWidth="750.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="HOME" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="14.0">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Pane layoutX="61.0" layoutY="68.0" prefHeight="427.0" prefWidth="629.0">
+               <children>
+                  <AnchorPane id="car" prefHeight="203.0" prefWidth="176.0" styleClass="card">
+                     <children>
+                        <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="64.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../assets/car.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="carR" layoutX="56.0" layoutY="122.0" onMouseClicked="#loadCar" styleClass="scalable_label" text="Car Report" />
+                        <Label fx:id="carStatusR" layoutX="33.0" layoutY="153.0" onMouseClicked="#loadCarStatus" styleClass="scalable_label" text="Car Status  Report" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane id="contract" layoutX="227.0" prefHeight="203.0" prefWidth="176.0" styleClass="card">
+                     <children>
+                        <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="64.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../assets/contract.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="contractR" layoutX="39.0" layoutY="102.0" onMouseClicked="#loadContract" styleClass="scalable_label" text="Contract Report" />
+                        <Label fx:id="contractCarAndModelsR" layoutX="8.0" layoutY="132.0" onMouseClicked="#loadContractForBrandAndModels" styleClass="scalable_label" text="C. R. by Brand and Models" />
+                        <Label fx:id="contractCountriesR" layoutX="33.0" layoutY="160.0" onMouseClicked="#loadContractCountries" styleClass="scalable_label" text="C. R. by Countries" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane id="driver" layoutX="450.0" prefHeight="203.0" prefWidth="176.0" styleClass="card">
+                     <children>
+                        <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="64.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../assets/driver.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="driversR" layoutX="44.0" layoutY="128.0" onMouseClicked="#loadDrivers" styleClass="scalable_label" text="Drivers Report" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane id="income" layoutX="110.0" layoutY="222.0" prefHeight="203.0" prefWidth="176.0" styleClass="card">
+                     <children>
+                        <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="64.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../assets/income.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="incomeAnualR" layoutX="19.0" layoutY="122.0" onMouseClicked="#loadIncomeAnnual" styleClass="scalable_label" text="Income Annual Report" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane id="tourist" layoutX="340.0" layoutY="222.0" prefHeight="203.0" prefWidth="176.0" styleClass="card">
+                     <children>
+                        <ImageView fitHeight="48.0" fitWidth="48.0" layoutX="64.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../assets/tourist.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="touristR" layoutX="44.0" layoutY="122.0" onMouseClicked="#loadTourist" styleClass="scalable_label" text="Tourist Report" />
+                        <Label fx:id="touristFailContractR" layoutX="19.0" layoutY="152.0" onMouseClicked="#loadTouristFailContract" styleClass="scalable_label" text="Tourist Fail Contract R." />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </children>
+   <stylesheets>
+      <URL value="@../pages.css" />
+      <URL value="@home.css" />
+   </stylesheets>
+</AnchorPane>

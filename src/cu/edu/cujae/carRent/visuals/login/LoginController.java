@@ -54,7 +54,7 @@ public class LoginController {
         yOffset = stage.getY() - event.getScreenY();
     }
 
-    public void login(ActionEvent e) throws IOException, SQLException, NoSuchAlgorithmException {
+    public void login(ActionEvent e) throws IOException, SQLException, NoSuchAlgorithmException, NoSuchFieldException, IllegalAccessException {
 
         String username = this.user_name.getText();
         String password = this.user_password.getText();
@@ -78,7 +78,7 @@ public class LoginController {
         }
     }
 
-    public void goToMainLayout(UserDto user) throws IOException {
+    public void goToMainLayout(UserDto user) throws IOException, NoSuchFieldException, IllegalAccessException {
         Stage mainStage = new Stage();
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("../mainLayout/MainLayout.fxml"));
@@ -91,6 +91,11 @@ public class LoginController {
         mainStage.setMaximized(true);
         mainStage.toFront();
     }
+
+    public void loginAsVisitant() throws IOException, NoSuchFieldException, IllegalAccessException {
+        goToMainLayout(null);
+    }
+
 
     public void closeApplication(MouseEvent e) {
         System.exit(0);

@@ -2,6 +2,8 @@ package cu.edu.cujae.carRent.visuals.pages.drivers.categories.updateForm;
 
 import cu.edu.cujae.carRent.dtos.DriversCategoriesDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
+import cu.edu.cujae.carRent.utils.Error;
+import cu.edu.cujae.carRent.utils.Validations;
 import cu.edu.cujae.carRent.visuals.pages.drivers.categories.Categories;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -10,6 +12,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class UpdateForm {
     @FXML
@@ -37,9 +41,16 @@ public class UpdateForm {
 
         String category = this.category.getText();
 
-        ServicesLocator.getDriverCategoryServices().updateDriverCategory(this.selected.getCode(), category);
+        Error error = Validations.noEmptyStringValidation(
+                new ArrayList<>(Arrays.asList(category)
+                ));
 
-        parent.refreshTable();
-        cancel();
+        if (error.getErrorMsg() == null) {
+            ServicesLocator.getDriverCategoryServices().updateDriverCategory(this.selected.getCode(), category);
+            this.parent.refreshTable();
+            cancel();
+        } else {
+            this.error_label.setText(error.getErrorMsg());
+        }
     }
 }

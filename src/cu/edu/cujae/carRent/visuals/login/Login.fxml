@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
@@ -10,9 +11,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="ap" onMouseDragged="#apMouseDragged" onMousePressed="#apMousePressed" prefHeight="360.0" prefWidth="350.0" styleClass="login_container" stylesheets="@login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cu.edu.cujae.carRent.visuals.login.LoginController">
+<AnchorPane fx:id="ap" onMouseDragged="#apMouseDragged" onMousePressed="#apMousePressed" prefHeight="405.0" prefWidth="350.0" styleClass="login_container" stylesheets="@login.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cu.edu.cujae.carRent.visuals.login.LoginController">
    <children>
-      <Button fx:id="login_button" alignment="BOTTOM_CENTER" layoutX="139.0" layoutY="312.0" mnemonicParsing="false" onAction="#login" styleClass="login_button" text="LOGIN" textAlignment="CENTER">
+      <Button fx:id="login_button" alignment="BOTTOM_CENTER" layoutX="139.0" layoutY="365.0" mnemonicParsing="false" onAction="#login" styleClass="login_button" text="LOGIN" textAlignment="CENTER">
          <opaqueInsets>
             <Insets top="100.0" />
          </opaqueInsets></Button>
@@ -20,7 +21,7 @@
       <Label layoutX="77.0" layoutY="171.0" text="user:" />
       <Label layoutX="77.0" layoutY="225.0" text="pass:" />
       <PasswordField fx:id="user_password" layoutX="114.0" layoutY="220.0" />
-      <Label fx:id="error_label" alignment="CENTER" contentDisplay="CENTER" layoutX="77.0" layoutY="258.0" prefHeight="43.0" prefWidth="197.0" styleClass="errors" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="error_label" alignment="CENTER" contentDisplay="CENTER" layoutX="77.0" layoutY="311.0" prefHeight="43.0" prefWidth="197.0" styleClass="errors" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -35,5 +36,10 @@
             <Image url="@../../assets/close.png" />
          </image>
       </ImageView>
+      <Label layoutX="126.0" layoutY="271.0" onMouseClicked="#loginAsVisitant" text="Login as visitant" underline="true">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Label>
    </children>
 </AnchorPane>

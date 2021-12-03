@@ -25,7 +25,7 @@
       </AnchorPane>
       <Pane prefHeight="540.0" prefWidth="209.0" styleClass="nav-bar" AnchorPane.bottomAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <ImageView fitHeight="97.0" fitWidth="147.0" layoutX="42.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="97.0" fitWidth="147.0" layoutX="42.0" onMouseClicked="#load_home" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../assets/logo.png" />
                </image>
