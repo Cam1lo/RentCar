@@ -3,6 +3,7 @@ package cu.edu.cujae.carRent.services;
 import cu.edu.cujae.carRent.dtos.ContractDto;
 import cu.edu.cujae.carRent.dtos.DriverDto;
 import cu.edu.cujae.carRent.dtos.DriversCategoriesDto;
+import cu.edu.cujae.carRent.utils.reportTables.DriverReport;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
@@ -112,5 +113,30 @@ public class DriverServices {
             }
         }
         return result;
+    }
+
+    public ArrayList<DriverReport> driverReport() throws SQLException {
+        ArrayList<DriverReport> report = new ArrayList<>();
+        java.sql.Connection connection = ServicesLocator.getConnection();
+        connection.setAutoCommit(false);
+        String function = "{?= call driver_report()}";
+        CallableStatement call = connection.prepareCall(function);
+        call.registerOutParameter(1, Types.OTHER);
+        call.execute();
+        ResultSet result = (ResultSet) call.getObject(1);
+        while (result.next()) {
+            report.add(new DriverReport(
+                            result.getString(1),
+                            result.getString(2),
+                            result.getString(3),
+                            result.getString(4),
+                            result.getString(5),
+                            result.getInt(6)
+                    )
+            );
+        }
+        call.close();
+        connection.close();
+        return report;
     }
 }

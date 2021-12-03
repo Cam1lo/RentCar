@@ -10,7 +10,7 @@ public class PaymentsDto {
         this.code=code;
     }
 
-    public String getPayment() { return payment; }
+    public String getPaymentText() { return payment; }
 
     public void setPayment(String payment) {
         this.payment = payment;

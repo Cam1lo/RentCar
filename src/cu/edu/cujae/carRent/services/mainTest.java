@@ -1,22 +1,12 @@
 package cu.edu.cujae.carRent.services;
 
-import cu.edu.cujae.carRent.dtos.BillDto;
-import cu.edu.cujae.carRent.utils.Encription;
-import cu.edu.cujae.carRent.utils.StringFormatters;
-import cu.edu.cujae.carRent.utils.rawData.Country;
-import javafx.util.converter.LocalDateStringConverter;
-import org.postgresql.shaded.com.ongres.scram.common.bouncycastle.base64.Base64Encoder;
+import cu.edu.cujae.carRent.utils.reportTables.*;
 
 import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
 import java.security.*;
 
 import java.sql.SQLException;
-import java.sql.SQLOutput;
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
-import java.util.Base64;
 
 public class mainTest {
 
@@ -36,11 +26,14 @@ public class mainTest {
 //      ServicesLocator.getDriverCategoryServices().listDriverCategories();
 
        /*LocalDate datei = LocalDate.parse("2021-04-23");
-        LocalDate datef = LocalDate.parse("2021-04-30");
+        LocalDate datef = LocalDate.parse("2021-04-30");*/
 
-        ServicesLocator.getContractServices().updateContract(4,2,3,3,2,0,datei,datef,4);*/
 
-        ServicesLocator.getRoleServices().listRoles();
+        ArrayList<TouristFailContractReport> report = TouristFailContractReport.getTouristFailContractReport();
+
+        for(TouristFailContractReport t : report){
+            System.out.println( t.getName()+" | "+t.getLastName()+" | "+t.getFinalDate()+" | "+t.getDeliveryDate()+" | ");
+        }
 
 
 

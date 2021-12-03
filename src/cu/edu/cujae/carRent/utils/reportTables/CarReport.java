@@ -1,4 +1,4 @@
-package cu.edu.cujae.carRent.utils.tables;
+package cu.edu.cujae.carRent.utils.reportTables;
 
 import cu.edu.cujae.carRent.dtos.CarDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
@@ -6,7 +6,7 @@ import cu.edu.cujae.carRent.services.ServicesLocator;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class CarTable {
+public class CarReport {
 
     private String car_Id;
     private String brand;
@@ -14,7 +14,7 @@ public class CarTable {
     private String color;
     private double mileage;
 
-    public CarTable(String car_Id, String brand, String model, String color, double mileage) {
+    public CarReport(String car_Id, String brand, String model, String color, double mileage) {
         this.car_Id = car_Id;
         this.brand = brand;
         this.model = model;
@@ -42,11 +42,11 @@ public class CarTable {
 
     public void setMileage(double km_driver) { this.mileage = km_driver; }
 
-    public static ArrayList<CarTable> getCarTable()throws SQLException, ClassNotFoundException {
-        ArrayList<CarTable> table = new ArrayList<>();
+    public static ArrayList<CarReport> getCarReport()throws SQLException, ClassNotFoundException {
+        ArrayList<CarReport> table = new ArrayList<>();
         ArrayList<CarDto> cars = ServicesLocator.getCarsServices().listCars();
         for(CarDto e : cars){
-            table.add(new CarTable(e.getCarID(),e.getBrand().getBrandText(),e.getBrand().getModel().getModelText(),e.getColor(),e.getMileage()));
+            table.add(new CarReport(e.getCarID(),e.getBrand().getBrandText(),e.getBrand().getModel().getModelText(),e.getColor(),e.getMileage()));
         }
         return table;
     }

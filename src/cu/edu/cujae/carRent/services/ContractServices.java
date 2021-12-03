@@ -1,13 +1,18 @@
 package cu.edu.cujae.carRent.services;
 
 import cu.edu.cujae.carRent.dtos.*;
+import cu.edu.cujae.carRent.utils.reportTables.ContractForBrandAndModelReport;
+import cu.edu.cujae.carRent.utils.reportTables.ContractReport;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ContractServices {
 
@@ -183,5 +188,91 @@ public class ContractServices {
         }
         return result;
     }
+
+    public ArrayList<ContractReport> contractReport() throws SQLException {
+        ArrayList<ContractReport> report = new ArrayList<>();
+        java.sql.Connection connection = ServicesLocator.getConnection();
+        connection.setAutoCommit(false);
+        String function = "{?= call contract_report()}";
+        CallableStatement call = connection.prepareCall(function);
+        call.registerOutParameter(1, Types.OTHER);
+        call.execute();
+        ResultSet result = (ResultSet) call.getObject(1);
+        while (result.next()) {
+            String haveDriver = "";
+            if(result.getInt(10)==0){
+                haveDriver = "No";
+            }else{
+                haveDriver = "Yes";
+            }
+            report.add(new ContractReport(
+                            result.getString(1),
+                            result.getString(2),
+                            result.getString(3),
+                            result.getString(4),
+                            result.getString(5),
+                            result.getString(6),
+                            result.getDate(7).toLocalDate(),
+                            result.getDate(8).toLocalDate(),
+                            result.getInt(9),
+                            haveDriver,
+                            result.getFloat(11)
+                    )
+            );
+        }
+        call.close();
+        connection.close();
+        return report;
+    }
+
+    public ArrayList<ContractDto> getAvailableContract() throws SQLException, ClassNotFoundException {
+        ArrayList<ContractDto> contracts = new ArrayList<>();
+        ArrayList<ContractDto> contractDtos = listContract();
+        for(ContractDto c : contractDtos){
+            if(c.getFinalDate().isAfter(LocalDate.now())){
+                contracts.add(c);
+            }
+        }
+        return contracts;
+    }
+
+    public ArrayList<ContractForBrandAndModelReport> contractForBrandAndModelReport() throws SQLException, ClassNotFoundException {
+        ArrayList<ContractForBrandAndModelReport> report = new ArrayList<>();
+        ArrayList<ContractDto> contracts = listContract();
+        List<Integer> carsId = new LinkedList<>();
+        for(ContractDto c : contracts){
+            int code = c.getCode();
+            String brand = c.getCar().getBrand().getBrandText();
+            String model = c.getCar().getBrand().getModel().getModelText();
+            int contractAmount = 0;
+            int amountRentedDays = 0;
+            float incomeCreditCard = 0;
+            float incomeCash = 0;
+            float incomeCheck = 0;
+            if(!carsId.contains(c.getCar().getCode())){
+                carsId.add(c.getCode());
+                for(ContractDto d : contracts){
+                    if(d.getCode()==code){
+                        contractAmount++;
+                        amountRentedDays += ChronoUnit.DAYS.between(d.getStartingDate(),d.getFinalDate());
+                        if(d.getPayment().getPaymentText().equals("credit card")){
+                            incomeCreditCard += d.getTotalAmount();
+                        }else{
+                            if(d.getPayment().getPaymentText().equals("cash")){
+                                incomeCash += d.getTotalAmount();
+                            }else{
+                                if(d.getPayment().getPaymentText().equals("check")){
+                                    incomeCheck += d.getTotalAmount();
+                                }
+                            }
+                        }
+                    }
+                }
+                report.add(new ContractForBrandAndModelReport(brand,model,contractAmount,amountRentedDays,incomeCreditCard,incomeCheck,incomeCash));
+            }
+        }
+        return report;
+    }
+
 
 }

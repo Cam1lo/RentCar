@@ -2,7 +2,7 @@ package cu.edu.cujae.carRent.services;
 
 import cu.edu.cujae.carRent.dtos.RoleDto;
 import cu.edu.cujae.carRent.dtos.UserDto;
-import cu.edu.cujae.carRent.utils.Encription;
+import cu.edu.cujae.carRent.utils.Encryption;
 import cu.edu.cujae.carRent.utils.bdResponses.LoginResponse;
 
 import java.security.NoSuchAlgorithmException;
@@ -26,9 +26,9 @@ public class UserServices {
         ResultSet result = (ResultSet) call.getObject(1);
         while (result.next()) {
             if (result.getString(2).equals(name)) {
-                if (result.getString(3).equals(Encription.encrypt(pass))) {
+                if (result.getString(3).equals(Encryption.encrypt(pass))) {
                     RoleDto role = ServicesLocator.getRoleServices().getRoleByText(result.getString(4));
-                    user = new UserDto(result.getInt(1), name, Encription.encrypt(pass), role);
+                    user = new UserDto(result.getInt(1), name, Encryption.encrypt(pass), role);
                 } else {
                     error = "Wrong password";
                 }
@@ -45,7 +45,7 @@ public class UserServices {
         String function = "{call insert_user( ?,? )}";
         CallableStatement insert = connection.prepareCall(function);
         insert.setString(1, name);
-        insert.setString(2, Encription.encrypt(pass));
+        insert.setString(2, Encryption.encrypt(pass));
         insert.execute();
         insert.close();
         connection.setAutoCommit(false);
@@ -87,7 +87,7 @@ public class UserServices {
         CallableStatement call = connection.prepareCall(function);
         call.setInt(1, code);
         call.setString(2, name);
-        call.setString(3, Encription.encrypt(pass));
+        call.setString(3, Encryption.encrypt(pass));
         call.execute();
         call.close();
         String function1 = "{call update_role_user( ?,? )}";

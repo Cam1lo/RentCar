@@ -1,6 +1,7 @@
 package cu.edu.cujae.carRent.services;
 
 import cu.edu.cujae.carRent.dtos.*;
+import cu.edu.cujae.carRent.utils.reportTables.CarStatusReport;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -125,5 +126,31 @@ public class CarsServices {
         CarDto car = getCarById(code);
         CarStatusDto rentStatus = ServicesLocator.getStatusServices().getStatusByText("Disponible");
         updateCar(car.getCode(),car.getCarID(),rentStatus.getCode(),car.getBrand().getCode(),car.getColor(),car.getMileage());
+    }
+
+    public ArrayList<CarStatusReport> getCarStatusReport() throws SQLException, ClassNotFoundException {
+        ArrayList<ContractDto> contracts = ServicesLocator.getContractServices().getAvailableContract();
+        ArrayList<CarStatusReport> report = new ArrayList<>();
+        java.sql.Connection connection = ServicesLocator.getConnection();
+        connection.setAutoCommit(false);
+        String function = "{?= call car_status_report()}";
+        CallableStatement call = connection.prepareCall(function);
+        call.registerOutParameter(1, Types.OTHER);
+        call.execute();
+        ResultSet result = (ResultSet) call.getObject(1);
+        while (result.next()) {
+            LocalDate endOfContract = null;
+            boolean found = false;
+            for(int i=0; i<contracts.size() && !found;i++){
+                if (contracts.get(i).getCar().getCarID().equals(result.getString(1))) {
+                    endOfContract = contracts.get(i).getFinalDate();
+                    found = true;
+                }
+            }
+            report.add(new CarStatusReport(result.getString(1),result.getString(2),result.getString(3),endOfContract));
+        }
+        call.close();
+        connection.close();
+        return report;
     }
 }

@@ -2,11 +2,14 @@ package cu.edu.cujae.carRent.services;
 
 import cu.edu.cujae.carRent.dtos.ContractDto;
 import cu.edu.cujae.carRent.dtos.TouristDto;
+import cu.edu.cujae.carRent.utils.reportTables.TouristReport;
+import cu.edu.cujae.carRent.utils.reportTables.TouristFailContractReport;
 
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TouristServices {
@@ -105,5 +108,56 @@ public class TouristServices {
         call.execute();
         call.close();
         connection.close();
+    }
+
+    public ArrayList<TouristReport> touristReport() throws SQLException {
+        ArrayList<TouristReport> report = new ArrayList<>();
+        java.sql.Connection connection = ServicesLocator.getConnection();
+        connection.setAutoCommit(false);
+        String function = "{?= call tourist_report()}";
+        CallableStatement call = connection.prepareCall(function);
+        call.registerOutParameter(1, Types.OTHER);
+        call.execute();
+        ResultSet result = (ResultSet) call.getObject(1);
+        while (result.next()) {
+            report.add(
+                    new TouristReport(
+                            result.getString(1),
+                            result.getString(2),
+                            result.getString(3),
+                            result.getString(4),
+                            result.getInt(5),
+                            result.getFloat(6)
+                    )
+            );
+        }
+        call.close();
+        connection.close();
+        return report;
+    }
+
+    public ArrayList<TouristFailContractReport> touristFailContractReport() throws SQLException {
+        ArrayList<TouristFailContractReport> report = new ArrayList<>();
+        java.sql.Connection connection = ServicesLocator.getConnection();
+        connection.setAutoCommit(false);
+        String function = "{?= call tourist_fail_contract_report()}";
+        CallableStatement call = connection.prepareCall(function);
+        call.registerOutParameter(1, Types.OTHER);
+        call.execute();
+        ResultSet result = (ResultSet) call.getObject(1);
+        while (result.next()) {
+            LocalDate deliveryDate = result.getDate(3).toLocalDate().plusDays(result.getInt(4));
+            report.add(
+                    new TouristFailContractReport(
+                            result.getString(1),
+                            result.getString(2),
+                            result.getDate(3).toLocalDate(),
+                            deliveryDate
+                    )
+            );
+        }
+        call.close();
+        connection.close();
+        return report;
     }
 }
