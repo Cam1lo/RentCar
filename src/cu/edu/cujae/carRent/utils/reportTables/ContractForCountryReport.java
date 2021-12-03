@@ -1,5 +1,10 @@
 package cu.edu.cujae.carRent.utils.reportTables;
 
+import cu.edu.cujae.carRent.services.ServicesLocator;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 public class ContractForCountryReport {
 
     private String country;
@@ -64,6 +69,10 @@ public class ContractForCountryReport {
 
     public void setTotalIncome(float totalIncome) {
         this.totalIncome = totalIncome;
+    }
+
+    public static ArrayList<ContractForCountryReport> getContractForCountryReport() throws SQLException, ClassNotFoundException {
+        return ServicesLocator.getContractServices().contractForCountryReport();
     }
 
 

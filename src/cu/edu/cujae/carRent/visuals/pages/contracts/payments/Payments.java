@@ -1,6 +1,5 @@
 package cu.edu.cujae.carRent.visuals.pages.contracts.payments;
 
-import cu.edu.cujae.carRent.dtos.ModelDto;
 import cu.edu.cujae.carRent.dtos.PaymentsDto;
 import cu.edu.cujae.carRent.services.ServicesLocator;
 import cu.edu.cujae.carRent.utils.visual.ScenesManager;
@@ -17,7 +16,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Modality;
@@ -48,7 +46,7 @@ public class Payments {
         update_button.setDisable(true);
         delete_button.setDisable(true);
 
-        paymentColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPayment()));
+        paymentColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPaymentText()));
 
         table.setItems(FXCollections.observableList(items));
 

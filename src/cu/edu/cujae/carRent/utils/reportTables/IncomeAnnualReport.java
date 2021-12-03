@@ -1,5 +1,10 @@
 package cu.edu.cujae.carRent.utils.reportTables;
 
+import cu.edu.cujae.carRent.services.ServicesLocator;
+
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 public class IncomeAnnualReport {
 
     private String moth;
@@ -24,5 +29,19 @@ public class IncomeAnnualReport {
 
     public void setIncomeMonthly(float incomeMonthly) {
         this.incomeMonthly = incomeMonthly;
+    }
+
+    public static ArrayList<IncomeAnnualReport> generatedIncomeAnnualReport(){
+        ArrayList<IncomeAnnualReport> report = new ArrayList<>();
+        String[] moths = {"JANUARY","FEBRUARY","MARCH","APRIL","MAY","JUNE","JULY","AUGUST","SEPTEMBER","OCTOBER","NOVEMBER","DECEMBER"};
+        float amount = 0;
+        for(String m : moths){
+            report.add(new IncomeAnnualReport(m,amount));
+        }
+        return report;
+    }
+
+    public static ArrayList<IncomeAnnualReport> getIncomeAnnualReport() throws SQLException, ClassNotFoundException {
+        return ServicesLocator.getContractServices().incomeAnnualReport();
     }
 }

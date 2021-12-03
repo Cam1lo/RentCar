@@ -78,7 +78,7 @@ public class Contracts {
                         data.getValue().getFinalDate()
                 )));
         extensionColumn.setCellValueFactory(new PropertyValueFactory<>("extension"));
-        paymentColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPayment().getPayment()));
+        paymentColumn.setCellValueFactory(data -> new SimpleStringProperty(data.getValue().getPayment().getPaymentText()));
         billColumn.setCellValueFactory(data -> new SimpleStringProperty(String.valueOf(data.getValue().getBill().getAmount())));
         specialBill.setCellValueFactory(data -> new SimpleStringProperty(String.valueOf(data.getValue().getBill().getSpecialAmount())));
         driverColumn.setCellValueFactory(data -> {

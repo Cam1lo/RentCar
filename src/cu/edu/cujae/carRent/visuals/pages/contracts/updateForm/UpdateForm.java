@@ -82,15 +82,15 @@ public class UpdateForm {
         ArrayList<PaymentsDto> payments = ServicesLocator.getPaymentsServices().listPaymaent();
         ArrayList<String> paymentsTextList = new ArrayList<>();
         for (PaymentsDto p : payments) {
-            paymentsTextList.add(p.getPayment());
-            paymentMap.put(p.getPayment(), p.getCode());
+            paymentsTextList.add(p.getPaymentText());
+            paymentMap.put(p.getPaymentText(), p.getCode());
         }
         this.payment.setItems(FXCollections.observableList(paymentsTextList));
 
 
         this.tourist.setValue(StringFormatters.touristToString(this.selected.getTourist()));
         this.car.setValue(StringFormatters.carToString(this.selected.getCar()));
-        this.payment.setValue(this.selected.getPayment().getPayment());
+        this.payment.setValue(this.selected.getPayment().getPaymentText());
 
         if (this.selected.getDriver() == null) {
             this.driver.setValue("-");

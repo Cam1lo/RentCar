@@ -27,7 +27,7 @@ public class UpdateForm {
         this.selected = selected;
         this.parent = parent;
 
-        this.payment.setText(selected.getPayment());
+        this.payment.setText(selected.getPaymentText());
     }
 
     public void cancel() {

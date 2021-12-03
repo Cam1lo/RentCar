@@ -78,8 +78,8 @@ public class AddForm {
         ArrayList<PaymentsDto> payments = ServicesLocator.getPaymentsServices().listPaymaent();
         ArrayList<String> paymentsTextList = new ArrayList<>();
         for (PaymentsDto p : payments) {
-            paymentsTextList.add(p.getPayment());
-            paymentMap.put(p.getPayment(), p.getCode());
+            paymentsTextList.add(p.getPaymentText());
+            paymentMap.put(p.getPaymentText(), p.getCode());
         }
         this.payment.setItems(FXCollections.observableList(paymentsTextList));
 
